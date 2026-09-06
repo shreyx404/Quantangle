@@ -1,0 +1,150 @@
+# SYSTEM_PATTERNS.md — Architecture Standards & Coding Patterns
+
+> **Design Patterns, Coding Conventions, and Best Practices for Quantangle Developers and AI Agents.**
+
+---
+
+## 1. State Management Patterns (Zustand Stores)
+
+Quantangle isolates state into specialized, decoupled Zustand stores:
+
+### 1.1 `useCircuitStore` (Single Source of Truth for Circuit IR)
+```typescript
+interface CircuitState {
+  numQubits: number;
+  numClbits: number;
+  steps: CircuitStep[];
+  selectedStep: number | null;
+  targetSDK: "qiskit" | "cirq" | "pennylane" | "qasm3";
+  
+  // Actions
+  addGate: (stepIndex: number, gate: GateOperation) => void;
+  removeGate: (stepIndex: number, gateId: string) => void;
+  setQubits: (n: number) => void;
+  setSelectedStep: (step: number | null) => void;
+  setTargetSDK: (sdk: "qiskit" | "cirq" | "pennylane" | "qasm3") => void;
+  loadCircuitFromIR: (ir: QuantumCircuitIR) => void;
+}
+```
+- **Rule**: Every mutation to `useCircuitStore` automatically triggers a debounced simulation dispatch to the Web Worker.
+
+### 1.2 `useSimulationStore` (Simulation Results & Step States)
+```typescript
+interface SimulationState {
+  isRunning: boolean;
+  stepStates: StepStateResult[];   // Statevector, Bloch vectors, probabilities per step
+  activeStep: number;             // Current timeline scrubber index
+  error: string | null;
+  
+  setStepStates: (results: StepStateResult[]) => void;
+  setActiveStep: (step: number) => void;
+}
+```
+
+---
+
+## 2. Web Worker & WebAssembly Communication Pattern
+
+To guarantee zero main-thread lag:
+1. Initialize the Web Worker once via a custom hook `useQuantumWorker`.
+2. Pass data via `Transferable` Float64Array buffers whenever possible.
+3. Message structure:
+
+```typescript
+// Worker Request
+export type WorkerRequest = 
+  | { type: "SIMULATE_CIRCUIT"; id: string; payload: QuantumCircuitIR }
+  | { type: "EVALUATE_FIDELITY"; id: string; targetIR: QuantumCircuitIR; studentIR: QuantumCircuitIR };
+
+// Worker Response
+export type WorkerResponse = 
+  | { type: "SIMULATION_SUCCESS"; id: string; results: StepStateResult[] }
+  | { type: "SIMULATION_ERROR"; id: string; error: string }
+  | { type: "FIDELITY_RESULT"; id: string; fidelity: number; passed: boolean };
+```
+
+---
+
+## 3. Three.js / WebGL Visualizer Patterns
+
+When building or editing 3D visualizers (Bloch Sphere, Q-Sphere):
+1. **Clean Resource Disposal**:
+   - Always hook into cleanup lifecycle:
+   ```typescript
+   useEffect(() => {
+     return () => {
+       geometry.dispose();
+       material.dispose();
+       renderer.dispose();
+     };
+   }, []);
+   ```
+2. **Phase Angle Hue Color Mapping**:
+   - Map phase $\phi \in [-\pi, \pi]$ to an HSV color circle:
+     $$\text{Hue} = \frac{\phi + \pi}{2\pi} \times 360^\circ$$
+   - A phase of $0$ is red, $\pi/2$ is green/cyan, $\pi$ is blue/violet, $-\pi/2$ is amber.
+3. **Smooth Slerp Interpolation**:
+   - When the user scrubs between steps, do not snap the Bloch vector abruptly. Use spherical linear interpolation (`Quaternion.slerp`) with a 200ms easing curve.
+
+---
+
+## 4. AST Synchronization & Reconciliation Pattern
+
+To avoid infinite update loops between Canvas and Monaco Editor:
+- **Canvas $\to$ Code**:
+  - Sets a synchronization flag `isCanvasOrigin = true`.
+  - Transpiles `QuantumCircuitIR` to code string.
+  - Updates Monaco editor value without triggering editor change listener.
+  - Clears flag on next microtask.
+- **Code $\to$ Canvas**:
+  - Debounces input by `250ms`.
+  - Checks if code was modified from Monaco editor directly.
+  - Parses into `QuantumCircuitIR`.
+  - Compares hash of new IR with current IR in `useCircuitStore`. If identical, skips update.
+  - If different and valid, updates `useCircuitStore`.
+
+---
+
+## 5. Error Handling & Quantum Guardrails
+
+1. **Custom Error Classes**:
+   - `QuantumSyntaxError`: Invalid gate name or wrong qubit wire index.
+   - `NonUnitaryError`: Matrix determinant is not 1 or $U^\dagger U \ne I$.
+   - `DimensionMismatchError`: Attempting multi-qubit gate on disconnected qubits.
+2. **Graceful UI Fallbacks**:
+   - If user code has a syntax error, show an inline Monaco squiggle marker with an actionable explanation, but keep the previous valid circuit rendered on canvas.
+   - Never crash the React component tree or blank the screen.
+
+---
+
+## 6. Directory & File Organization Standards
+
+```
+quantangle/
+├── apps/
+│   ├── web/                     # Next.js 14 Frontend
+│   │   ├── src/
+│   │   │   ├── app/             # App Router pages (routes: /designer, /arena, /quests)
+│   │   │   ├── components/
+│   │   │   │   ├── canvas/      # Circuit grid, wires, gate pills, parameter dialogs
+│   │   │   │   ├── visualizer/  # Three.js Bloch Sphere, Q-Sphere, Density Matrix
+│   │   │   │   ├── editor/      # Monaco editor wrapper, SDK language toggle
+│   │   │   │   ├── copilot/     # Qu-Copilot chat UI, verified diff view
+│   │   │   │   └── arena/       # Quest cards, streak trackers, leaderboards
+│   │   │   ├── stores/          # Zustand stores (useCircuitStore, useSimulationStore)
+│   │   │   ├── workers/         # Web Worker script & WASM loader
+│   │   │   ├── transpiler/      # AST parsers & emitters (Qiskit, PennyLane, Cirq, QASM3)
+│   │   │   └── types/           # Shared TypeScript interfaces (IR, simulation types)
+│   └── api/                     # Python FastAPI Backend
+│       ├── routers/             # Endpoints (/sim, /copilot, /arena, /credentials)
+│       ├── services/            # Qiskit Aer, PennyLane VQE engine, RAG pipeline
+│       └── models/              # Pydantic schemas
+└── packages/
+    └── wasm-engine/             # Rust Statevector & Density Matrix Simulator
+        ├── src/
+        │   ├── lib.rs           # WASM bindings & entry point
+        │   ├── statevector.rs   # 2^n Complex64 buffer operations
+        │   ├── gates.rs         # Unitary gate matrices & Kronecker products
+        │   └── bloch.rs         # Partial trace & Bloch vector projections
+        └── Cargo.toml
+```

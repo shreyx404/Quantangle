@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%">
+  <!-- Transparent background for seamless slide integration -->
+
+  <!-- Title -->
+  <text x="250" y="20" fill="#0F172A" font-family="system-ui" font-size="12" font-weight="700" text-anchor="middle">Multi-SDK Interoperability &amp; Transpilation</text>
+
+  <!-- Left: Visual Canvas -->
+  <rect x="30" y="80" width="110" height="80" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="85" y="105" fill="#0F172A" font-family="system-ui" font-size="10" font-weight="700" text-anchor="middle">Visual Canvas</text>
+  <line x1="45" y1="125" x2="125" y2="125" stroke="#94A3B8" stroke-width="1"/>
+  <rect x="65" y="115" width="16" height="20" rx="3" fill="#EEF2FF" stroke="#4F46E5" stroke-width="1"/>
+  <text x="73" y="128" fill="#4F46E5" font-family="system-ui" font-size="8" font-weight="700" text-anchor="middle">H</text>
+
+  <!-- Arrow -->
+  <line x1="140" y1="120" x2="175" y2="120" stroke="#64748B" stroke-width="1.5" stroke-dasharray="2,2"/>
+  <polygon points="180,120 172,116 172,124" fill="#64748B"/>
+
+  <!-- Center: AST / OpenQASM -->
+  <circle cx="250" cy="120" r="45" fill="#F8FAFC" stroke="#0F172A" stroke-width="1.5"/>
+  <text x="250" y="115" fill="#0F172A" font-family="system-ui" font-size="11" font-weight="800" text-anchor="middle">AST</text>
+  <text x="250" y="128" fill="#64748B" font-family="system-ui" font-size="8" font-weight="600" text-anchor="middle">OpenQASM 3.0</text>
+  <text x="250" y="140" fill="#64748B" font-family="system-ui" font-size="7" font-weight="600" text-anchor="middle">Intermediate Rep.</text>
+
+  <!-- Arrows Out -->
+  <!-- Top Right (Qiskit) -->
+  <line x1="295" y1="100" x2="345" y2="70" stroke="#4F46E5" stroke-width="1.5"/>
+  <polygon points="350,67 341,68 345,74" fill="#4F46E5"/>
+  
+  <!-- Right (Cirq) -->
+  <line x1="295" y1="120" x2="345" y2="120" stroke="#059669" stroke-width="1.5"/>
+  <polygon points="350,120 342,116 342,124" fill="#059669"/>
+
+  <!-- Bottom Right (PennyLane) -->
+  <line x1="295" y1="140" x2="345" y2="170" stroke="#D97706" stroke-width="1.5"/>
+  <polygon points="350,173 345,166 341,172" fill="#D97706"/>
+
+  <!-- Output Boxes -->
+  <rect x="360" y="40" width="110" height="40" rx="6" fill="#EEF2FF" stroke="#4F46E5" stroke-width="1"/>
+  <text x="415" y="60" fill="#4338CA" font-family="system-ui" font-size="10" font-weight="700" text-anchor="middle">Qiskit Code</text>
+  <text x="415" y="72" fill="#4338CA" font-family="monospace" font-size="8" text-anchor="middle">qc.h(0)</text>
+
+  <rect x="360" y="100" width="110" height="40" rx="6" fill="#ECFDF5" stroke="#059669" stroke-width="1"/>
+  <text x="415" y="120" fill="#047857" font-family="system-ui" font-size="10" font-weight="700" text-anchor="middle">Cirq Code</text>
+  <text x="415" y="132" fill="#047857" font-family="monospace" font-size="8" text-anchor="middle">cirq.H(q0)</text>
+
+  <rect x="360" y="160" width="110" height="40" rx="6" fill="#FFFBEB" stroke="#D97706" stroke-width="1"/>
+  <text x="415" y="180" fill="#B45309" font-family="system-ui" font-size="10" font-weight="700" text-anchor="middle">PennyLane Code</text>
+  <text x="415" y="192" fill="#B45309" font-family="monospace" font-size="8" text-anchor="middle">qml.Hadamard(0)</text>
+
+  <text x="250" y="240" fill="#475569" font-family="system-ui" font-size="9" font-weight="600" text-anchor="middle">Like LLVM, compiling multiple abstractions through a common IR.</text>
+
+</svg>

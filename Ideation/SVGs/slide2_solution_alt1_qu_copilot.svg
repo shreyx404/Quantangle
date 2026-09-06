@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%">
+  <!-- Transparent background for seamless slide integration -->
+
+  <!-- Title -->
+  <text x="250" y="20" fill="#0F172A" font-family="system-ui" font-size="12" font-weight="700" text-anchor="middle">Qu-Copilot RAG &amp; Verification Flow</text>
+
+  <!-- User Input Box -->
+  <rect x="20" y="50" width="120" height="40" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="80" y="70" fill="#0F172A" font-family="system-ui" font-size="10" font-weight="700" text-anchor="middle">User Query</text>
+  <text x="80" y="82" fill="#64748B" font-family="system-ui" font-size="8" text-anchor="middle">"How to make a Bell State?"</text>
+
+  <!-- Arrow -->
+  <line x1="140" y1="70" x2="180" y2="70" stroke="#94A3B8" stroke-width="1.5"/>
+  <polygon points="185,70 177,66 177,74" fill="#94A3B8"/>
+
+  <!-- LLM / RAG Box -->
+  <rect x="190" y="40" width="120" height="60" rx="6" fill="#EEF2FF" stroke="#4F46E5" stroke-width="1.5"/>
+  <text x="250" y="60" fill="#4F46E5" font-family="system-ui" font-size="10" font-weight="700" text-anchor="middle">Domain RAG</text>
+  <text x="250" y="72" fill="#4338CA" font-family="system-ui" font-size="8" text-anchor="middle">Qiskit/PennyLane Docs</text>
+  <text x="250" y="84" fill="#4338CA" font-family="system-ui" font-size="8" text-anchor="middle">+ Code Generation</text>
+
+  <!-- Arrow Down to Verifier -->
+  <line x1="250" y1="100" x2="250" y2="130" stroke="#94A3B8" stroke-width="1.5"/>
+  <polygon points="250,135 246,127 254,127" fill="#94A3B8"/>
+
+  <!-- Unitary Verification Box -->
+  <rect x="150" y="140" width="200" height="50" rx="6" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="250" y="160" fill="#D97706" font-family="system-ui" font-size="10" font-weight="700" text-anchor="middle">Unitary Verification Pipeline</text>
+  <text x="250" y="175" fill="#B45309" font-family="system-ui" font-size="8" text-anchor="middle">Simulates circuit. Fidelity ≥ 0.999?</text>
+
+  <!-- Loopback Arrow (Failed) -->
+  <path d="M 150,165 L 120,165 L 120,70 L 140,70" fill="none" stroke="#EF4444" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <polygon points="140,70 132,66 132,74" fill="#EF4444"/>
+  <text x="135" y="120" fill="#EF4444" font-family="system-ui" font-size="9" font-weight="700" text-anchor="end">Fails check</text>
+
+  <!-- Arrow Right (Pass) -->
+  <line x1="350" y1="165" x2="390" y2="165" stroke="#10B981" stroke-width="1.5"/>
+  <polygon points="395,165 387,161 387,169" fill="#10B981"/>
+  <text x="370" y="160" fill="#10B981" font-family="system-ui" font-size="9" font-weight="700" text-anchor="middle">Passes</text>
+
+  <!-- Final Output Box -->
+  <rect x="400" y="145" width="80" height="40" rx="6" fill="#ECFDF5" stroke="#10B981" stroke-width="1.5"/>
+  <text x="440" y="163" fill="#047857" font-family="system-ui" font-size="10" font-weight="700" text-anchor="middle">Verified</text>
+  <text x="440" y="175" fill="#047857" font-family="system-ui" font-size="9" font-weight="700" text-anchor="middle">Output</text>
+
+  <!-- Visual flair: Zero Hallucination -->
+  <rect x="20" y="220" width="460" height="30" rx="15" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="250" y="240" fill="#64748B" font-family="system-ui" font-size="10" font-weight="600" text-anchor="middle">Result: The first Zero-Hallucination Quantum AI Tutor</text>
+
+</svg>

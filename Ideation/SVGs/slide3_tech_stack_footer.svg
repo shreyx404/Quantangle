@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 120" width="100%" height="100%">
+  <!-- Transparent background for seamless slide integration -->
+
+  <!-- Base ribbon / background (optional, keeping it minimal without full background) -->
+
+  <!-- Box 1: Frontend -->
+  <g transform="translate(10, 15)">
+    <rect width="125" height="90" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+    <rect width="125" height="4" fill="#3B82F6" rx="2"/>
+    <text x="62.5" y="30" fill="#0F172A" font-family="system-ui" font-size="10" font-weight="800" text-anchor="middle">FRONTEND</text>
+    <line x1="20" y1="40" x2="105" y2="40" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="62.5" y="58" fill="#475569" font-family="system-ui" font-size="10" font-weight="600" text-anchor="middle">Next.js 14 / React</text>
+    <text x="62.5" y="74" fill="#64748B" font-family="system-ui" font-size="9" text-anchor="middle">React Flow • Monaco</text>
+  </g>
+
+  <!-- Box 2: 3D Engine -->
+  <g transform="translate(145, 15)">
+    <rect width="125" height="90" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+    <rect width="125" height="4" fill="#8B5CF6" rx="2"/>
+    <text x="62.5" y="30" fill="#0F172A" font-family="system-ui" font-size="10" font-weight="800" text-anchor="middle">3D ENGINE</text>
+    <line x1="20" y1="40" x2="105" y2="40" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="62.5" y="58" fill="#475569" font-family="system-ui" font-size="10" font-weight="600" text-anchor="middle">Three.js</text>
+    <text x="62.5" y="74" fill="#64748B" font-family="system-ui" font-size="9" text-anchor="middle">WebGL Renderers</text>
+  </g>
+
+  <!-- Box 3: Edge Sim -->
+  <g transform="translate(280, 15)">
+    <rect width="125" height="90" rx="6" fill="#ECFDF5" stroke="#10B981" stroke-width="1.5"/>
+    <rect width="125" height="4" fill="#10B981" rx="2"/>
+    <text x="62.5" y="30" fill="#047857" font-family="system-ui" font-size="10" font-weight="800" text-anchor="middle">EDGE SIM</text>
+    <line x1="20" y1="40" x2="105" y2="40" stroke="#A7F3D0" stroke-width="1"/>
+    <text x="62.5" y="58" fill="#059669" font-family="system-ui" font-size="10" font-weight="600" text-anchor="middle">Rust Core</text>
+    <text x="62.5" y="74" fill="#047857" font-family="system-ui" font-size="9" text-anchor="middle">WebAssembly (0ms)</text>
+  </g>
+
+  <!-- Box 4: Cloud & DB -->
+  <g transform="translate(415, 15)">
+    <rect width="125" height="90" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+    <rect width="125" height="4" fill="#0EA5E9" rx="2"/>
+    <text x="62.5" y="30" fill="#0F172A" font-family="system-ui" font-size="10" font-weight="800" text-anchor="middle">CLOUD &amp; DB</text>
+    <line x1="20" y1="40" x2="105" y2="40" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="62.5" y="58" fill="#475569" font-family="system-ui" font-size="10" font-weight="600" text-anchor="middle">Python FastAPI</text>
+    <text x="62.5" y="74" fill="#64748B" font-family="system-ui" font-size="9" text-anchor="middle">PostgreSQL • Celery</text>
+  </g>
+
+  <!-- Box 5: Quantum SDKs -->
+  <g transform="translate(550, 15)">
+    <rect width="125" height="90" rx="6" fill="#EEF2FF" stroke="#4F46E5" stroke-width="1.5"/>
+    <rect width="125" height="4" fill="#4F46E5" rx="2"/>
+    <text x="62.5" y="30" fill="#312E81" font-family="system-ui" font-size="10" font-weight="800" text-anchor="middle">QUANTUM SDKs</text>
+    <line x1="20" y1="40" x2="105" y2="40" stroke="#C7D2FE" stroke-width="1"/>
+    <text x="62.5" y="58" fill="#4338CA" font-family="system-ui" font-size="10" font-weight="600" text-anchor="middle">Qiskit Aer</text>
+    <text x="62.5" y="74" fill="#4F46E5" font-family="system-ui" font-size="9" text-anchor="middle">PennyLane • Cirq</text>
+  </g>
+
+  <!-- Box 6: AI Engine -->
+  <g transform="translate(685, 15)">
+    <rect width="125" height="90" rx="6" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+    <rect width="125" height="4" fill="#D97706" rx="2"/>
+    <text x="62.5" y="30" fill="#78350F" font-family="system-ui" font-size="10" font-weight="800" text-anchor="middle">AI ENGINE</text>
+    <line x1="20" y1="40" x2="105" y2="40" stroke="#FDE68A" stroke-width="1"/>
+    <text x="62.5" y="58" fill="#B45309" font-family="system-ui" font-size="10" font-weight="600" text-anchor="middle">LangChain RAG</text>
+    <text x="62.5" y="74" fill="#D97706" font-family="system-ui" font-size="9" text-anchor="middle">AST Linter • LLM</text>
+  </g>
+
+  <!-- Connector line running through the middle behind them (optional, maybe too messy) -->
+</svg>

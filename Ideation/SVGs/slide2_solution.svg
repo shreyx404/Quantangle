@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" width="100%" height="100%">
+  <!-- Transparent background for seamless slide integration -->
+
+  <!-- Window Frame -->
+  <rect x="10" y="10" width="460" height="300" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+  <path d="M 10,18 Q 10,10 18,10 L 462,10 Q 470,10 470,18 L 470,30 L 10,30 Z" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+  
+  <!-- Window Controls -->
+  <circle cx="24" cy="20" r="3" fill="#CBD5E1"/>
+  <circle cx="34" cy="20" r="3" fill="#CBD5E1"/>
+  <circle cx="44" cy="20" r="3" fill="#CBD5E1"/>
+  <text x="60" y="23" fill="#0F172A" font-family="system-ui, sans-serif" font-size="9" font-weight="700">Quantangle AI - IDE</text>
+
+  <!-- Left Sidebar Palette -->
+  <rect x="20" y="40" width="40" height="260" rx="4" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+  <g transform="translate(25, 45)">
+    <rect width="30" height="24" rx="3" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+    <text x="15" y="16" fill="#0F172A" font-family="system-ui" font-size="10" font-weight="700" text-anchor="middle">H</text>
+  </g>
+  <g transform="translate(25, 75)">
+    <rect width="30" height="24" rx="3" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+    <text x="15" y="16" fill="#0F172A" font-family="system-ui" font-size="10" font-weight="700" text-anchor="middle">CX</text>
+  </g>
+  <g transform="translate(25, 105)">
+    <rect width="30" height="24" rx="3" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+    <text x="15" y="16" fill="#0F172A" font-family="system-ui" font-size="10" font-weight="700" text-anchor="middle">Rz</text>
+  </g>
+
+  <!-- Top Center: Circuit Canvas -->
+  <rect x="70" y="40" width="280" height="120" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+  <rect x="70" y="40" width="280" height="20" rx="4" fill="#F8FAFC"/>
+  <text x="76" y="53" fill="#475569" font-family="system-ui" font-size="8" font-weight="700">DUAL-SYNC CANVAS</text>
+  
+  <line x1="85" y1="80" x2="335" y2="80" stroke="#CBD5E1" stroke-width="1.2"/>
+  <line x1="85" y1="110" x2="335" y2="110" stroke="#CBD5E1" stroke-width="1.2"/>
+  
+  <rect x="110" y="70" width="20" height="20" rx="4" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.2"/>
+  <text x="120" y="84" fill="#0F172A" font-family="system-ui" font-size="9" font-weight="700" text-anchor="middle">H</text>
+
+  <circle cx="170" cy="80" r="3" fill="#0F172A"/>
+  <line x1="170" y1="80" x2="170" y2="110" stroke="#0F172A" stroke-width="1.2"/>
+  <circle cx="170" cy="110" r="6" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.2"/>
+  
+  <rect x="220" y="100" width="26" height="20" rx="4" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.2"/>
+  <text x="233" y="114" fill="#0F172A" font-family="system-ui" font-size="9" font-weight="700" text-anchor="middle">Rz</text>
+
+  <!-- Bottom Center: Code Editor -->
+  <rect x="70" y="170" width="280" height="130" rx="4" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+  <rect x="70" y="170" width="280" height="20" rx="4" fill="#F1F5F9"/>
+  <text x="76" y="183" fill="#475569" font-family="system-ui" font-size="8" font-weight="700">CODE EDITOR (Multi-SDK)</text>
+  
+  <g transform="translate(80, 205)" font-family="monospace" font-size="9">
+    <text y="0" fill="#4F46E5">from</text> <text x="25" y="0" fill="#0F172A">qiskit</text> <text x="65" y="0" fill="#4F46E5">import</text> <text x="105" y="0" fill="#0F172A">QuantumCircuit</text>
+    <text y="16" fill="#0F172A">qc = QuantumCircuit(2, 2)</text>
+    <text y="32" fill="#0F172A">qc.h(0)</text> <text x="90" y="32" fill="#94A3B8"># Superposition</text>
+    <text y="48" fill="#0F172A">qc.cx(0,1)</text> <text x="90" y="48" fill="#94A3B8"># Entangle</text>
+    <text y="64" fill="#0F172A">qc.rz(1.57, 1)</text> <text x="90" y="64" fill="#94A3B8"># Phase</text>
+    <text y="82" fill="#059669" font-weight="bold">// 0ms WASM Edge</text>
+  </g>
+
+  <!-- Right Sidebar: Sphere & Chart -->
+  <rect x="360" y="40" width="100" height="260" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="366" y="53" fill="#475569" font-family="system-ui" font-size="7" font-weight="700">3D INSPECTOR</text>
+  
+  <!-- Mini Sphere -->
+  <g transform="translate(410, 95)">
+    <circle cx="0" cy="0" r="30" fill="#F8FAFC" stroke="#0F172A" stroke-width="1"/>
+    <ellipse cx="0" cy="0" rx="30" ry="10" fill="none" stroke="#94A3B8" stroke-width="1" stroke-dasharray="2,2"/>
+    <line x1="0" y1="-35" x2="0" y2="35" stroke="#CBD5E1" stroke-width="1"/>
+    <line x1="0" y1="0" x2="20" y2="-15" stroke="#4F46E5" stroke-width="1.5"/>
+    <circle cx="20" cy="-15" r="2" fill="#4F46E5"/>
+  </g>
+
+  <!-- Mini Chart -->
+  <g transform="translate(370, 180)">
+    <rect x="0" y="0" width="16" height="40" fill="#4F46E5" rx="2"/>
+    <text x="8" y="50" fill="#475569" font-family="monospace" font-size="7" text-anchor="middle">00</text>
+    
+    <rect x="22" y="36" width="16" height="4" fill="#CBD5E1" rx="1"/>
+    <text x="30" y="50" fill="#475569" font-family="monospace" font-size="7" text-anchor="middle">01</text>
+    
+    <rect x="44" y="36" width="16" height="4" fill="#CBD5E1" rx="1"/>
+    <text x="52" y="50" fill="#475569" font-family="monospace" font-size="7" text-anchor="middle">10</text>
+    
+    <rect x="66" y="0" width="16" height="40" fill="#4F46E5" rx="2"/>
+    <text x="74" y="50" fill="#475569" font-family="monospace" font-size="7" text-anchor="middle">11</text>
+  </g>
+
+  <!-- AI Card -->
+  <rect x="366" y="240" width="88" height="50" rx="4" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="372" y="254" fill="#0F172A" font-family="system-ui" font-size="8" font-weight="700">Qu-Copilot</text>
+  <rect x="372" y="260" width="76" height="8" rx="4" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="0.5"/>
+  <text x="410" y="267" fill="#047857" font-family="system-ui" font-size="6" font-weight="700" text-anchor="middle">✓ VERIFIED</text>
+  <text x="372" y="280" fill="#475569" font-family="system-ui" font-size="6">Perfect bell state!</text>
+</svg>

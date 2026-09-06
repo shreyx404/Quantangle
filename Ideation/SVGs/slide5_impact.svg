@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 240" width="100%" height="100%">
+  <!-- Transparent background for seamless slide integration -->
+
+  <!-- Layout: 4 Pillars as simple clean cards -->
+  
+  <!-- Pillar 1: Education -->
+  <g transform="translate(10, 20)">
+    <rect width="135" height="200" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+    <rect width="135" height="4" fill="#4F46E5" rx="2"/>
+    
+    <circle cx="67.5" cy="50" r="24" fill="#EEF2FF"/>
+    <path d="M57.5,45 L77.5,45 L77.5,55 L57.5,55 Z" fill="none" stroke="#4F46E5" stroke-width="2"/>
+    <line x1="57.5" y1="42" x2="77.5" y2="42" stroke="#4F46E5" stroke-width="2"/>
+    
+    <text x="67.5" y="100" fill="#0F172A" font-family="system-ui" font-size="12" font-weight="700" text-anchor="middle">EDUCATIONAL</text>
+    
+    <text x="67.5" y="140" fill="#4338CA" font-family="system-ui" font-size="24" font-weight="800" text-anchor="middle">4x</text>
+    <text x="67.5" y="160" fill="#64748B" font-family="system-ui" font-size="9" text-anchor="middle">Higher Completion</text>
+    <text x="67.5" y="172" fill="#64748B" font-family="system-ui" font-size="9" text-anchor="middle">via Active Learning</text>
+  </g>
+
+  <!-- Pillar 2: National -->
+  <g transform="translate(155, 20)">
+    <rect width="135" height="200" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+    <rect width="135" height="4" fill="#0284C7" rx="2"/>
+    
+    <circle cx="67.5" cy="50" r="24" fill="#E0F2FE"/>
+    <polygon points="67.5,38 77.5,58 57.5,58" fill="none" stroke="#0284C7" stroke-width="2"/>
+    
+    <text x="67.5" y="100" fill="#0F172A" font-family="system-ui" font-size="12" font-weight="700" text-anchor="middle">NATIONAL</text>
+    
+    <text x="67.5" y="140" fill="#0369A1" font-family="system-ui" font-size="24" font-weight="800" text-anchor="middle">25k</text>
+    <text x="67.5" y="160" fill="#64748B" font-family="system-ui" font-size="9" text-anchor="middle">Quantum Ready</text>
+    <text x="67.5" y="172" fill="#64748B" font-family="system-ui" font-size="9" text-anchor="middle">Engineers by 2030</text>
+  </g>
+
+  <!-- Pillar 3: Inclusive -->
+  <g transform="translate(300, 20)">
+    <rect width="135" height="200" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+    <rect width="135" height="4" fill="#D97706" rx="2"/>
+    
+    <circle cx="67.5" cy="50" r="24" fill="#FFFBEB"/>
+    <rect x="57.5" y="38" width="20" height="24" rx="2" fill="none" stroke="#D97706" stroke-width="2"/>
+    <line x1="62.5" y1="58" x2="72.5" y2="58" stroke="#D97706" stroke-width="2"/>
+
+    <text x="67.5" y="100" fill="#0F172A" font-family="system-ui" font-size="12" font-weight="700" text-anchor="middle">INCLUSIVE</text>
+    
+    <text x="67.5" y="140" fill="#B45309" font-family="system-ui" font-size="24" font-weight="800" text-anchor="middle">12+</text>
+    <text x="67.5" y="160" fill="#64748B" font-family="system-ui" font-size="9" text-anchor="middle">Indian Languages</text>
+    <text x="67.5" y="172" fill="#64748B" font-family="system-ui" font-size="9" text-anchor="middle">(Bhashini API)</text>
+  </g>
+
+  <!-- Pillar 4: Environmental -->
+  <g transform="translate(445, 20)">
+    <rect width="135" height="200" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+    <rect width="135" height="4" fill="#059669" rx="2"/>
+    
+    <circle cx="67.5" cy="50" r="24" fill="#ECFDF5"/>
+    <circle cx="67.5" cy="50" r="8" fill="none" stroke="#059669" stroke-width="2"/>
+    <path d="M67.5,35 Q75,45 67.5,50" fill="none" stroke="#059669" stroke-width="2"/>
+
+    <text x="67.5" y="100" fill="#0F172A" font-family="system-ui" font-size="12" font-weight="700" text-anchor="middle">ENVIRONMENTAL</text>
+    
+    <text x="67.5" y="140" fill="#047857" font-family="system-ui" font-size="24" font-weight="800" text-anchor="middle">Green</text>
+    <text x="67.5" y="160" fill="#64748B" font-family="system-ui" font-size="9" text-anchor="middle">Compute (WASM)</text>
+    <text x="67.5" y="172" fill="#64748B" font-family="system-ui" font-size="9" text-anchor="middle">Reduces Cloud Footprint</text>
+  </g>
+
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" width="100%" height="100%">
+  <!-- Transparent background -->
+
+  <!-- Title -->
+  <text x="250" y="30" fill="#0F172A" font-family="system-ui" font-size="12" font-weight="700" text-anchor="middle">Quantangle Sustainability Model</text>
+
+  <!-- Base Level 1: Free Tier (Largest) -->
+  <path d="M 50,240 L 450,240 L 410,180 L 90,180 Z" fill="#EEF2FF" stroke="#4F46E5" stroke-width="1.5"/>
+  <text x="250" y="215" fill="#4338CA" font-family="system-ui" font-size="11" font-weight="800" text-anchor="middle">Level 1: Free Core Curriculum</text>
+  <text x="250" y="230" fill="#4F46E5" font-family="system-ui" font-size="9" font-weight="600" text-anchor="middle">Mass adoption via ₹0 WASM execution</text>
+
+  <!-- Level 2: Institutional -->
+  <path d="M 100,170 L 400,170 L 360,110 L 140,110 Z" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.5"/>
+  <text x="250" y="145" fill="#15803D" font-family="system-ui" font-size="11" font-weight="800" text-anchor="middle">Level 2: Institutional &amp; B2B Licenses</text>
+  <text x="250" y="160" fill="#16A34A" font-family="system-ui" font-size="9" font-weight="600" text-anchor="middle">Automated Lab Grading &amp; Cohort Analytics</text>
+
+  <!-- Level 3: Certifications -->
+  <path d="M 150,100 L 350,100 L 310,40 L 190,40 Z" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="250" y="60" fill="#B45309" font-family="system-ui" font-size="10" font-weight="800" text-anchor="middle">Level 3: Monetization</text>
+  <text x="250" y="74" fill="#D97706" font-family="system-ui" font-size="8" font-weight="600" text-anchor="middle">Verified Certifications</text>
+  <text x="250" y="87" fill="#D97706" font-family="system-ui" font-size="8" font-weight="600" text-anchor="middle">&amp; Premium Cloud Tiers</text>
+
+  <!-- Callout lines pointing to sides -->
+  <!-- Left Side -->
+  <line x1="65" y1="210" x2="25" y2="210" stroke="#94A3B8" stroke-width="1" stroke-dasharray="2,2"/>
+  <text x="25" y="200" fill="#64748B" font-family="system-ui" font-size="8" font-weight="600" text-anchor="start">Wide Funnel</text>
+
+  <!-- Right Side -->
+  <line x1="335" y1="70" x2="395" y2="70" stroke="#94A3B8" stroke-width="1" stroke-dasharray="2,2"/>
+  <text x="400" y="66" fill="#64748B" font-family="system-ui" font-size="8" font-weight="600" text-anchor="start">Sustainable Revenue</text>
+
+</svg>

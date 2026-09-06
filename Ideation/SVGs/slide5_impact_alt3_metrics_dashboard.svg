@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" width="100%" height="100%">
+  <!-- Transparent background -->
+
+  <text x="300" y="30" fill="#0F172A" font-family="system-ui" font-size="14" font-weight="700" text-anchor="middle">Impact Metrics Dashboard</text>
+
+  <!-- 2x2 Grid -->
+  
+  <!-- Top Left: Educational -->
+  <g transform="translate(40, 60)">
+    <rect width="250" height="100" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+    <rect x="0" y="0" width="8" height="100" fill="#4F46E5" rx="4"/>
+    <rect x="0" y="0" width="8" height="10" fill="#4F46E5"/> <!-- Square top corner -->
+    <rect x="0" y="90" width="8" height="10" fill="#4F46E5"/> <!-- Square bottom corner -->
+    
+    <text x="25" y="25" fill="#4338CA" font-family="system-ui" font-size="10" font-weight="700">EDUCATIONAL IMPACT</text>
+    <text x="25" y="65" fill="#4F46E5" font-family="system-ui" font-size="36" font-weight="800">4x</text>
+    <text x="90" y="55" fill="#0F172A" font-family="system-ui" font-size="12" font-weight="600">Higher Course</text>
+    <text x="90" y="70" fill="#0F172A" font-family="system-ui" font-size="12" font-weight="600">Completion</text>
+    <text x="25" y="90" fill="#64748B" font-family="system-ui" font-size="9">Saves educators 15+ hours/week grading</text>
+  </g>
+
+  <!-- Top Right: National -->
+  <g transform="translate(310, 60)">
+    <rect width="250" height="100" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+    <rect x="0" y="0" width="8" height="100" fill="#0284C7" rx="4"/>
+    <rect x="0" y="0" width="8" height="10" fill="#0284C7"/>
+    <rect x="0" y="90" width="8" height="10" fill="#0284C7"/>
+    
+    <text x="25" y="25" fill="#0369A1" font-family="system-ui" font-size="10" font-weight="700">NATIONAL IMPACT (NQM)</text>
+    <text x="25" y="65" fill="#0284C7" font-family="system-ui" font-size="32" font-weight="800">25k</text>
+    <text x="90" y="55" fill="#0F172A" font-family="system-ui" font-size="12" font-weight="600">Quantum Ready</text>
+    <text x="90" y="70" fill="#0F172A" font-family="system-ui" font-size="12" font-weight="600">Engineers (2030)</text>
+    <text x="25" y="90" fill="#64748B" font-family="system-ui" font-size="9">Bridges gap between IITs and Tier-2/3</text>
+  </g>
+
+  <!-- Bottom Left: Inclusive -->
+  <g transform="translate(40, 180)">
+    <rect width="250" height="100" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+    <rect x="0" y="0" width="8" height="100" fill="#D97706" rx="4"/>
+    <rect x="0" y="0" width="8" height="10" fill="#D97706"/>
+    <rect x="0" y="90" width="8" height="10" fill="#D97706"/>
+    
+    <text x="25" y="25" fill="#B45309" font-family="system-ui" font-size="10" font-weight="700">INCLUSIVE ACCESS</text>
+    <text x="25" y="65" fill="#D97706" font-family="system-ui" font-size="36" font-weight="800">12+</text>
+    <text x="90" y="55" fill="#0F172A" font-family="system-ui" font-size="12" font-weight="600">Indian Regional</text>
+    <text x="90" y="70" fill="#0F172A" font-family="system-ui" font-size="12" font-weight="600">Languages</text>
+    <text x="25" y="90" fill="#64748B" font-family="system-ui" font-size="9">Full PWA Offline Support (Low-bandwidth)</text>
+  </g>
+
+  <!-- Bottom Right: Environment -->
+  <g transform="translate(310, 180)">
+    <rect width="250" height="100" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+    <rect x="0" y="0" width="8" height="100" fill="#10B981" rx="4"/>
+    <rect x="0" y="0" width="8" height="10" fill="#10B981"/>
+    <rect x="0" y="90" width="8" height="10" fill="#10B981"/>
+    
+    <text x="25" y="25" fill="#047857" font-family="system-ui" font-size="10" font-weight="700">ENVIRONMENTAL (GREEN IT)</text>
+    <text x="25" y="65" fill="#10B981" font-family="system-ui" font-size="32" font-weight="800">~90%</text>
+    <text x="105" y="55" fill="#0F172A" font-family="system-ui" font-size="12" font-weight="600">Cloud Compute</text>
+    <text x="105" y="70" fill="#0F172A" font-family="system-ui" font-size="12" font-weight="600">Reduction</text>
+    <text x="25" y="90" fill="#64748B" font-family="system-ui" font-size="9">Client-side WASM cuts data-center footprint</text>
+  </g>
+
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 320" width="100%" height="100%">
+  <!-- Transparent background -->
+
+  <text x="250" y="30" fill="#0F172A" font-family="system-ui" font-size="12" font-weight="700" text-anchor="middle">Multi-Dimensional Impact</text>
+
+  <!-- Central Node -->
+  <circle cx="250" cy="170" r="40" fill="#F8FAFC" stroke="#4F46E5" stroke-width="2"/>
+  <text x="250" y="174" fill="#4F46E5" font-family="system-ui" font-size="10" font-weight="800" text-anchor="middle">Quantangle</text>
+
+  <!-- Connectors -->
+  <line x1="250" y1="130" x2="160" y2="80" stroke="#CBD5E1" stroke-width="1.5"/>
+  <line x1="250" y1="130" x2="340" y2="80" stroke="#CBD5E1" stroke-width="1.5"/>
+  <line x1="250" y1="210" x2="160" y2="260" stroke="#CBD5E1" stroke-width="1.5"/>
+  <line x1="250" y1="210" x2="340" y2="260" stroke="#CBD5E1" stroke-width="1.5"/>
+
+  <!-- Top Left: Students -->
+  <rect x="50" y="50" width="130" height="50" rx="6" fill="#EEF2FF" stroke="#4F46E5" stroke-width="1"/>
+  <text x="115" y="68" fill="#4338CA" font-family="system-ui" font-size="10" font-weight="700" text-anchor="middle">For Students</text>
+  <text x="115" y="82" fill="#4F46E5" font-family="system-ui" font-size="8" text-anchor="middle">4x Course Completion</text>
+  <text x="115" y="94" fill="#4F46E5" font-family="system-ui" font-size="8" text-anchor="middle">Active Visual Learning</text>
+
+  <!-- Top Right: Educators -->
+  <rect x="320" y="50" width="130" height="50" rx="6" fill="#F0FDF4" stroke="#16A34A" stroke-width="1"/>
+  <text x="385" y="68" fill="#15803D" font-family="system-ui" font-size="10" font-weight="700" text-anchor="middle">For Educators</text>
+  <text x="385" y="82" fill="#16A34A" font-family="system-ui" font-size="8" text-anchor="middle">Saves 15+ hrs/week</text>
+  <text x="385" y="94" fill="#16A34A" font-family="system-ui" font-size="8" text-anchor="middle">Auto Fidelity-Grading</text>
+
+  <!-- Bottom Left: National/Inclusive -->
+  <rect x="50" y="240" width="130" height="50" rx="6" fill="#FFFBEB" stroke="#D97706" stroke-width="1"/>
+  <text x="115" y="258" fill="#B45309" font-family="system-ui" font-size="10" font-weight="700" text-anchor="middle">For India</text>
+  <text x="115" y="272" fill="#D97706" font-family="system-ui" font-size="8" text-anchor="middle">25,000 Quantum Talent</text>
+  <text x="115" y="284" fill="#D97706" font-family="system-ui" font-size="8" text-anchor="middle">12+ Languages (Bhashini)</text>
+
+  <!-- Bottom Right: Environment -->
+  <rect x="320" y="240" width="130" height="50" rx="6" fill="#ECFDF5" stroke="#059669" stroke-width="1"/>
+  <text x="385" y="258" fill="#047857" font-family="system-ui" font-size="10" font-weight="700" text-anchor="middle">For the Environment</text>
+  <text x="385" y="272" fill="#059669" font-family="system-ui" font-size="8" text-anchor="middle">Green Computing</text>
+  <text x="385" y="284" fill="#059669" font-family="system-ui" font-size="8" text-anchor="middle">Local WASM reduces Cloud</text>
+
+</svg>

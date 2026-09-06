@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" width="100%" height="100%">
+  <!-- Transparent background -->
+  
+  <text x="250" y="20" fill="#0F172A" font-family="system-ui" font-size="12" font-weight="700" text-anchor="middle">Risk &amp; Mitigation Matrix</text>
+
+  <!-- Y Axis: Severity -->
+  <line x1="100" y1="260" x2="100" y2="60" stroke="#CBD5E1" stroke-width="2"/>
+  <polygon points="100,55 95,65 105,65" fill="#CBD5E1"/>
+  <text x="80" y="160" fill="#64748B" font-family="system-ui" font-size="10" font-weight="600" text-anchor="middle" transform="rotate(-90 80,160)">Severity</text>
+
+  <!-- X Axis: Probability -->
+  <line x1="90" y1="250" x2="440" y2="250" stroke="#CBD5E1" stroke-width="2"/>
+  <polygon points="445,250 435,245 435,255" fill="#CBD5E1"/>
+  <text x="270" y="275" fill="#64748B" font-family="system-ui" font-size="10" font-weight="600" text-anchor="middle">Probability</text>
+
+  <!-- Quadrant Grid Lines -->
+  <line x1="270" y1="250" x2="270" y2="70" stroke="#E2E8F0" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <line x1="100" y1="160" x2="420" y2="160" stroke="#E2E8F0" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+  <!-- High / High Quadrant -->
+  <rect x="290" y="80" width="120" height="40" rx="4" fill="#FEF2F2" stroke="#EF4444" stroke-width="1"/>
+  <text x="350" y="98" fill="#B91C1C" font-family="system-ui" font-size="9" font-weight="700" text-anchor="middle">AI Hallucinations</text>
+  <text x="350" y="110" fill="#EF4444" font-family="system-ui" font-size="8" text-anchor="middle">Mitigated via Unitary Verify</text>
+
+  <!-- High Sev / Low Prob Quadrant -->
+  <rect x="120" y="80" width="120" height="40" rx="4" fill="#FEF2F2" stroke="#EF4444" stroke-width="1"/>
+  <text x="180" y="98" fill="#B91C1C" font-family="system-ui" font-size="9" font-weight="700" text-anchor="middle">High Cloud Cost</text>
+  <text x="180" y="110" fill="#EF4444" font-family="system-ui" font-size="8" text-anchor="middle">Mitigated via Local WASM</text>
+
+  <!-- Med Sev / High Prob Quadrant -->
+  <rect x="290" y="180" width="120" height="40" rx="4" fill="#FFFBEB" stroke="#D97706" stroke-width="1"/>
+  <text x="350" y="198" fill="#B45309" font-family="system-ui" font-size="9" font-weight="700" text-anchor="middle">Learner Drop-off</text>
+  <text x="350" y="210" fill="#D97706" font-family="system-ui" font-size="8" text-anchor="middle">Mitigated via Gamified Quests</text>
+
+  <!-- Med Sev / Low Prob Quadrant -->
+  <rect x="120" y="180" width="120" height="40" rx="4" fill="#FFFBEB" stroke="#D97706" stroke-width="1"/>
+  <text x="180" y="198" fill="#B45309" font-family="system-ui" font-size="9" font-weight="700" text-anchor="middle">Low Connectivity</text>
+  <text x="180" y="210" fill="#D97706" font-family="system-ui" font-size="8" text-anchor="middle">Mitigated via PWA Offline Mode</text>
+
+</svg>

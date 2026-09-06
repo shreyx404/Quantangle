@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 260" width="100%" height="100%">
+  <!-- Transparent background for seamless slide integration -->
+
+  <!-- Table Container -->
+  <rect x="10" y="10" width="420" height="240" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+  
+  <!-- Table Header -->
+  <path d="M 10,18 Q 10,10 18,10 L 422,10 Q 430,10 430,18 L 430,36 L 10,36 Z" fill="#F8FAFC"/>
+  <text x="20" y="26" fill="#334155" font-family="system-ui" font-size="10" font-weight="700">IDENTIFIED RISK</text>
+  <text x="170" y="26" fill="#334155" font-family="system-ui" font-size="10" font-weight="700">SEV</text>
+  <text x="220" y="26" fill="#334155" font-family="system-ui" font-size="10" font-weight="700">MITIGATION STRATEGY</text>
+
+  <!-- Row 1: Cost -->
+  <line x1="10" y1="36" x2="430" y2="36" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="20" y="55" fill="#0F172A" font-family="system-ui" font-size="11" font-weight="600">High Cloud Cost</text>
+  <text x="20" y="70" fill="#64748B" font-family="system-ui" font-size="9">at nationwide scale</text>
+
+  <rect x="165" y="45" width="40" height="18" rx="9" fill="#FEF2F2" stroke="#FECACA" stroke-width="1"/>
+  <text x="185" y="58" fill="#B91C1C" font-family="system-ui" font-size="9" font-weight="700" text-anchor="middle">HIGH</text>
+
+  <text x="220" y="55" fill="#0F172A" font-family="system-ui" font-size="10" font-weight="600">Hybrid Routing</text>
+  <text x="220" y="70" fill="#475569" font-family="system-ui" font-size="9">85% runs local WASM (₹0 cost)</text>
+
+  <!-- Row 2: LLM Hallucinations -->
+  <line x1="10" y1="90" x2="430" y2="90" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="20" y="110" fill="#0F172A" font-family="system-ui" font-size="11" font-weight="600">AI Hallucinations</text>
+  <text x="20" y="125" fill="#64748B" font-family="system-ui" font-size="9">invalid circuit generation</text>
+
+  <rect x="165" y="100" width="40" height="18" rx="9" fill="#FEF2F2" stroke="#FECACA" stroke-width="1"/>
+  <text x="185" y="113" fill="#B91C1C" font-family="system-ui" font-size="9" font-weight="700" text-anchor="middle">HIGH</text>
+
+  <text x="220" y="110" fill="#0F172A" font-family="system-ui" font-size="10" font-weight="600">Unitary Verification</text>
+  <text x="220" y="125" fill="#475569" font-family="system-ui" font-size="9">Fidelity tested (F ≥ 0.999) before display</text>
+
+  <!-- Row 3: Learner Drop-off -->
+  <line x1="10" y1="145" x2="430" y2="145" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="20" y="165" fill="#0F172A" font-family="system-ui" font-size="11" font-weight="600">Learner Drop-Off</text>
+  <text x="20" y="180" fill="#64748B" font-family="system-ui" font-size="9">abstract theory fatigue</text>
+
+  <rect x="165" y="155" width="40" height="18" rx="9" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1"/>
+  <text x="185" y="168" fill="#B45309" font-family="system-ui" font-size="9" font-weight="700" text-anchor="middle">MED</text>
+
+  <text x="220" y="165" fill="#0F172A" font-family="system-ui" font-size="10" font-weight="600">Interactive Arena</text>
+  <text x="220" y="180" fill="#475569" font-family="system-ui" font-size="9">Bite-sized quests &amp; skill badges</text>
+
+  <!-- Row 4: Connectivity -->
+  <line x1="10" y1="200" x2="430" y2="200" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="20" y="220" fill="#0F172A" font-family="system-ui" font-size="11" font-weight="600">Low Connectivity</text>
+  <text x="20" y="235" fill="#64748B" font-family="system-ui" font-size="9">rural tier-2/3 access</text>
+
+  <rect x="165" y="210" width="40" height="18" rx="9" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1"/>
+  <text x="185" y="223" fill="#B45309" font-family="system-ui" font-size="9" font-weight="700" text-anchor="middle">MED</text>
+
+  <text x="220" y="220" fill="#0F172A" font-family="system-ui" font-size="10" font-weight="600">PWA Offline Mode</text>
+  <text x="220" y="235" fill="#475569" font-family="system-ui" font-size="9">Pre-caches app, local runtime</text>
+
+</svg>

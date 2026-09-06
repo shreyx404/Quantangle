@@ -33,8 +33,9 @@ Quantangle is being initialized as a production-grade interactive quantum learni
 
 ### Next Immediate Action (for the next agent session or turn)
 - Once Phase 0 system specifications are complete:
-  - Initialize the project repository scaffolding per [TECH_STACK.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/TECH_STACK.md) (Frontend Next.js app, Rust-WASM crate, and FastAPI backend skeleton).
-  - Begin Phase 1 in [TASKS.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/TASKS.md).
+  - Initialize the project repository scaffolding per [TECH_STACK.md](file:///c:/Users/shrey/Downloads/Quantangle/TECH_STACK.md) (Frontend Next.js app, Rust-WASM crate, and FastAPI backend skeleton).
+  - Begin Phase 1 in [TASKS.md](file:///c:/Users/shrey/Downloads/Quantangle/TASKS.md).
+- **Enforce Mandatory Post-Fix Protocol**: After any code fix or task completion, update all system markdown files and immediately push to GitHub (`git push origin main`).
 
 ---
 
@@ -45,6 +46,10 @@ Quantangle is being initialized as a production-grade interactive quantum learni
   - Created `CLAUDE.md` (CLI cheatsheet & commands).
   - Created `.cursorrules` (Vibe coding directives).
   - Created `ACTIVE_CONTEXT.md` (Short-term memory file).
+  - Configured polyglot `.gitignore` (Node, Python, Rust, IDE).
+  - Initialized git repository on branch `main` and linked to private remote `https://github.com/shreyx404/Quantangle.git`.
+  - Pushed initial project structure and specification suite to GitHub.
+  - Added strict rule across all system markdown files: after every code fix, update system docs and push code to GitHub.
 
 ---
 
@@ -55,3 +60,4 @@ Quantangle is being initialized as a production-grade interactive quantum learni
 | Monorepo vs Multi-repo structure | **Resolved: Turborepo Monorepo** | Single repository containing `/apps/web` (Next.js), `/packages/wasm-simulator` (Rust/Wasm), and `/apps/api` (FastAPI backend). |
 | Qubit Endianness Convention | **Resolved: Little-Endian** | Little-endian ($q_0$ is LSB) strictly enforced across all modules to ensure seamless compatibility with Qiskit and standard literature. |
 | Client vs Cloud Simulation Boundary | **Resolved: 16 Qubits** | $\le 16$ qubits run client-side in Rust WebAssembly (0ms latency, zero server cost). $>16$ qubits or noisy/VQE circuits offload to FastAPI backend. |
+| Code Fix Sync & Git Push Protocol | **Resolved: Mandatory Auto-Push** | After every code fix or task, all system markdown files must be updated and pushed to GitHub. |

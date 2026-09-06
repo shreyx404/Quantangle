@@ -21,7 +21,7 @@ Your goal is to build an educational deep-tech platform combining:
 
 ## 2. The Agent Workflow Loop (Every Session)
 
-Whenever you (the AI agent) begin a new turn or pick up a task, follow this exact 5-step loop:
+Whenever you (the AI agent) begin a new turn or pick up a task, follow this exact 6-step loop:
 
 ```
 ┌────────────────────────────────────────────────────────┐
@@ -47,8 +47,15 @@ Whenever you (the AI agent) begin a new turn or pick up a task, follow this exac
 └──────────────────────────┬─────────────────────────────┘
                            ▼
 ┌────────────────────────────────────────────────────────┐
-│ 5. UPDATE ACTIVE_CONTEXT.md & TASKS.md                 │
-│    Mark task [x], document changes, state next task    │
+│ 5. UPDATE ALL SYSTEM MARKDOWN FILES                    │
+│    Update ACTIVE_CONTEXT.md, mark TASKS.md [x], and    │
+│    update relevant specs/docs to reflect exact state   │
+└──────────────────────────┬─────────────────────────────┘
+                           ▼
+┌────────────────────────────────────────────────────────┐
+│ 6. PUSH CODE & DOCS TO GITHUB (AFTER EVERY FIX)        │
+│    Stage all changes, commit with clear message, and   │
+│    push to GitHub: git push origin main                │
 └────────────────────────────────────────────────────────┘
 ```
 
@@ -61,7 +68,7 @@ Whenever you (the AI agent) begin a new turn or pick up a task, follow this exac
      $$|q_{n-1} \dots q_1 q_0\rangle$$
      where Qubit 0 is the Least Significant Bit (LSB).
    - In statevector arrays of length $2^n$, index `0` represents $|00\dots0\rangle$, index `1` represents $|00\dots1\rangle$ (qubit 0 is 1), index `2` represents $|00\dots10\rangle$ (qubit 1 is 1).
-   - Never reverse or mix up endianness between the Rust-WASM engine, canvas, and code editor. See [SIMULATION_SPEC.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/SIMULATION_SPEC.md).
+   - Never reverse or mix up endianness between the Rust-WASM engine, canvas, and code editor. See [SIMULATION_SPEC.md](file:///c:/Users/shrey/Downloads/Quantangle/SIMULATION_SPEC.md).
 
 2. **Zero-Hallucination AI Rule**:
    - Never show AI-generated circuit fixes to a learner without passing the **Unitary Verification Pipeline**.
@@ -80,27 +87,38 @@ Whenever you (the AI agent) begin a new turn or pick up a task, follow this exac
    - Do not write mock algorithms with `// TODO: implement later` or hardcoded fake probability arrays when completing a task.
    - Implement authentic linear algebra (complex matrix multiplication, Kronecker products) or use designated helper libraries.
 
+6. **Post-Fix Documentation Sync & GitHub Push (MANDATORY)**:
+   - After **every single code fix**, refactor, bugfix, or feature addition:
+     1. **Update all system markdown files** (`ACTIVE_CONTEXT.md`, `TASKS.md`, and any related specs) to accurately reflect the new status.
+     2. **Immediately push the code and updated markdown files to GitHub**:
+        ```powershell
+        git add .
+        git commit -m "fix: <brief description of fix> and update system docs"
+        git push origin main
+        ```
+     3. Never leave uncommitted or unpushed fixes at the conclusion of any task or session.
+
 ---
 
 ## 4. How to Handle Errors & Blockers
 
-- If a test fails: Do NOT mark the task complete in [TASKS.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/TASKS.md). Fix the root cause.
-- If an architectural trade-off arises: Document the decision in [ACTIVE_CONTEXT.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/ACTIVE_CONTEXT.md) under "Open Decisions".
-- If quantum math fails: Check [SIMULATION_SPEC.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/SIMULATION_SPEC.md) for gate matrix matrices and phase factor conventions ($\pm i$, $\frac{1}{\sqrt{2}}$, $e^{i\theta}$).
+- If a test fails: Do NOT mark the task complete in [TASKS.md](file:///c:/Users/shrey/Downloads/Quantangle/TASKS.md). Fix the root cause.
+- If an architectural trade-off arises: Document the decision in [ACTIVE_CONTEXT.md](file:///c:/Users/shrey/Downloads/Quantangle/ACTIVE_CONTEXT.md) under "Open Decisions".
+- If quantum math fails: Check [SIMULATION_SPEC.md](file:///c:/Users/shrey/Downloads/Quantangle/SIMULATION_SPEC.md) for gate matrix matrices and phase factor conventions ($\pm i$, $\frac{1}{\sqrt{2}}$, $e^{i\theta}$).
 
 ---
 
 ## 5. File System & Documentation Map
 
-- **Ground Rules**: [AGENTS.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/AGENTS.md) (this file)
-- **Fast CLI & Claude Cheatsheet**: [CLAUDE.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/CLAUDE.md)
-- **Cursor / Vibe Rules**: [.cursorrules](file:///c:/Users/shrey/Downloads/SIH%20Ideation/.cursorrules)
-- **Live Context Memory**: [ACTIVE_CONTEXT.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/ACTIVE_CONTEXT.md)
-- **Product Requirements**: [PRD.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/PRD.md)
-- **System Architecture**: [ARCHITECTURE.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/ARCHITECTURE.md)
-- **Design Patterns & Standards**: [SYSTEM_PATTERNS.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/SYSTEM_PATTERNS.md)
-- **Tech Stack & Tooling**: [TECH_STACK.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/TECH_STACK.md)
-- **Quantum Simulation Mathematics**: [SIMULATION_SPEC.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/SIMULATION_SPEC.md)
-- **API Contracts (REST & WebSockets)**: [API_SPEC.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/API_SPEC.md)
-- **Self-Testing & Verification**: [TESTING_GUIDE.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/TESTING_GUIDE.md)
-- **Atomic Implementation Roadmap**: [TASKS.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/TASKS.md)
+- **Ground Rules**: [AGENTS.md](file:///c:/Users/shrey/Downloads/Quantangle/AGENTS.md) (this file)
+- **Fast CLI & Claude Cheatsheet**: [CLAUDE.md](file:///c:/Users/shrey/Downloads/Quantangle/CLAUDE.md)
+- **Cursor / Vibe Rules**: [.cursorrules](file:///c:/Users/shrey/Downloads/Quantangle/.cursorrules)
+- **Live Context Memory**: [ACTIVE_CONTEXT.md](file:///c:/Users/shrey/Downloads/Quantangle/ACTIVE_CONTEXT.md)
+- **Product Requirements**: [PRD.md](file:///c:/Users/shrey/Downloads/Quantangle/PRD.md)
+- **System Architecture**: [ARCHITECTURE.md](file:///c:/Users/shrey/Downloads/Quantangle/ARCHITECTURE.md)
+- **Design Patterns & Standards**: [SYSTEM_PATTERNS.md](file:///c:/Users/shrey/Downloads/Quantangle/SYSTEM_PATTERNS.md)
+- **Tech Stack & Tooling**: [TECH_STACK.md](file:///c:/Users/shrey/Downloads/Quantangle/TECH_STACK.md)
+- **Quantum Simulation Mathematics**: [SIMULATION_SPEC.md](file:///c:/Users/shrey/Downloads/Quantangle/SIMULATION_SPEC.md)
+- **API Contracts (REST & WebSockets)**: [API_SPEC.md](file:///c:/Users/shrey/Downloads/Quantangle/API_SPEC.md)
+- **Self-Testing & Verification**: [TESTING_GUIDE.md](file:///c:/Users/shrey/Downloads/Quantangle/TESTING_GUIDE.md)
+- **Atomic Implementation Roadmap**: [TASKS.md](file:///c:/Users/shrey/Downloads/Quantangle/TASKS.md)

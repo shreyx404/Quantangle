@@ -89,9 +89,28 @@ pytest
 
 ---
 
-## 4. Key References
-- Product Specs: [PRD.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/PRD.md)
-- System Architecture: [ARCHITECTURE.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/ARCHITECTURE.md)
-- Quantum Physics Ground Truths: [SIMULATION_SPEC.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/SIMULATION_SPEC.md)
-- Active Session State: [ACTIVE_CONTEXT.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/ACTIVE_CONTEXT.md)
-- Engineering Roadmap: [TASKS.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/TASKS.md)
+## 4. Post-Fix Protocol (Sync & Git Push)
+
+**MANDATORY AFTER EVERY CODE FIX OR TASK COMPLETION**:
+1. **Update System Markdown Files**:
+   - Update [ACTIVE_CONTEXT.md](file:///c:/Users/shrey/Downloads/Quantangle/ACTIVE_CONTEXT.md) with recent changes and immediate next steps.
+   - Update [TASKS.md](file:///c:/Users/shrey/Downloads/Quantangle/TASKS.md) marking completed tasks `[x]`.
+   - Update any relevant technical specs (`ARCHITECTURE.md`, `SYSTEM_PATTERNS.md`, etc.) if signatures or designs changed.
+2. **Push Code and Docs to GitHub**:
+   ```bash
+   git add .
+   git commit -m "fix: <concise summary of fix> & update system docs"
+   git push origin main
+   ```
+
+---
+
+## 5. Key References
+- Ground Rules & Protocol: [AGENTS.md](file:///c:/Users/shrey/Downloads/Quantangle/AGENTS.md)
+- Product Specs: [PRD.md](file:///c:/Users/shrey/Downloads/Quantangle/PRD.md)
+- System Architecture: [ARCHITECTURE.md](file:///c:/Users/shrey/Downloads/Quantangle/ARCHITECTURE.md)
+- System Patterns: [SYSTEM_PATTERNS.md](file:///c:/Users/shrey/Downloads/Quantangle/SYSTEM_PATTERNS.md)
+- Quantum Physics Ground Truths: [SIMULATION_SPEC.md](file:///c:/Users/shrey/Downloads/Quantangle/SIMULATION_SPEC.md)
+- Active Session State: [ACTIVE_CONTEXT.md](file:///c:/Users/shrey/Downloads/Quantangle/ACTIVE_CONTEXT.md)
+- Engineering Roadmap: [TASKS.md](file:///c:/Users/shrey/Downloads/Quantangle/TASKS.md)
+- Testing & Verification: [TESTING_GUIDE.md](file:///c:/Users/shrey/Downloads/Quantangle/TESTING_GUIDE.md)

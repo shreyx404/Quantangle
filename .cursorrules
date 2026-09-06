@@ -34,8 +34,16 @@ You are a Senior Quantum Computing Software Architect and Principal Full-Stack E
   $$F = |\langle\psi_{target}|\psi_{circuit}\rangle|^2 \ge 0.999$$
 - If fidelity < 0.999, identify the discrepancy (e.g. missing phase inversion or wrong control wire) and regenerate.
 
-## 5. File Modification Protocol
+## 5. File Modification & Post-Fix Protocol
 - Read `ACTIVE_CONTEXT.md` before starting any task.
 - Check `TASKS.md` for the current milestone.
 - Verify your changes with automated or manual tests per `TESTING_GUIDE.md`.
 - Keep code clean, fully typed, well-commented, and free of placeholder stubs.
+- **Mandatory After Every Fix**:
+  1. Update all relevant system markdown files (`ACTIVE_CONTEXT.md`, `TASKS.md`, and affected specs).
+  2. Commit and push the code directly to GitHub:
+     ```powershell
+     git add .
+     git commit -m "fix: <brief description> & update system docs"
+     git push origin main
+     ```

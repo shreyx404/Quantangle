@@ -1,4 +1,4 @@
-﻿# Dependencies
+# Dependencies
 node_modules/
 .pnp
 .pnp.js
@@ -8,8 +8,11 @@ dist/
 build/
 out/
 .next/
+.turbo/
 packages/wasm-engine/pkg/
+**/pkg/
 target/
+**/target/
 
 # Python
 __pycache__/

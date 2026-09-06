@@ -41,14 +41,15 @@ Quantangle is being initialized as a production-grade interactive quantum learni
 
 ## 3. Recent Changes Log
 - **2026-09-06**:
-  - Cleaned root workspace; archived pitch assets into `docs/pitch_archive/`.
+  - Cleaned root workspace; archived pitch assets safely into `docs/pitch_archive/` and renamed presentation file typo (`Quantangle_SIH26140_Idea_PPT.pptx`).
   - Created `AGENTS.md` (Agent operating manifesto).
-  - Created `CLAUDE.md` (CLI cheatsheet & commands).
+  - Created `CLAUDE.md` (CLI cheatsheet & commands) and aligned monorepo paths (`/apps/web`, `/packages/wasm-engine`, `/apps/api`).
   - Created `.cursorrules` (Vibe coding directives).
   - Created `ACTIVE_CONTEXT.md` (Short-term memory file).
-  - Configured polyglot `.gitignore` (Node, Python, Rust, IDE).
-  - Initialized git repository on branch `main` and linked to private remote `https://github.com/shreyx404/Quantangle.git`.
-  - Pushed initial project structure and specification suite to GitHub.
+  - Configured polyglot `.gitignore` (Node, Python, Rust, IDE, Turborepo `.turbo/`, `**/pkg/`, `**/target/`).
+  - Initialized git repository on branch `main` and linked to remote `https://github.com/shreyx404/Quantangle.git`.
+  - Fixed broken `SIH Ideation` links in `README.md` to point to `Quantangle`.
+  - Audited mathematical rigor in `SIMULATION_SPEC.md` (all Pauli, Hadamard, Phase, Rotation, CX, CZ, SWAP unitaries, in-place update algorithms, and Bloch vector projections verified).
   - Added strict rule across all system markdown files: after every code fix, update system docs and push code to GitHub.
 
 ---
@@ -57,7 +58,8 @@ Quantangle is being initialized as a production-grade interactive quantum learni
 
 | Item | Status | Notes |
 |---|---|---|
-| Monorepo vs Multi-repo structure | **Resolved: Turborepo Monorepo** | Single repository containing `/apps/web` (Next.js), `/packages/wasm-simulator` (Rust/Wasm), and `/apps/api` (FastAPI backend). |
+| Monorepo vs Multi-repo structure | **Resolved: Turborepo Monorepo** | Single repository containing `/apps/web` (Next.js), `/packages/wasm-engine` (Rust/Wasm), and `/apps/api` (FastAPI backend). |
 | Qubit Endianness Convention | **Resolved: Little-Endian** | Little-endian ($q_0$ is LSB) strictly enforced across all modules to ensure seamless compatibility with Qiskit and standard literature. |
 | Client vs Cloud Simulation Boundary | **Resolved: 16 Qubits** | $\le 16$ qubits run client-side in Rust WebAssembly (0ms latency, zero server cost). $>16$ qubits or noisy/VQE circuits offload to FastAPI backend. |
 | Code Fix Sync & Git Push Protocol | **Resolved: Mandatory Auto-Push** | After every code fix or task, all system markdown files must be updated and pushed to GitHub. |
+

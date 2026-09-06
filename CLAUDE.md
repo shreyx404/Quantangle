@@ -17,7 +17,7 @@ Quantangle is an AI-based Interactive Quantum Algorithm Learning & Multi-Engine 
 
 ## 2. Common CLI Commands
 
-### Frontend (`/frontend` or root)
+### Frontend (`/apps/web`)
 ```bash
 # Install dependencies
 npm install
@@ -38,7 +38,7 @@ npm run test:e2e
 npm run build
 ```
 
-### Rust WebAssembly Quantum Engine (`/wasm-engine`)
+### Rust WebAssembly Quantum Engine (`/packages/wasm-engine`)
 ```bash
 # Build WASM package for web target
 wasm-pack build --target web --release
@@ -50,7 +50,7 @@ cargo test
 cargo bench
 ```
 
-### Python Backend & Simulation Hub (`/backend`)
+### Python Backend & Simulation Hub (`/apps/api`)
 ```bash
 # Create and activate virtual environment
 python -m venv venv
@@ -76,13 +76,13 @@ pytest
 - For styling, use high-contrast dark theme variables and CSS modules or Tailwind.
 - Keep complex linear algebra out of React components — call the WebAssembly Web Worker.
 
-### Rust (`/wasm-engine`)
+### Rust (`/packages/wasm-engine`)
 - Use `num-complex` for complex numbers (`Complex64`).
 - Statevector is represented as `Vec<Complex64>` of length $2^n$.
 - Qubit indices are `0`-indexed, Little-Endian ($q_0$ is LSB).
 - Ensure memory allocations are pre-calculated for $2^n$ statevector operations.
 
-### Python (`/backend`)
+### Python (`/apps/api`)
 - Format code with `black` and `ruff`.
 - Use Pydantic v2 models for request/response validation.
 - All AI responses must pass through `verify_unitary(circuit_ast)` before returning to the client.

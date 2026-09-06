@@ -13,18 +13,18 @@ This repository is equipped with an enterprise-grade **AI Agent & Vibe Coding Op
 
 | Document | Description | Target Audience |
 |---|---|---|
-| **[AGENTS.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/AGENTS.md)** | Universal AI Agent Manifesto & rules of engagement | AI Coding Agents & LLMs |
-| **[CLAUDE.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/CLAUDE.md)** | Fast CLI commands, build scripts, and testing cheatsheet | Claude Code & Terminal Agents |
-| **[.cursorrules](file:///c:/Users/shrey/Downloads/SIH%20Ideation/.cursorrules)** | Cursor / Windsurf IDE vibe coding directives | Cursor & IDE Vibe Coders |
-| **[ACTIVE_CONTEXT.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/ACTIVE_CONTEXT.md)** | Dynamic memory: current focus, recent changes, next action | Multi-session Handover & Memory |
-| **[PRD.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/PRD.md)** | Product Requirements Document: Problem gaps, personas, 6 modules, NFRs | Product, Design & Architecture |
-| **[ARCHITECTURE.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/ARCHITECTURE.md)** | System topology, data flows, AST synchronization, WASM worker | Senior Engineers & Architects |
-| **[SYSTEM_PATTERNS.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/SYSTEM_PATTERNS.md)** | Zustand stores, Web Worker messaging, Three.js shaders, error handling | Frontend & Fullstack Engineers |
-| **[TECH_STACK.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/TECH_STACK.md)** | Verified dependencies, package configurations, versions | DevOps & Fullstack Engineers |
-| **[SIMULATION_SPEC.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/SIMULATION_SPEC.md)** | Quantum linear algebra, statevectors, unitary gates, Little-Endian rule | Quantum Software Engineers |
-| **[API_SPEC.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/API_SPEC.md)** | REST & WebSocket interface contracts and Pydantic models | Backend & Integration Engineers |
-| **[TESTING_GUIDE.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/TESTING_GUIDE.md)** | Self-verification test commands & quantum fidelity assertions ($F \ge 0.999$) | QA & Autonomous Agent Verification |
-| **[TASKS.md](file:///c:/Users/shrey/Downloads/SIH%20Ideation/TASKS.md)** | Phased, checkbox-driven implementation roadmap (Phase 0 to Phase 7) | Project Management & Task Execution |
+| **[AGENTS.md](file:///c:/Users/shrey/Downloads/Quantangle/AGENTS.md)** | Universal AI Agent Manifesto & rules of engagement | AI Coding Agents & LLMs |
+| **[CLAUDE.md](file:///c:/Users/shrey/Downloads/Quantangle/CLAUDE.md)** | Fast CLI commands, build scripts, and testing cheatsheet | Claude Code & Terminal Agents |
+| **[.cursorrules](file:///c:/Users/shrey/Downloads/Quantangle/.cursorrules)** | Cursor / Windsurf IDE vibe coding directives | Cursor & IDE Vibe Coders |
+| **[ACTIVE_CONTEXT.md](file:///c:/Users/shrey/Downloads/Quantangle/ACTIVE_CONTEXT.md)** | Dynamic memory: current focus, recent changes, next action | Multi-session Handover & Memory |
+| **[PRD.md](file:///c:/Users/shrey/Downloads/Quantangle/PRD.md)** | Product Requirements Document: Problem gaps, personas, 6 modules, NFRs | Product, Design & Architecture |
+| **[ARCHITECTURE.md](file:///c:/Users/shrey/Downloads/Quantangle/ARCHITECTURE.md)** | System topology, data flows, AST synchronization, WASM worker | Senior Engineers & Architects |
+| **[SYSTEM_PATTERNS.md](file:///c:/Users/shrey/Downloads/Quantangle/SYSTEM_PATTERNS.md)** | Zustand stores, Web Worker messaging, Three.js shaders, error handling | Frontend & Fullstack Engineers |
+| **[TECH_STACK.md](file:///c:/Users/shrey/Downloads/Quantangle/TECH_STACK.md)** | Verified dependencies, package configurations, versions | DevOps & Fullstack Engineers |
+| **[SIMULATION_SPEC.md](file:///c:/Users/shrey/Downloads/Quantangle/SIMULATION_SPEC.md)** | Quantum linear algebra, statevectors, unitary gates, Little-Endian rule | Quantum Software Engineers |
+| **[API_SPEC.md](file:///c:/Users/shrey/Downloads/Quantangle/API_SPEC.md)** | REST & WebSocket interface contracts and Pydantic models | Backend & Integration Engineers |
+| **[TESTING_GUIDE.md](file:///c:/Users/shrey/Downloads/Quantangle/TESTING_GUIDE.md)** | Self-verification test commands & quantum fidelity assertions ($F \ge 0.999$) | QA & Autonomous Agent Verification |
+| **[TASKS.md](file:///c:/Users/shrey/Downloads/Quantangle/TASKS.md)** | Phased, checkbox-driven implementation roadmap (Phase 0 to Phase 7) | Project Management & Task Execution |
 
 ---
 

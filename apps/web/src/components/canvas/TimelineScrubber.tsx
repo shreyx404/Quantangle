@@ -51,16 +51,16 @@ export const TimelineScrubber: React.FC = () => {
   };
 
   return (
-    <div className="glass-panel rounded-xl p-3 border border-white/10 flex flex-wrap items-center justify-between gap-3">
+    <div className="bg-[#0b0f19] rounded-lg p-3 border border-white/[0.08] flex flex-wrap items-center justify-between gap-3 shadow-sm">
       {/* Playback Controls */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1.5">
         <button
           onClick={() => {
             setIsPlaying(false);
             setActiveStep(0);
           }}
           title="Reset to t=0 (Initial State)"
-          className="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 flex items-center justify-center transition-colors"
+          className="w-8 h-8 rounded-md bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 flex items-center justify-center transition-colors active:translate-y-[1px]"
         >
           <RotateCcw className="w-3.5 h-3.5" />
         </button>
@@ -69,7 +69,7 @@ export const TimelineScrubber: React.FC = () => {
           onClick={handleStepBack}
           disabled={activeStep <= 0}
           title="Step Backward"
-          className="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 disabled:opacity-40 flex items-center justify-center transition-colors"
+          className="w-8 h-8 rounded-md bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 disabled:opacity-30 flex items-center justify-center transition-colors active:translate-y-[1px]"
         >
           <SkipBack className="w-3.5 h-3.5" />
         </button>
@@ -77,12 +77,12 @@ export const TimelineScrubber: React.FC = () => {
         <button
           onClick={() => setIsPlaying(!isPlaying)}
           title={isPlaying ? "Pause Timeline" : "Play Timeline Animation"}
-          className="w-10 h-10 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-slate-950 flex items-center justify-center shadow-[0_0_15px_rgba(0,242,254,0.4)] transition-all"
+          className="w-8 h-8 rounded-md bg-cyan-500 hover:bg-cyan-400 text-slate-950 flex items-center justify-center transition-colors active:translate-y-[1px] shadow-sm"
         >
           {isPlaying ? (
-            <Pause className="w-4 h-4 fill-current" />
+            <Pause className="w-3.5 h-3.5 fill-current" />
           ) : (
-            <Play className="w-4 h-4 fill-current ml-0.5" />
+            <Play className="w-3.5 h-3.5 fill-current ml-0.5" />
           )}
         </button>
 
@@ -90,7 +90,7 @@ export const TimelineScrubber: React.FC = () => {
           onClick={handleStepForward}
           disabled={activeStep >= maxSteps - 1}
           title="Step Forward"
-          className="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 disabled:opacity-40 flex items-center justify-center transition-colors"
+          className="w-8 h-8 rounded-md bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 disabled:opacity-30 flex items-center justify-center transition-colors active:translate-y-[1px]"
         >
           <SkipForward className="w-3.5 h-3.5" />
         </button>
@@ -98,7 +98,7 @@ export const TimelineScrubber: React.FC = () => {
 
       {/* Scrubber Slider */}
       <div className="flex-1 min-w-[200px] flex items-center gap-3">
-        <span className="text-xs font-mono text-cyan-400 font-bold whitespace-nowrap">
+        <span className="text-xs font-mono text-cyan-300 font-semibold whitespace-nowrap bg-[#101726] px-2 py-0.5 rounded border border-white/[0.06] tabular-nums">
           Step {activeStep} / {Math.max(0, maxSteps - 1)}
         </span>
         <div className="flex-1 relative flex items-center">
@@ -117,9 +117,9 @@ export const TimelineScrubber: React.FC = () => {
       </div>
 
       {/* Speed & Simulator Info */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2.5">
         {/* Speed toggle */}
-        <div className="flex items-center gap-1 bg-black/40 rounded-lg p-1 border border-white/5 text-[11px] font-mono">
+        <div className="flex items-center gap-0.5 bg-[#101726] rounded-md p-0.5 border border-white/[0.08] text-[11px] font-mono">
           {[
             { label: "0.5x", speed: 1500 },
             { label: "1x", speed: 1000 },
@@ -128,9 +128,9 @@ export const TimelineScrubber: React.FC = () => {
             <button
               key={item.label}
               onClick={() => setPlaybackSpeed(item.speed)}
-              className={`px-2 py-0.5 rounded ${
+              className={`px-2 py-0.5 rounded transition-colors ${
                 playbackSpeed === item.speed
-                  ? "bg-cyan-500 text-slate-950 font-bold"
+                  ? "bg-cyan-500/20 text-cyan-300 font-semibold border border-cyan-500/30"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -140,12 +140,12 @@ export const TimelineScrubber: React.FC = () => {
         </div>
 
         {/* Engine status indicator */}
-        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
-          <Zap className="w-3.5 h-3.5" />
+        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#101726] border border-white/[0.08] text-emerald-400 text-xs font-mono">
+          <Zap className="w-3 h-3" />
           <span>
             {simulationTimeMs !== null
               ? `${simulationTimeMs.toFixed(2)} ms`
-              : "0 ms"}
+              : "0.08 ms"}
           </span>
         </div>
       </div>

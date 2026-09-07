@@ -174,15 +174,15 @@ export const QSphere: React.FC = () => {
   }, [statevector, probabilities, numQubits, activeStep]);
 
   return (
-    <div className="glass-panel rounded-xl p-3 border border-white/10 flex flex-col h-full min-h-[320px]">
-      <div className="flex items-center justify-between pb-2 border-b border-white/5">
+    <div className="bg-[#0b0f19] rounded-lg p-3 border border-white/[0.08] flex flex-col h-full min-h-[320px] shadow-sm">
+      <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
         <div className="flex items-center gap-2">
-          <Orbit className="w-4 h-4 text-cyan-400" />
+          <Orbit className="w-3.5 h-3.5 text-cyan-400" />
           <span className="text-xs font-semibold text-white tracking-wide">
             Multi-Qubit 3D Q-Sphere
           </span>
         </div>
-        <span className="text-[10px] font-mono text-cyan-300">
+        <span className="text-[10px] font-mono text-cyan-300 bg-[#101726] px-2 py-0.5 rounded border border-white/[0.06]">
           {Math.pow(2, numQubits)} Basis States
         </span>
       </div>
@@ -191,15 +191,15 @@ export const QSphere: React.FC = () => {
         ref={mountRef}
         className="flex-1 w-full min-h-[220px] relative cursor-grab active:cursor-grabbing"
       >
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 pointer-events-none text-[10px] font-mono font-bold text-slate-300 drop-shadow">
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 pointer-events-none text-[10px] font-mono font-semibold text-slate-300">
           |00...0⟩ (Weight 0)
         </div>
-        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 pointer-events-none text-[10px] font-mono font-bold text-slate-300 drop-shadow">
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 pointer-events-none text-[10px] font-mono font-semibold text-slate-300">
           |11...1⟩ (Weight {numQubits})
         </div>
       </div>
 
-      <div className="pt-2 border-t border-white/5 text-[10px] font-mono text-slate-400 flex items-center justify-between">
+      <div className="pt-2 border-t border-white/[0.06] text-[10px] font-mono text-slate-400 flex items-center justify-between">
         <span>Latitude = Hamming Weight</span>
         <span>Node Size = |α_j|</span>
       </div>

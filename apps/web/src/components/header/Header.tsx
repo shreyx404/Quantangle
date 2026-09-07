@@ -145,49 +145,54 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className="glass-panel border-b border-white/10 px-4 py-3 sticky top-0 z-40">
+    <header className="bg-[#0b0f19] border-b border-white/[0.08] px-5 py-2.5 sticky top-0 z-40">
       <div className="max-w-[1700px] mx-auto flex flex-wrap items-center justify-between gap-3">
         {/* Logo & Brand */}
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-500 to-purple-600 flex items-center justify-center shadow-[0_0_20px_rgba(0,242,254,0.4)]">
-            <Atom className="w-5 h-5 text-slate-950 animate-spin" style={{ animationDuration: "12s" }} />
+          <div className="w-8 h-8 rounded-lg bg-[#111726] border border-cyan-500/25 flex items-center justify-center text-cyan-400 shadow-sm">
+            <Atom className="w-4.5 h-4.5" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-base font-bold tracking-tight text-white flex items-center gap-1.5">
-                Quant<span className="quantum-text-gradient">angle</span>
+              <h1 className="text-sm font-semibold tracking-tight text-white flex items-center gap-1.5">
+                Quantangle
               </h1>
-              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
                 SIH26140
+              </span>
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/[0.05] text-slate-400 border border-white/[0.08] hidden sm:inline-block">
+                Little-Endian
               </span>
             </div>
             <p className="text-[11px] text-slate-400">
-              Interactive AI-Guided Quantum Computing Platform
+              Interactive Quantum Circuit Designer & Multi-Engine Simulation Hub
             </p>
           </div>
         </div>
 
         {/* Engine Status & Preset Picker */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           {/* Edge Simulator Status Pill */}
-          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-            <span>WASM Edge (0ms Latency)</span>
+          <div className="flex items-center gap-2 px-2.5 py-1 rounded-md bg-[#101726] border border-white/[0.08] text-xs font-mono text-slate-300">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            <span className="text-slate-200">WASM Edge</span>
+            <span className="text-slate-500 font-normal">|</span>
+            <span className="text-emerald-400">0.08ms</span>
           </div>
 
           {/* Preset Circuits Dropdown */}
-          <div className="flex items-center gap-1.5 bg-black/40 rounded-lg px-2.5 py-1 border border-white/10 text-xs">
+          <div className="flex items-center gap-1.5 bg-[#101726] rounded-md px-2.5 py-1 border border-white/[0.08] text-xs hover:border-white/20 transition-colors">
             <BookOpen className="w-3.5 h-3.5 text-cyan-400" />
             <select
               onChange={(e) => handleSelectPreset(e.target.value)}
               defaultValue=""
-              className="bg-transparent text-slate-200 focus:outline-none cursor-pointer"
+              className="bg-transparent text-slate-200 focus:outline-none cursor-pointer text-xs"
             >
               <option value="" disabled>
                 Load Preset Circuit...
               </option>
               {Object.entries(PRESET_CIRCUITS).map(([key, item]) => (
-                <option key={key} value={key} className="bg-slate-900 text-white">
+                <option key={key} value={key} className="bg-[#0b0f19] text-white">
                   {item.name}
                 </option>
               ))}
@@ -198,7 +203,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={onRunSimulation}
             disabled={isRunningSimulation}
-            className="px-4 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-[0_0_20px_rgba(0,242,254,0.4)] transition-all hover:scale-105 active:scale-95"
+            className="px-3.5 py-1.5 rounded-md bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold text-xs flex items-center gap-1.5 transition-colors active:translate-y-[1px] disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
           >
             {isRunningSimulation ? (
               <>
@@ -218,7 +223,7 @@ export const Header: React.FC<HeaderProps> = ({
             href="https://github.com/shreyx404/Quantangle"
             target="_blank"
             rel="noreferrer"
-            className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 transition-colors"
+            className="p-1.5 rounded-md bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-400 hover:text-white transition-colors"
             title="GitHub Repository"
           >
             <Github className="w-4 h-4" />

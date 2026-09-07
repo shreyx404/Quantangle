@@ -132,41 +132,42 @@ export default function Home() {
           )}
         </div>
 
-        {/* Floating Quick Action Button when Qu-Copilot is collapsed */}
+        {/* Docked Action Button when Qu-Copilot is collapsed */}
         {!copilotOpen && (
           <button
             onClick={() => setCopilotOpen(true)}
-            className="fixed bottom-6 right-6 z-50 px-4 py-2.5 rounded-full bg-gradient-to-r from-purple-600 to-cyan-600 text-white font-bold text-xs flex items-center gap-2 shadow-[0_0_20px_rgba(181,55,242,0.4)] hover:scale-105 active:scale-95 transition-all"
+            className="fixed bottom-5 right-5 z-50 px-3 py-2 rounded-md bg-[#101726] hover:bg-[#162035] text-cyan-300 font-mono text-xs flex items-center gap-2 border border-cyan-500/30 shadow-lg active:translate-y-[1px] transition-colors"
             title="Open Qu-Copilot AI Tutor"
           >
-            <Bot className="w-4 h-4" />
+            <Bot className="w-4 h-4 text-cyan-400" />
             <span>Open Qu-Copilot</span>
+            <span className="text-[10px] text-slate-500 border border-white/[0.1] px-1 rounded">AI</span>
           </button>
         )}
 
         {/* Bottom Inspector Tabs */}
-        <div className="glass-panel rounded-xl border border-white/10 flex flex-col overflow-hidden">
+        <div className="bg-[#0b0f19] rounded-lg border border-white/[0.08] flex flex-col overflow-hidden shadow-sm">
           {/* Tab Selection Bar */}
-          <div className="flex flex-wrap items-center justify-between px-4 py-2 border-b border-white/10 bg-slate-900/60">
-            <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center justify-between px-3 py-1.5 border-b border-white/[0.06] bg-[#0d121f]">
+            <div className="flex items-center gap-1.5">
               <button
                 onClick={() => setActiveBottomTab("visualizer")}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all ${
+                className={`px-3 py-1.5 rounded-md text-xs font-mono flex items-center gap-2 transition-colors ${
                   activeBottomTab === "visualizer"
-                    ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-[0_0_12px_rgba(0,242,254,0.2)]"
-                    : "text-slate-400 hover:text-white"
+                    ? "bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 font-semibold"
+                    : "text-slate-400 hover:text-white border border-transparent"
                 }`}
               >
                 <Globe2 className="w-3.5 h-3.5" />
-                <span>3D Quantum State Inspector (Bloch & Q-Sphere)</span>
+                <span>3D Quantum State (Bloch & Q-Sphere)</span>
               </button>
 
               <button
                 onClick={() => setActiveBottomTab("measurements")}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all ${
+                className={`px-3 py-1.5 rounded-md text-xs font-mono flex items-center gap-2 transition-colors ${
                   activeBottomTab === "measurements"
-                    ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-[0_0_12px_rgba(0,242,254,0.2)]"
-                    : "text-slate-400 hover:text-white"
+                    ? "bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 font-semibold"
+                    : "text-slate-400 hover:text-white border border-transparent"
                 }`}
               >
                 <BarChart3 className="w-3.5 h-3.5" />
@@ -175,10 +176,10 @@ export default function Home() {
 
               <button
                 onClick={() => setActiveBottomTab("editor")}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all ${
+                className={`px-3 py-1.5 rounded-md text-xs font-mono flex items-center gap-2 transition-colors ${
                   activeBottomTab === "editor"
-                    ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-[0_0_12px_rgba(0,242,254,0.2)]"
-                    : "text-slate-400 hover:text-white"
+                    ? "bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 font-semibold"
+                    : "text-slate-400 hover:text-white border border-transparent"
                 }`}
               >
                 <Code2 className="w-3.5 h-3.5" />
@@ -188,16 +189,16 @@ export default function Home() {
           </div>
 
           {/* Tab Content Panes */}
-          <div className="p-4">
+          <div className="p-3">
             {activeBottomTab === "visualizer" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <BlochSphere />
                 <QSphere />
               </div>
             )}
 
             {activeBottomTab === "measurements" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <ProbabilityHistogram />
                 <StatevectorTable />
               </div>
@@ -213,7 +214,7 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/5 py-3 px-4 text-center text-xs text-slate-500 font-mono">
+      <footer className="border-t border-white/[0.06] py-2.5 px-4 text-center text-[11px] text-slate-500 font-mono bg-[#07090e]">
         Quantangle Platform — Smart India Hackathon (SIH 2026 Problem Statement SIH26140) • Little-Endian Architecture
       </footer>
     </div>

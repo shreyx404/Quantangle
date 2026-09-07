@@ -34,18 +34,18 @@ export const ProbabilityHistogram: React.FC = () => {
   };
 
   return (
-    <div className="glass-panel rounded-xl p-3 border border-white/10 flex flex-col h-full min-h-[260px]">
+    <div className="bg-[#0b0f19] rounded-lg p-3 border border-white/[0.08] flex flex-col h-full min-h-[260px] shadow-sm">
       {/* Header */}
-      <div className="flex items-center justify-between pb-2 border-b border-white/5">
+      <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
         <div className="flex items-center gap-2">
-          <BarChart3 className="w-4 h-4 text-cyan-400" />
+          <BarChart3 className="w-3.5 h-3.5 text-cyan-400" />
           <span className="text-xs font-semibold text-white tracking-wide">
             Measurement Probabilities P(|j⟩)
           </span>
         </div>
         <div className="flex items-center gap-2 text-[10px] font-mono text-slate-400">
           <span>Phase Hue:</span>
-          <div className="w-16 h-2 rounded-full bg-gradient-to-r from-red-500 via-yellow-400 via-cyan-400 to-purple-500" />
+          <div className="w-16 h-1.5 rounded-full bg-gradient-to-r from-red-500 via-yellow-400 via-cyan-400 to-purple-500 opacity-90" />
         </div>
       </div>
 
@@ -62,25 +62,24 @@ export const ProbabilityHistogram: React.FC = () => {
               key={idx}
               className="flex-1 min-w-[36px] max-w-[64px] flex flex-col items-center gap-1 group"
             >
-              {/* Percentage tooltip above bar */}
-              <span className="text-[10px] font-mono text-slate-300 opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all font-semibold">
+              {/* Percentage label above bar */}
+              <span className="text-[10px] font-mono text-slate-300 font-medium tabular-nums">
                 {percent > 0 ? `${percent}%` : ""}
               </span>
 
               {/* Bar Fill */}
-              <div className="w-full h-28 bg-white/5 rounded-t-md relative flex items-end p-0.5 overflow-hidden border border-white/5">
+              <div className="w-full h-28 bg-[#101726] rounded-t-sm relative flex items-end p-0.5 overflow-hidden border border-white/[0.06]">
                 <div
-                  className="w-full rounded-t-sm transition-all duration-300"
+                  className="w-full rounded-t-[2px] transition-[height] duration-200"
                   style={{
                     height: `${Math.max(prob > 0 ? 4 : 0, percent)}%`,
                     backgroundColor: phaseColor,
-                    boxShadow: prob > 0.05 ? `0 0 12px ${phaseColor}` : "none",
                   }}
                 />
               </div>
 
               {/* Basis State Label */}
-              <span className="text-[11px] font-mono font-semibold text-slate-400 group-hover:text-cyan-300 transition-colors">
+              <span className="text-[11px] font-mono font-semibold text-slate-300 group-hover:text-cyan-300 transition-colors">
                 |{basisLabel}⟩
               </span>
             </div>
@@ -89,7 +88,7 @@ export const ProbabilityHistogram: React.FC = () => {
       </div>
 
       {/* Basis footer note */}
-      <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-slate-500">
+      <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[10px] font-mono text-slate-500">
         <span>Order: |q_{numQubits - 1}...q_1 q_0⟩ (LSB right)</span>
         <span>Σ P(|j⟩) = 1.000</span>
       </div>

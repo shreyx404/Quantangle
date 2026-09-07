@@ -37,6 +37,18 @@ Quantangle has successfully completed Phases 0 through 5:
 
 ## 3. Recent Changes Log
 - **2026-09-07**:
+  - **Anti-AI-Slop Superconducting Quantum Workstation Overhaul (`TASK-5.5`)**:
+    - Installed modern anti-AI-slop skills `.agents/skills/hallmark/` (58-gate validation suite and curated themes from Nutlope/hallmark) and `.agents/skills/frontend-design/` (aesthetic restraint and design direction from Anthropics).
+    - Established `.agents/rules/anti-ai-slop.md` enforcing 10 auto-fail anti-slop gates and zero tolerance for generic AI hackathon tropes.
+    - Replaced neon purple-to-cyan text gradients, diffuse blurry glassmorphism, and spinning atom logos with an authentic **Superconducting Quantum Workstation** aesthetic inspired by IBM Quantum System One and Teenage Engineering:
+      - Cryogenic base `#06080e`, precision titanium borders (`#1a2336`), and dark instrument panels (`#0b0f19`).
+      - Precision Header with Little-Endian & SIH26140 hardware telemetry pills, steady status lights, and tactile action controls.
+      - Gate Palette grouped into categorized scientific chips (Single-qubit, Two-qubit `CNOT 2q`, `CZ 2q`, `SWAP 2q`, Rotations `Rx`, `Ry`, `Rz`, Measurement `MEAS`) with active physical key travel (`active:translate-y-[1px]`).
+      - Circuit Canvas with copper/slate wire rails (`#222d42`), logic analyzer step ticks (`t0`–`t7`), and crisp gate blocks.
+      - Hardware transport scrubber with discrete step stepping and speed selector (`0.5x, 1x, 2x`).
+      - 3D Bloch & Q-Sphere visualizers styled as laboratory instruments with monospaced coordinate telemetry.
+      - Pinned Qu-Copilot assistant panel with `F ≥ 0.999 Verified` badge, clean message cards, and monospaced gate pipeline tokens.
+    - Verified with TypeScript check (`0 errors`), AST unit tests (`3 passed`), Next.js static build, live HMR dev server, and automated browser subagent recordings (`anti_slop_precision_demo_*.webp`).
   - **Live Qiskit Python Code Visibility & Dual-Sync Split View (`TASK-3.4`)**:
     - Embedded a side-by-side **Dual-Sync Split View** in `CircuitCanvas.tsx` displaying the circuit schematic on the left and live synchronized Qiskit Python code on the right with default active state on initial load.
     - Added a 3-way **Workspace View Mode Switcher** (`Dual-Sync` | `Canvas` | `Code`) in the canvas toolbar.

@@ -106,6 +106,10 @@
   - *Input*: Browser audit of Qu-Copilot UX and layout overflow.
   - *Output*: `apps/web/src/stores/useCopilotStore.ts`, updated `apps/web/src/components/copilot/QuCopilot.tsx`, updated `apps/web/src/app/page.tsx`, and updated `apps/web/tailwind.config.ts`.
   - *Acceptance Criteria*: Fixed unconstrained vertical layout expansion with internal scroll (`min-h-0 flex-1 overflow-y-auto`); pinned prompt chips and input bar to the bottom; header close `✕` and clear conversation controls; persistent state in `useCopilotStore` across collapse/reopen; mini gate preview badges (`H(q0) -> CX(q0->q1)`); instant "Applied to Circuit Canvas! ✓" confirmation; and removed misplaced collapse button from bottom inspector tabs.
+- [x] **TASK-5.5: Anti-AI-Slop Superconducting Workstation Aesthetic Overhaul**
+  - *Input*: Anti-AI-slop skills (`hallmark` 58-gate validation suite and `frontend-design` aesthetic restraint) and user requirement to eliminate generic hackathon AI slop.
+  - *Output*: `.agents/skills/hallmark/`, `.agents/skills/frontend-design/`, `.agents/rules/anti-ai-slop.md`, refactored `globals.css`, `Header.tsx`, `GatePalette.tsx`, `CircuitCanvas.tsx`, `TimelineScrubber.tsx`, `QuCopilot.tsx`, `page.tsx`, `QuantumCodeEditor.tsx`, `BlochSphere.tsx`, `QSphere.tsx`, `ProbabilityHistogram.tsx`, `StatevectorTable.tsx`.
+  - *Acceptance Criteria*: Eliminated spinning atom logos, neon purple-to-cyan text gradients, floating candy pill buttons, and blurry glassmorphism; replaced with cryogenic void `#06080e`, copper/slate wire rails (`#222d42`), tactile gate depression (`active:translate-y-[1px]`), hardware transport scrubber, monospaced coordinate telemetry, and verified against all 10 anti-slop gates.
 
 ---
 

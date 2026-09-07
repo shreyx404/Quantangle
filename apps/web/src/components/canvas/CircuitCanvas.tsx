@@ -113,30 +113,30 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
   const getGateBadgeStyle = (gate: GateType) => {
     switch (gate) {
       case "H":
-        return "bg-cyan-500/30 text-cyan-200 border-cyan-400 shadow-[0_0_10px_rgba(0,242,254,0.3)]";
+        return "bg-[#132236] text-sky-200 border-sky-500/40 hover:border-sky-400";
       case "X":
-        return "bg-blue-500/30 text-blue-200 border-blue-400 shadow-[0_0_10px_rgba(59,130,246,0.3)]";
+        return "bg-[#121e36] text-blue-200 border-blue-500/40 hover:border-blue-400";
       case "Y":
-        return "bg-indigo-500/30 text-indigo-200 border-indigo-400";
+        return "bg-[#161a38] text-indigo-200 border-indigo-500/40 hover:border-indigo-400";
       case "Z":
-        return "bg-purple-500/30 text-purple-200 border-purple-400";
+        return "bg-[#1d1433] text-purple-200 border-purple-500/40 hover:border-purple-400";
       case "S":
       case "T":
-        return "bg-fuchsia-500/30 text-fuchsia-200 border-fuchsia-400";
+        return "bg-[#241330] text-fuchsia-200 border-fuchsia-500/40 hover:border-fuchsia-400";
       case "CX":
-        return "bg-emerald-500/30 text-emerald-200 border-emerald-400 shadow-[0_0_10px_rgba(168,85,247,0.3)]";
+        return "bg-[#0e241f] text-emerald-200 border-emerald-500/40 hover:border-emerald-400";
       case "CZ":
-        return "bg-teal-500/30 text-teal-200 border-teal-400";
+        return "bg-[#0e2424] text-teal-200 border-teal-500/40 hover:border-teal-400";
       case "SWAP":
-        return "bg-amber-500/30 text-amber-200 border-amber-400";
+        return "bg-[#292212] text-amber-200 border-amber-500/40 hover:border-amber-400";
       case "RX":
       case "RY":
       case "RZ":
-        return "bg-violet-500/30 text-violet-200 border-violet-400";
+        return "bg-[#1f1733] text-violet-200 border-violet-500/40 hover:border-violet-400";
       case "M":
-        return "bg-rose-500/30 text-rose-200 border-rose-400";
+        return "bg-[#2e131d] text-rose-200 border-rose-500/40 hover:border-rose-400";
       default:
-        return "bg-slate-700 text-slate-200 border-slate-500";
+        return "bg-[#161d2d] text-slate-200 border-slate-600";
     }
   };
 
@@ -148,10 +148,10 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
           <div
             key={stepIdx}
             onClick={() => setActiveStep(stepIdx)}
-            className={`w-14 text-center text-[11px] font-mono cursor-pointer transition-all ${
+            className={`w-14 text-center text-[11px] font-mono cursor-pointer transition-colors py-0.5 rounded ${
               activeStep === stepIdx
-                ? "text-cyan-400 font-bold scale-110"
-                : "text-slate-500 hover:text-slate-300"
+                ? "text-cyan-300 font-semibold bg-cyan-500/10 border border-cyan-500/30"
+                : "text-slate-400 hover:text-slate-200"
             }`}
           >
             t{stepIdx}
@@ -166,18 +166,17 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
             {/* Qubit Label */}
             <div className="w-20 pr-3 flex items-center justify-between text-xs font-mono font-semibold text-slate-300">
               <span className="text-cyan-400">|q{qIdx}⟩</span>
-              <span className="text-[10px] text-slate-500">|0⟩</span>
+              <span className="text-[10px] text-slate-500 font-normal">|0⟩</span>
             </div>
 
             {/* Wire line running behind cells */}
             <div className="relative flex items-center">
-              <div className="absolute left-0 right-0 h-[2px] bg-slate-700 group-hover:bg-slate-600 transition-colors z-0" />
+              <div className="absolute left-0 right-0 h-[1.5px] bg-[#222d42] group-hover:bg-[#324361] transition-colors z-0" />
 
               {/* Wire Cells */}
               {Array.from({ length: visibleStepsCount }).map((_, stepIdx) => {
                 const op = getGateAt(stepIdx, qIdx);
                 const isControl = op && op.qubits.length > 1 && op.qubits[0] === qIdx;
-                const isTarget = op && op.qubits.length > 1 && op.qubits[1] === qIdx;
                 const isPendingControl =
                   pendingControlQubit?.stepIndex === stepIdx &&
                   pendingControlQubit.controlQubit === qIdx;
@@ -186,14 +185,16 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
                   <div
                     key={stepIdx}
                     onClick={() => handleCellClick(stepIdx, qIdx)}
-                    className={`relative w-14 h-12 flex items-center justify-center z-10 cursor-pointer transition-all ${
-                      activeStep === stepIdx ? "bg-cyan-500/5 rounded-lg" : ""
+                    className={`relative w-14 h-12 flex items-center justify-center z-10 cursor-pointer transition-colors ${
+                      activeStep === stepIdx
+                        ? "bg-cyan-500/[0.04] border-x border-cyan-500/15"
+                        : "hover:bg-white/[0.02]"
                     }`}
                   >
                     {/* Two-qubit connector line if multi-qubit gate */}
                     {op && op.qubits.length > 1 && isControl && (
                       <div
-                        className="absolute w-[2px] bg-emerald-400 z-0 pointer-events-none"
+                        className="absolute w-[1.5px] bg-emerald-400 z-0 pointer-events-none"
                         style={{
                           top: "50%",
                           height: `${Math.abs(op.qubits[1] - op.qubits[0]) * 52}px`,
@@ -206,12 +207,12 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
                     {/* Placed Gate Badge */}
                     {op ? (
                       <div
-                        className={`relative px-2.5 py-1.5 rounded-lg font-mono text-xs font-bold border transition-transform ${getGateBadgeStyle(
+                        className={`relative px-2.5 py-1.5 rounded font-mono text-xs font-semibold border transition-colors ${getGateBadgeStyle(
                           op.gate
-                        )} group/gate hover:scale-110`}
+                        )} group/gate hover:border-cyan-400`}
                       >
                         {isControl ? (
-                          <div className="w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
                         ) : (
                           <span>
                             {op.gate}
@@ -223,7 +224,7 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
                           </span>
                         )}
 
-                        {/* Gate Actions Dropdown / Delete button */}
+                        {/* Gate Actions: Edit & Delete */}
                         <div className="absolute -top-2 -right-2 hidden group-hover/gate:flex items-center gap-1 z-30">
                           {op.params && (
                             <button
@@ -236,7 +237,7 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
                                 });
                               }}
                               title="Edit rotation angle"
-                              className="w-4 h-4 rounded-full bg-violet-600 text-white flex items-center justify-center text-[10px] hover:scale-110 shadow"
+                              className="w-4 h-4 rounded bg-[#1f1733] border border-violet-500/40 text-violet-300 flex items-center justify-center text-[10px] hover:bg-violet-600 hover:text-white transition-colors"
                             >
                               <Sliders className="w-2.5 h-2.5" />
                             </button>
@@ -247,19 +248,16 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
                               removeGate(stepIdx, op.id);
                             }}
                             title="Remove gate"
-                            className="w-4 h-4 rounded-full bg-rose-600 text-white flex items-center justify-center text-[10px] hover:scale-110 shadow"
+                            className="w-4 h-4 rounded bg-[#2e131d] border border-rose-500/40 text-rose-300 flex items-center justify-center text-[10px] hover:bg-rose-600 hover:text-white transition-colors"
                           >
-                            ×
+                            <Trash2 className="w-2.5 h-2.5" />
                           </button>
                         </div>
                       </div>
                     ) : isPendingControl ? (
-                      <div className="w-4 h-4 rounded-full bg-emerald-400 ring-4 ring-emerald-400/30 animate-pulse" />
+                      <div className="w-4 h-4 rounded-full border-2 border-emerald-400 bg-emerald-400/20" />
                     ) : (
-                      /* Empty slot hover target */
-                      <div className="w-8 h-8 rounded-lg border border-dashed border-slate-700/60 hover:border-cyan-400/80 hover:bg-cyan-500/10 flex items-center justify-center opacity-0 hover:opacity-100 transition-all">
-                        <Plus className="w-3 h-3 text-cyan-400" />
-                      </div>
+                      <div className="w-2 h-2 rounded-full bg-white/[0.04] group-hover:bg-cyan-500/30 transition-colors" />
                     )}
                   </div>
                 );
@@ -272,106 +270,106 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
   );
 
   return (
-    <div className="glass-panel rounded-xl p-4 flex flex-col gap-4 border border-white/10 relative overflow-hidden">
+    <div className="bg-[#0b0f19] rounded-lg p-3.5 flex flex-col gap-3 border border-white/[0.08] relative overflow-hidden shadow-sm">
       {/* Canvas Header & Toolbar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/5 pb-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/[0.06] pb-2.5">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <Zap className="w-4 h-4 text-cyan-400" />
-            <span className="text-sm font-semibold text-white tracking-wide">
+            <Zap className="w-3.5 h-3.5 text-cyan-400" />
+            <span className="text-xs font-semibold tracking-wider uppercase text-white">
               Quantum Circuit Canvas
             </span>
           </div>
-          <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
             Little-Endian: q₀ is LSB
           </span>
         </div>
 
         {/* Controls: View Modes, Qubits, Steps, Copilot */}
-        <div className="flex flex-wrap items-center gap-2.5">
+        <div className="flex flex-wrap items-center gap-2">
           {/* Dual-Sync View Mode Switcher */}
-          <div className="flex items-center bg-black/50 rounded-lg p-0.5 border border-white/10 text-xs">
+          <div className="flex items-center bg-[#101726] rounded-md p-0.5 border border-white/[0.08] text-xs">
             <button
               onClick={() => setViewMode("split")}
-              className={`px-2 py-1 rounded flex items-center gap-1.5 font-medium transition-all ${
+              className={`px-2.5 py-1 rounded flex items-center gap-1.5 font-medium transition-colors ${
                 viewMode === "split"
-                  ? "bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30 shadow-[0_0_10px_rgba(0,242,254,0.2)]"
+                  ? "bg-cyan-500/15 text-cyan-300 font-semibold border border-cyan-500/30"
                   : "text-slate-400 hover:text-white"
               }`}
               title="Dual-Sync Split View: Visual Canvas + Live Python Qiskit Code"
             >
-              <Columns className="w-3.5 h-3.5" />
+              <Columns className="w-3 h-3" />
               <span>Dual-Sync</span>
             </button>
             <button
               onClick={() => setViewMode("canvas")}
-              className={`px-2 py-1 rounded flex items-center gap-1.5 font-medium transition-all ${
+              className={`px-2.5 py-1 rounded flex items-center gap-1.5 font-medium transition-colors ${
                 viewMode === "canvas"
-                  ? "bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30 shadow-[0_0_10px_rgba(0,242,254,0.2)]"
+                  ? "bg-cyan-500/15 text-cyan-300 font-semibold border border-cyan-500/30"
                   : "text-slate-400 hover:text-white"
               }`}
               title="Canvas Only View"
             >
-              <Layers className="w-3.5 h-3.5" />
+              <Layers className="w-3 h-3" />
               <span>Canvas</span>
             </button>
             <button
               onClick={() => setViewMode("code")}
-              className={`px-2 py-1 rounded flex items-center gap-1.5 font-medium transition-all ${
+              className={`px-2.5 py-1 rounded flex items-center gap-1.5 font-medium transition-colors ${
                 viewMode === "code"
-                  ? "bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30 shadow-[0_0_10px_rgba(0,242,254,0.2)]"
+                  ? "bg-cyan-500/15 text-cyan-300 font-semibold border border-cyan-500/30"
                   : "text-slate-400 hover:text-white"
               }`}
               title="Full Code Editor View"
             >
-              <Code2 className="w-3.5 h-3.5" />
+              <Code2 className="w-3 h-3" />
               <span>Code</span>
             </button>
           </div>
 
           {/* Qubit controls */}
-          <div className="flex items-center gap-1.5 bg-black/40 rounded-lg p-1 border border-white/5 text-xs">
-            <span className="text-slate-400 px-1 font-mono">Qubits:</span>
+          <div className="flex items-center gap-1 bg-[#101726] rounded-md px-1.5 py-0.5 border border-white/[0.08] text-xs">
+            <span className="text-slate-400 px-1 font-mono text-[11px]">Qubits:</span>
             <button
               onClick={() => setQubits(Math.max(1, numQubits - 1))}
               disabled={numQubits <= 1}
-              className="w-6 h-6 rounded flex items-center justify-center bg-white/5 hover:bg-white/10 disabled:opacity-40 transition-colors"
+              className="w-5 h-5 rounded flex items-center justify-center bg-white/[0.04] hover:bg-white/[0.08] disabled:opacity-40 transition-colors"
             >
-              <Minus className="w-3 h-3" />
+              <Minus className="w-2.5 h-2.5" />
             </button>
-            <span className="w-5 text-center font-mono font-bold text-cyan-300">
+            <span className="w-4 text-center font-mono font-semibold text-cyan-300 text-xs">
               {numQubits}
             </span>
             <button
               onClick={() => setQubits(Math.min(16, numQubits + 1))}
               disabled={numQubits >= 16}
-              className="w-6 h-6 rounded flex items-center justify-center bg-white/5 hover:bg-white/10 disabled:opacity-40 transition-colors"
+              className="w-5 h-5 rounded flex items-center justify-center bg-white/[0.04] hover:bg-white/[0.08] disabled:opacity-40 transition-colors"
             >
-              <Plus className="w-3 h-3" />
+              <Plus className="w-2.5 h-2.5" />
             </button>
           </div>
 
           <div className="flex items-center gap-1.5">
             <button
               onClick={addStep}
-              className="px-2.5 py-1 rounded-lg text-xs font-medium bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 transition-colors flex items-center gap-1"
+              className="px-2.5 py-1 rounded-md text-xs font-medium bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 transition-colors active:translate-y-[1px] flex items-center gap-1"
             >
               <Plus className="w-3 h-3" /> Step
             </button>
             <button
               onClick={resetCircuit}
-              className="px-2.5 py-1 rounded-lg text-xs font-medium bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-300 transition-colors flex items-center gap-1"
+              className="px-2.5 py-1 rounded-md text-xs font-medium bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-300 transition-colors active:translate-y-[1px] flex items-center gap-1"
             >
-              <RotateCcw className="w-3.5 h-3.5" /> Reset
+              <RotateCcw className="w-3 h-3" /> Reset
             </button>
 
             {!copilotOpen && onToggleCopilot && (
               <button
                 onClick={onToggleCopilot}
-                className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-purple-500/15 hover:bg-purple-500/25 border border-purple-500/30 text-purple-300 transition-all flex items-center gap-1.5 shadow-[0_0_10px_rgba(168,85,247,0.15)] hover:scale-105 active:scale-95"
+                className="px-2.5 py-1 rounded-md text-xs font-medium bg-[#101726] hover:bg-[#162035] border border-cyan-500/30 text-cyan-300 transition-colors active:translate-y-[1px] flex items-center gap-1.5"
                 title="Open Qu-Copilot AI Tutor"
               >
-                <Bot className="w-3.5 h-3.5 text-purple-400" />
+                <Bot className="w-3.5 h-3.5 text-cyan-400" />
                 <span>AI Tutor</span>
               </button>
             )}
@@ -397,7 +395,7 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
       {/* Workspace Display Area based on View Mode */}
       {viewMode === "split" && (
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-3 items-stretch">
-          <div className="xl:col-span-7 flex flex-col justify-between overflow-x-auto pb-2 select-none min-w-0 bg-slate-950/40 rounded-xl p-2.5 border border-white/5">
+          <div className="xl:col-span-7 flex flex-col justify-between overflow-x-auto pb-2 select-none min-w-0 bg-[#080c14] rounded-md p-2.5 border border-white/[0.06]">
             {renderGrid()}
           </div>
           <div className="xl:col-span-5 min-w-0 flex flex-col">
@@ -412,7 +410,7 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
       )}
 
       {viewMode === "canvas" && (
-        <div className="overflow-x-auto pb-2 select-none">
+        <div className="overflow-x-auto pb-2 select-none bg-[#080c14] rounded-md p-2.5 border border-white/[0.06]">
           {renderGrid()}
         </div>
       )}
@@ -430,22 +428,22 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
 
       {/* Rotation Parameter Modal */}
       {activeParamModal && (
-        <div className="absolute inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="glass-panel rounded-xl p-5 border border-violet-500/40 w-80 flex flex-col gap-3 shadow-2xl">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-violet-300 font-mono">
+        <div className="absolute inset-0 bg-black/75 backdrop-blur-[2px] flex items-center justify-center z-50 p-4">
+          <div className="bg-[#0f1422] rounded-lg p-4 border border-white/[0.12] w-80 flex flex-col gap-3 shadow-xl">
+            <div className="flex items-center justify-between border-b border-white/[0.06] pb-2">
+              <span className="text-xs font-semibold text-white font-mono tracking-wide">
                 Set Rotation Angle (θ)
               </span>
               <button
                 onClick={() => setActiveParamModal(null)}
-                className="text-slate-400 hover:text-white text-xs"
+                className="text-slate-400 hover:text-white text-xs font-mono"
               >
                 ✕
               </button>
             </div>
             <div className="flex items-center justify-between text-xs font-mono">
               <span className="text-slate-400">Angle:</span>
-              <span className="text-cyan-400 font-bold">
+              <span className="text-cyan-300 font-semibold">
                 {activeParamModal.angle.toFixed(4)} rad (
                 {(activeParamModal.angle / Math.PI).toFixed(2)}π)
               </span>
@@ -464,7 +462,7 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
               }
               className="w-full accent-cyan-400"
             />
-            <div className="flex items-center gap-1.5 pt-2">
+            <div className="flex items-center gap-1.5 pt-1">
               <button
                 onClick={() => {
                   updateGateParams(
@@ -474,13 +472,13 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
                   );
                   setActiveParamModal(null);
                 }}
-                className="flex-1 py-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-bold text-xs transition-colors"
+                className="flex-1 py-1.5 rounded-md bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold text-xs transition-colors active:translate-y-[1px]"
               >
-                Apply
+                Apply Angle
               </button>
               <button
                 onClick={() => setActiveParamModal(null)}
-                className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 text-xs transition-colors"
+                className="flex-1 py-1.5 rounded-md bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 border border-white/[0.08] text-xs transition-colors"
               >
                 Cancel
               </button>

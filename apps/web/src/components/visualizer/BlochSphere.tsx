@@ -167,11 +167,11 @@ export const BlochSphere: React.FC = () => {
   }, [blochVector, selectedQubit]);
 
   return (
-    <div className="glass-panel rounded-xl p-3 border border-white/10 flex flex-col h-full min-h-[320px]">
+    <div className="bg-[#0b0f19] rounded-lg p-3 border border-white/[0.08] flex flex-col h-full min-h-[320px] shadow-sm">
       {/* Header with Qubit Selector */}
-      <div className="flex items-center justify-between pb-2 border-b border-white/5">
+      <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
         <div className="flex items-center gap-2">
-          <Globe2 className="w-4 h-4 text-cyan-400" />
+          <Globe2 className="w-3.5 h-3.5 text-cyan-400" />
           <span className="text-xs font-semibold text-white tracking-wide">
             3D Bloch Sphere
           </span>
@@ -183,10 +183,10 @@ export const BlochSphere: React.FC = () => {
           <select
             value={selectedQubit}
             onChange={(e) => setSelectedQubit(parseInt(e.target.value, 10))}
-            className="bg-black/40 border border-white/10 rounded px-2 py-0.5 text-xs font-mono text-cyan-300 focus:outline-none focus:border-cyan-400"
+            className="bg-[#101726] border border-white/[0.08] rounded px-2 py-0.5 text-xs font-mono text-cyan-300 focus:outline-none focus:border-cyan-400 cursor-pointer"
           >
             {Array.from({ length: numQubits }).map((_, i) => (
-              <option key={i} value={i}>
+              <option key={i} value={i} className="bg-[#0b0f19] text-white">
                 q[{i}]
               </option>
             ))}
@@ -200,10 +200,10 @@ export const BlochSphere: React.FC = () => {
         className="flex-1 w-full min-h-[220px] relative cursor-grab active:cursor-grabbing"
       >
         {/* Cardinal State Pole Overlays */}
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 pointer-events-none text-[11px] font-mono font-bold text-sky-300 drop-shadow">
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 pointer-events-none text-[11px] font-mono font-semibold text-sky-300">
           |0⟩ (+Z)
         </div>
-        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 pointer-events-none text-[11px] font-mono font-bold text-sky-400 drop-shadow">
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 pointer-events-none text-[11px] font-mono font-semibold text-sky-400">
           |1⟩ (-Z)
         </div>
         <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-[10px] font-mono text-amber-300/80">
@@ -215,18 +215,18 @@ export const BlochSphere: React.FC = () => {
       </div>
 
       {/* Numerical Coordinate Readout */}
-      <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[11px] font-mono">
-        <div className="flex items-center gap-2">
+      <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono">
+        <div className="flex items-center gap-2.5">
           <span className="text-amber-400">x: {blochVector.x.toFixed(3)}</span>
           <span className="text-emerald-400">y: {blochVector.y.toFixed(3)}</span>
           <span className="text-sky-400">z: {blochVector.z.toFixed(3)}</span>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1.5">
           <span className="text-slate-400">Purity r:</span>
           <span
-            className={`font-bold ${
+            className={`font-semibold ${
               blochVector.purity < 0.99
-                ? "text-purple-400 underline decoration-dotted"
+                ? "text-violet-400 underline decoration-dotted"
                 : "text-emerald-400"
             }`}
             title={

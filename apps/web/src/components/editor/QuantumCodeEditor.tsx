@@ -167,28 +167,28 @@ export const QuantumCodeEditor: React.FC<QuantumCodeEditorProps> = ({
 
   return (
     <div
-      className={`glass-panel rounded-xl flex flex-col border border-white/10 overflow-hidden shadow-xl ${className}`}
+      className={`bg-[#0b0f19] rounded-lg flex flex-col border border-white/[0.08] overflow-hidden shadow-sm ${className}`}
     >
       {/* Editor Header & SDK Tabs */}
       {showHeader && (
-        <div className="flex flex-wrap items-center justify-between gap-2 px-3 py-2 border-b border-white/10 bg-slate-900/70">
+        <div className="flex flex-wrap items-center justify-between gap-2 px-3 py-1.5 border-b border-white/[0.06] bg-[#0d121f]">
           <div className="flex items-center gap-2">
-            <Code2 className="w-4 h-4 text-cyan-400" />
+            <Code2 className="w-3.5 h-3.5 text-cyan-400" />
             <span className="text-xs font-semibold text-white tracking-wide mr-2">
               Dual-Sync Code Editor
             </span>
 
             {/* Language Tabs */}
-            <div className="flex items-center gap-1 bg-black/40 rounded-lg p-0.5 border border-white/5">
+            <div className="flex items-center gap-0.5 bg-[#101726] rounded-md p-0.5 border border-white/[0.08]">
               <button
                 onClick={() => {
                   setActiveTab("qiskit");
                   setTargetSDK("qiskit");
                 }}
-                className={`px-2.5 py-1 rounded text-xs font-mono font-medium transition-all ${
+                className={`px-2.5 py-1 rounded text-xs font-mono font-medium transition-colors ${
                   activeTab === "qiskit"
-                    ? "bg-cyan-500 text-slate-950 font-bold shadow-[0_0_10px_rgba(0,242,254,0.3)]"
-                    : "text-slate-400 hover:text-white"
+                    ? "bg-cyan-500/15 text-cyan-300 font-semibold border border-cyan-500/30"
+                    : "text-slate-400 hover:text-white border border-transparent"
                 }`}
               >
                 Qiskit (Python)
@@ -198,10 +198,10 @@ export const QuantumCodeEditor: React.FC<QuantumCodeEditorProps> = ({
                   setActiveTab("qasm3");
                   setTargetSDK("qasm3");
                 }}
-                className={`px-2.5 py-1 rounded text-xs font-mono font-medium transition-all ${
+                className={`px-2.5 py-1 rounded text-xs font-mono font-medium transition-colors ${
                   activeTab === "qasm3"
-                    ? "bg-cyan-500 text-slate-950 font-bold shadow-[0_0_10px_rgba(0,242,254,0.3)]"
-                    : "text-slate-400 hover:text-white"
+                    ? "bg-cyan-500/15 text-cyan-300 font-semibold border border-cyan-500/30"
+                    : "text-slate-400 hover:text-white border border-transparent"
                 }`}
               >
                 OpenQASM 3.0
@@ -212,7 +212,7 @@ export const QuantumCodeEditor: React.FC<QuantumCodeEditorProps> = ({
                 title="Google Cirq transpilation targeted for v2"
               >
                 Cirq
-                <span className="text-[9px] px-1 py-0.2 bg-white/5 border border-white/10 rounded text-amber-400">
+                <span className="text-[9px] px-1 py-0.2 bg-white/[0.05] border border-white/[0.08] rounded text-amber-400">
                   v2
                 </span>
               </button>
@@ -222,7 +222,7 @@ export const QuantumCodeEditor: React.FC<QuantumCodeEditorProps> = ({
                 title="Xanadu PennyLane transpilation targeted for v2"
               >
                 PennyLane
-                <span className="text-[9px] px-1 py-0.2 bg-white/5 border border-white/10 rounded text-amber-400">
+                <span className="text-[9px] px-1 py-0.2 bg-white/[0.05] border border-white/[0.08] rounded text-amber-400">
                   v2
                 </span>
               </button>
@@ -232,12 +232,12 @@ export const QuantumCodeEditor: React.FC<QuantumCodeEditorProps> = ({
           {/* Toolbar Actions */}
           <div className="flex items-center gap-1.5">
             {/* Toggle Monaco vs Raw View */}
-            <div className="flex items-center bg-black/30 rounded-lg p-0.5 border border-white/5 text-[11px]">
+            <div className="flex items-center bg-[#101726] rounded-md p-0.5 border border-white/[0.08] text-[11px]">
               <button
                 onClick={() => setEditorMode("monaco")}
-                className={`px-2 py-0.5 rounded flex items-center gap-1 transition-all ${
+                className={`px-2 py-0.5 rounded flex items-center gap-1 transition-colors ${
                   editorMode === "monaco"
-                    ? "bg-cyan-500/20 text-cyan-300 font-semibold"
+                    ? "bg-cyan-500/15 text-cyan-300 font-semibold border border-cyan-500/30"
                     : "text-slate-400 hover:text-white"
                 }`}
                 title="Interactive Monaco IDE"
@@ -247,9 +247,9 @@ export const QuantumCodeEditor: React.FC<QuantumCodeEditorProps> = ({
               </button>
               <button
                 onClick={() => setEditorMode("raw")}
-                className={`px-2 py-0.5 rounded flex items-center gap-1 transition-all ${
+                className={`px-2 py-0.5 rounded flex items-center gap-1 transition-colors ${
                   editorMode === "raw"
-                    ? "bg-cyan-500/20 text-cyan-300 font-semibold"
+                    ? "bg-cyan-500/15 text-cyan-300 font-semibold border border-cyan-500/30"
                     : "text-slate-400 hover:text-white"
                 }`}
                 title="Direct Syntax View"
@@ -262,7 +262,7 @@ export const QuantumCodeEditor: React.FC<QuantumCodeEditorProps> = ({
             <button
               onClick={handleCopy}
               title="Copy code to clipboard"
-              className="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 text-xs flex items-center gap-1.5 transition-colors"
+              className="px-2.5 py-1 rounded-md bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 text-xs flex items-center gap-1.5 transition-colors active:translate-y-[1px]"
             >
               {copied ? (
                 <>
@@ -279,7 +279,7 @@ export const QuantumCodeEditor: React.FC<QuantumCodeEditorProps> = ({
             <button
               onClick={handleDownload}
               title="Download code file"
-              className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 transition-colors"
+              className="p-1.5 rounded-md bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 transition-colors active:translate-y-[1px]"
             >
               <Download className="w-3.5 h-3.5" />
             </button>

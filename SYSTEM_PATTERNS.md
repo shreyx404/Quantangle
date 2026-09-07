@@ -148,3 +148,29 @@ quantangle/
         │   └── bloch.rs         # Partial trace & Bloch vector projections
         └── Cargo.toml
 ```
+
+---
+
+## 7. Anti-AI-Slop & Superconducting Workstation Design Standards
+
+Per `.agents/skills/hallmark/` and `.agents/skills/frontend-design/`, Quantangle adheres to strict scientific instrument UI standards:
+
+### 7.1 Design Tokens & Instrument Surfaces
+- **Background Base**: `#06080e` (pure cryogenic deep void).
+- **Instrument Surface**: `#0b0f19` with hairline titanium borders (`#1a2336`).
+- **Telemetry Amber / Copper**: `#d97706` / `#f59e0b` (superconducting coaxial line resonance).
+- **Quantum Cyan**: `#06b6d4` / `#0ea5e9` reserved strictly for active physical eigenstates and measurement.
+- **Wire Rails**: `#222d42` solid copper/slate tracks with logic analyzer step ticks (`t0`, `t1`, ...).
+
+### 7.2 The 10 Anti-Slop Auto-Fail Gates
+1. **No Purple-to-Cyan Gradients**: Never use multi-stop neon gradients on text or general container borders.
+2. **No Blurry Glassmorphism Overuse**: Replace diffuse backdrop blur with crisp, opaque instrument panels and 1px borders.
+3. **No Unweighted Inter Monoculture**: Pair `JetBrains Mono` / `Geist Mono` for all coordinate readouts, gate matrices, and telemetry.
+4. **No Gimmick Animations**: Prohibit spinning atom logos (`animate-spin` on logos), pulsing ping dots (`animate-ping`), or continuous idle bobbing.
+5. **No Floating Candy Pill Buttons**: Use precision rectangular buttons with subtle radius (`rounded-md` or `rounded`), sharp borders, and physical depression (`active:translate-y-[1px]`).
+6. **No Fake Metrics or Placeholders**: All state vectors, fidelity values, and probabilities must stem from authentic WebAssembly simulation.
+7. **No Equal-Grid Card Uniformity**: Layouts reflect functional hierarchy (Canvas 60%, Inspector 40%, pinned copilot assistant).
+8. **No Layout Scroll Hijacking**: Message lists and code editors must have bounded height with internal overflow scrolling.
+9. **No Meaningless Decorative Blobs**: Every pixel, grid line, and tick mark must correspond to physical quantum hardware concepts.
+10. **Tactile Microinteraction Physics**: Transitions must be fast (75ms–150ms), property-specific, with active state key travel (`translate-y-[1px]`).
+

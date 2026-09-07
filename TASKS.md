@@ -98,6 +98,10 @@
   - *Input*: Streaming SSE chat endpoint.
   - *Output*: `apps/web/src/components/copilot/QuCopilot.tsx` with chat history, LaTeX math rendering, code snippets, and one-click "Apply to Canvas" button.
   - *Acceptance Criteria*: Learner receives verified quantum explanations and can import suggested circuits directly into their workspace.
+- [x] **TASK-5.4: Qu-Copilot Design Fault & Layout Refactor**
+  - *Input*: Browser audit of Qu-Copilot UX and layout overflow.
+  - *Output*: `apps/web/src/stores/useCopilotStore.ts`, updated `apps/web/src/components/copilot/QuCopilot.tsx`, updated `apps/web/src/app/page.tsx`, and updated `apps/web/tailwind.config.ts`.
+  - *Acceptance Criteria*: Fixed unconstrained vertical layout expansion with internal scroll (`min-h-0 flex-1 overflow-y-auto`); pinned prompt chips and input bar to the bottom; header close `✕` and clear conversation controls; persistent state in `useCopilotStore` across collapse/reopen; mini gate preview badges (`H(q0) -> CX(q0->q1)`); instant "Applied to Circuit Canvas! ✓" confirmation; and removed misplaced collapse button from bottom inspector tabs.
 
 ---
 

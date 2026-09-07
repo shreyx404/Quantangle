@@ -37,6 +37,16 @@ Quantangle has successfully completed Phases 0 through 5:
 
 ## 3. Recent Changes Log
 - **2026-09-07**:
+  - **Qu-Copilot Design Fault & Layout Refactor Completed (`TASK-5.4`)**:
+    - Eliminated unconstrained vertical expansion and scroll hijacking by bounding the message list with `min-h-0 flex-1 overflow-y-auto` and auto-scrolling directly on the chat container (`chatContainerRef.current.scrollTo`).
+    - Anchored prompt chips and input bar to the bottom of the copilot panel, ensuring they are always visible without scrolling the window.
+    - Aligned the top grid with `items-stretch` so the Circuit Canvas workspace and Qu-Copilot panel are pixel-perfect in height.
+    - Relocated collapse/close button into the Qu-Copilot header (`✕`) alongside a conversation reset button (`RotateCcw`).
+    - Removed the misplaced "Collapse AI Tutor" button from the Bottom Inspector Tabs bar.
+    - Added an "AI Tutor" quick-reopen toggle button in the Quantum Circuit Canvas toolbar alongside the floating action button.
+    - Created `apps/web/src/stores/useCopilotStore.ts` using Zustand to persist chat history across collapses, modal switches, and tab changes.
+    - Enhanced verified circuit cards with gate sequence badges (`H(q0) -> CX(q0->q1)`) and instant "Applied to Circuit Canvas! ✓" feedback.
+    - Verified full browser visual rendering and end-to-end user flows with `browser_subagent`.
   - **Implemented & Verified Phases 1 through 5**:
     - Compiled Rust WASM engine to `pkg/quantangle_wasm_engine_bg.wasm` via `wasm-pack`.
     - Resolved React 18 / Three.js / Next.js 14 dependency alignment cleanly in npm workspace.

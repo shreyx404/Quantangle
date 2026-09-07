@@ -14,6 +14,7 @@ import { QuCopilot } from "../components/copilot/QuCopilot";
 
 import { useCircuitStore } from "../stores/useCircuitStore";
 import { useSimulationStore } from "../stores/useSimulationStore";
+import { useCopilotStore } from "../stores/useCopilotStore";
 import { simulateCircuitClient } from "../lib/clientSimulator";
 import type { GateType } from "@quantangle/quantum-ast";
 
@@ -41,7 +42,7 @@ export default function Home() {
   const [activeBottomTab, setActiveBottomTab] = useState<"visualizer" | "measurements" | "editor">(
     "visualizer"
   );
-  const [copilotOpen, setCopilotOpen] = useState(true);
+  const { isOpen: copilotOpen, setOpen: setCopilotOpen } = useCopilotStore();
 
   // Initialize with Bell State |Φ⁺⟩ on first load
   const initializedRef = useRef(false);
@@ -98,7 +99,7 @@ export default function Home() {
       {/* Main Workspace Layout */}
       <main className="flex-1 max-w-[1700px] w-full mx-auto p-4 flex flex-col gap-4">
         {/* Top Grid: Canvas & Copilot */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
           {/* Circuit Design Workspace (Canvas + Palette + Scrubber) */}
           <div
             className={`flex flex-col gap-3 transition-all duration-300 ${
@@ -115,6 +116,8 @@ export default function Home() {
             <CircuitCanvas
               selectedPaletteGate={selectedPaletteGate}
               onClearPaletteGate={() => setSelectedPaletteGate(null)}
+              copilotOpen={copilotOpen}
+              onToggleCopilot={() => setCopilotOpen(!copilotOpen)}
             />
 
             {/* Step-by-Step Timeline Scrubber */}
@@ -122,20 +125,24 @@ export default function Home() {
           </div>
 
           {/* Qu-Copilot AI Tutor Sidebar */}
-          {copilotOpen ? (
-            <div className="lg:col-span-4 h-full flex flex-col">
-              <QuCopilot />
+          {copilotOpen && (
+            <div className="lg:col-span-4 flex flex-col h-full">
+              <QuCopilot onClose={() => setCopilotOpen(false)} />
             </div>
-          ) : (
-            <button
-              onClick={() => setCopilotOpen(true)}
-              className="fixed bottom-6 right-6 z-50 px-4 py-2.5 rounded-full bg-gradient-to-r from-purple-600 to-cyan-600 text-white font-bold text-xs flex items-center gap-2 shadow-[0_0_20px_rgba(181,55,242,0.4)] hover:scale-105 transition-all"
-            >
-              <Bot className="w-4 h-4" />
-              <span>Open Qu-Copilot</span>
-            </button>
           )}
         </div>
+
+        {/* Floating Quick Action Button when Qu-Copilot is collapsed */}
+        {!copilotOpen && (
+          <button
+            onClick={() => setCopilotOpen(true)}
+            className="fixed bottom-6 right-6 z-50 px-4 py-2.5 rounded-full bg-gradient-to-r from-purple-600 to-cyan-600 text-white font-bold text-xs flex items-center gap-2 shadow-[0_0_20px_rgba(181,55,242,0.4)] hover:scale-105 active:scale-95 transition-all"
+            title="Open Qu-Copilot AI Tutor"
+          >
+            <Bot className="w-4 h-4" />
+            <span>Open Qu-Copilot</span>
+          </button>
+        )}
 
         {/* Bottom Inspector Tabs */}
         <div className="glass-panel rounded-xl border border-white/10 flex flex-col overflow-hidden">
@@ -178,15 +185,6 @@ export default function Home() {
                 <span>Dual-Sync Code Editor (Qiskit & OpenQASM 3.0)</span>
               </button>
             </div>
-
-            {/* Toggle Copilot view */}
-            <button
-              onClick={() => setCopilotOpen(!copilotOpen)}
-              className="text-xs text-slate-400 hover:text-purple-300 flex items-center gap-1.5 px-2.5 py-1 rounded bg-white/5 border border-white/10 transition-colors"
-            >
-              <Bot className="w-3.5 h-3.5 text-purple-400" />
-              <span>{copilotOpen ? "Collapse AI Tutor" : "Expand AI Tutor"}</span>
-            </button>
           </div>
 
           {/* Tab Content Panes */}

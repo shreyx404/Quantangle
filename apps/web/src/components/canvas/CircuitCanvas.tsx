@@ -11,16 +11,21 @@ import {
   Sliders,
   RotateCcw,
   Zap,
+  Bot,
 } from "lucide-react";
 
 interface CircuitCanvasProps {
   selectedPaletteGate: GateType | null;
   onClearPaletteGate: () => void;
+  copilotOpen?: boolean;
+  onToggleCopilot?: () => void;
 }
 
 export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
   selectedPaletteGate,
   onClearPaletteGate,
+  copilotOpen,
+  onToggleCopilot,
 }) => {
   const {
     numQubits,
@@ -178,8 +183,19 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
               onClick={resetCircuit}
               className="px-2.5 py-1 rounded-lg text-xs font-medium bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-300 transition-colors flex items-center gap-1"
             >
-              <RotateCcw className="w-3 h-3" /> Reset
+              <RotateCcw className="w-3.5 h-3.5" /> Reset
             </button>
+
+            {!copilotOpen && onToggleCopilot && (
+              <button
+                onClick={onToggleCopilot}
+                className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-purple-500/15 hover:bg-purple-500/25 border border-purple-500/30 text-purple-300 transition-all flex items-center gap-1.5 shadow-[0_0_10px_rgba(168,85,247,0.15)] hover:scale-105 active:scale-95"
+                title="Open Qu-Copilot AI Tutor"
+              >
+                <Bot className="w-3.5 h-3.5 text-purple-400" />
+                <span>AI Tutor</span>
+              </button>
+            )}
           </div>
         </div>
       </div>

@@ -172,21 +172,22 @@ export const BlochSphere: React.FC = () => {
       <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
         <div className="flex items-center gap-2">
           <Globe2 className="w-3.5 h-3.5 text-cyan-400" />
-          <span className="text-xs font-semibold text-white tracking-wide">
+          <span className="type-heading font-mono text-white">
             3D Bloch Sphere
           </span>
-          <span className="text-[10px] text-slate-500 font-mono hidden sm:inline">
-            · Single-Qubit State
+          <span className="text-[10px] text-slate-400 font-mono hidden sm:inline">
+            · Single-Qubit Reduced State
           </span>
         </div>
 
         {/* Qubit Selector */}
         <div className="flex items-center gap-1.5">
-          <span className="text-[11px] text-slate-400 font-mono">Qubit:</span>
+          <span className="text-xs text-slate-300 font-mono">Qubit:</span>
           <select
             value={selectedQubit}
+            aria-label="Select qubit to inspect on Bloch Sphere"
             onChange={(e) => setSelectedQubit(parseInt(e.target.value, 10))}
-            className="bg-[#101726] border border-white/[0.08] rounded-md px-2.5 py-0.5 text-xs font-telemetry text-cyan-300 focus:outline-none focus:border-cyan-400 cursor-pointer active:translate-y-[1px]"
+            className="h-7 bg-[#101726] border border-white/[0.08] rounded-md px-2.5 text-xs font-telemetry text-cyan-300 focus:outline-none focus:border-cyan-400 cursor-pointer active:translate-y-[1px] shadow-sm tabular-nums"
           >
             {Array.from({ length: numQubits }).map((_, i) => (
               <option key={i} value={i} className="bg-[#0b0f19] text-white">
@@ -203,29 +204,29 @@ export const BlochSphere: React.FC = () => {
         className="flex-1 w-full min-h-[220px] relative cursor-grab active:cursor-grabbing"
       >
         {/* Cardinal State Pole Overlays */}
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 pointer-events-none text-[11px] font-telemetry font-semibold text-sky-300 bg-[#070b14]/70 px-2 py-0.5 rounded border border-white/[0.05]">
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 pointer-events-none type-telemetry font-semibold text-sky-300 bg-[#070b14]/80 px-2.5 py-1 rounded-md border border-white/[0.08] shadow-sm">
           |0⟩ (+Z)
         </div>
-        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 pointer-events-none text-[11px] font-telemetry font-semibold text-sky-400 bg-[#070b14]/70 px-2 py-0.5 rounded border border-white/[0.05]">
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 pointer-events-none type-telemetry font-semibold text-sky-400 bg-[#070b14]/80 px-2.5 py-1 rounded-md border border-white/[0.08] shadow-sm">
           |1⟩ (-Z)
         </div>
-        <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-[10px] font-telemetry text-amber-300/90 bg-[#070b14]/70 px-1.5 py-0.5 rounded border border-white/[0.05]">
+        <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-xs font-telemetry text-amber-300 bg-[#070b14]/80 px-2 py-0.5 rounded-md border border-white/[0.08] shadow-sm">
           |+⟩ (+X)
         </div>
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[10px] font-telemetry text-emerald-300/90 bg-[#070b14]/70 px-1.5 py-0.5 rounded border border-white/[0.05]">
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-xs font-telemetry text-emerald-300 bg-[#070b14]/80 px-2 py-0.5 rounded-md border border-white/[0.08] shadow-sm">
           |+i⟩ (+Y)
         </div>
       </div>
 
       {/* Numerical Coordinate Readout */}
-      <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-telemetry tabular-nums">
+      <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-xs font-telemetry tabular-nums">
         <div className="flex items-center gap-3">
-          <span className="text-amber-400">x: {blochVector.x.toFixed(3)}</span>
-          <span className="text-emerald-400">y: {blochVector.y.toFixed(3)}</span>
-          <span className="text-sky-400">z: {blochVector.z.toFixed(3)}</span>
+          <span className="text-amber-400 font-semibold">x: {blochVector.x.toFixed(3)}</span>
+          <span className="text-emerald-400 font-semibold">y: {blochVector.y.toFixed(3)}</span>
+          <span className="text-sky-400 font-semibold">z: {blochVector.z.toFixed(3)}</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="text-slate-400">Purity r:</span>
+          <span className="text-slate-300">Purity r:</span>
           <span
             className={`font-semibold ${
               blochVector.purity < 0.99

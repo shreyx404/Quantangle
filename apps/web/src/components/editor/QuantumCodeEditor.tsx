@@ -175,7 +175,7 @@ export const QuantumCodeEditor: React.FC<QuantumCodeEditorProps> = ({
           <div className="flex items-center gap-2 min-w-0">
             <Code2 className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0" />
             {!compact ? (
-              <span className="text-xs font-semibold text-white tracking-wide mr-2 truncate">
+              <span className="text-xs font-semibold text-white tracking-wide mr-1.5 truncate">
                 Dual-Sync Code Studio
               </span>
             ) : (
@@ -185,13 +185,13 @@ export const QuantumCodeEditor: React.FC<QuantumCodeEditorProps> = ({
             )}
 
             {/* Language Tabs (Responsive & Compact) */}
-            <div className="flex items-center gap-0.5 bg-[#101726] rounded-lg p-0.5 border border-white/[0.08]">
+            <div className="h-7 flex items-center gap-0.5 bg-[#101726] rounded-lg p-0.5 border border-white/[0.08]">
               <button
                 onClick={() => {
                   setActiveTab("qiskit");
                   setTargetSDK("qiskit");
                 }}
-                className={`px-2.5 py-1 rounded-md text-xs font-mono font-medium transition-colors ${
+                className={`h-6 px-2.5 rounded-md text-xs font-mono font-medium transition-colors ${
                   activeTab === "qiskit"
                     ? "bg-cyan-500/15 text-cyan-300 font-semibold border border-cyan-500/30"
                     : "text-slate-400 hover:text-white border border-transparent"
@@ -205,7 +205,7 @@ export const QuantumCodeEditor: React.FC<QuantumCodeEditorProps> = ({
                   setActiveTab("qasm3");
                   setTargetSDK("qasm3");
                 }}
-                className={`px-2.5 py-1 rounded-md text-xs font-mono font-medium transition-colors ${
+                className={`h-6 px-2.5 rounded-md text-xs font-mono font-medium transition-colors ${
                   activeTab === "qasm3"
                     ? "bg-cyan-500/15 text-cyan-300 font-semibold border border-cyan-500/30"
                     : "text-slate-400 hover:text-white border border-transparent"
@@ -216,21 +216,21 @@ export const QuantumCodeEditor: React.FC<QuantumCodeEditorProps> = ({
               </button>
               <button
                 onClick={() => setActiveTab("cirq")}
-                className="px-2 py-1 rounded-md text-[11px] font-mono text-slate-500 hover:text-slate-400 flex items-center gap-1"
+                className="h-6 px-2 rounded-md text-[11px] font-mono text-slate-400 hover:text-slate-200 flex items-center gap-1"
                 title="Google Cirq transpilation targeted for v2"
               >
                 Cirq
-                <span className="text-[9px] px-1 bg-white/[0.05] border border-white/[0.08] rounded text-amber-400 font-sans">
+                <span className="text-[9px] px-1 bg-white/[0.05] border border-white/[0.08] rounded text-amber-300 font-sans">
                   v2
                 </span>
               </button>
               <button
                 onClick={() => setActiveTab("pennylane")}
-                className="px-2 py-1 rounded-md text-[11px] font-mono text-slate-500 hover:text-slate-400 flex items-center gap-1"
+                className="h-6 px-2 rounded-md text-[11px] font-mono text-slate-400 hover:text-slate-200 flex items-center gap-1"
                 title="Xanadu PennyLane transpilation targeted for v2"
               >
                 PennyLane
-                <span className="text-[9px] px-1 bg-white/[0.05] border border-white/[0.08] rounded text-amber-400 font-sans">
+                <span className="text-[9px] px-1 bg-white/[0.05] border border-white/[0.08] rounded text-amber-300 font-sans">
                   v2
                 </span>
               </button>
@@ -240,10 +240,10 @@ export const QuantumCodeEditor: React.FC<QuantumCodeEditorProps> = ({
           {/* Toolbar Actions */}
           <div className="flex items-center gap-1.5 flex-shrink-0">
             {/* Toggle Monaco vs Raw View */}
-            <div className="flex items-center bg-[#101726] rounded-md p-0.5 border border-white/[0.08] text-[11px] font-mono">
+            <div className="h-7 flex items-center bg-[#101726] rounded-md p-0.5 border border-white/[0.08] text-[11px] font-mono">
               <button
                 onClick={() => setEditorMode("monaco")}
-                className={`px-2 py-0.5 rounded flex items-center gap-1 transition-colors ${
+                className={`h-6 px-2 rounded flex items-center gap-1 transition-colors ${
                   editorMode === "monaco"
                     ? "bg-cyan-500/15 text-cyan-300 font-semibold border border-cyan-500/30"
                     : "text-slate-400 hover:text-white"
@@ -255,7 +255,7 @@ export const QuantumCodeEditor: React.FC<QuantumCodeEditorProps> = ({
               </button>
               <button
                 onClick={() => setEditorMode("raw")}
-                className={`px-2 py-0.5 rounded flex items-center gap-1 transition-colors ${
+                className={`h-6 px-2 rounded flex items-center gap-1 transition-colors ${
                   editorMode === "raw"
                     ? "bg-cyan-500/15 text-cyan-300 font-semibold border border-cyan-500/30"
                     : "text-slate-400 hover:text-white"
@@ -269,8 +269,9 @@ export const QuantumCodeEditor: React.FC<QuantumCodeEditorProps> = ({
 
             <button
               onClick={handleCopy}
+              aria-label="Copy code to clipboard"
               title="Copy code to clipboard"
-              className="px-2.5 py-1 rounded-md bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 text-xs flex items-center gap-1.5 transition-colors active:translate-y-[1px]"
+              className="h-7 px-2.5 rounded-md bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 text-xs flex items-center gap-1.5 transition-colors active:translate-y-[1px]"
             >
               {copied ? (
                 <>
@@ -286,8 +287,9 @@ export const QuantumCodeEditor: React.FC<QuantumCodeEditorProps> = ({
             </button>
             <button
               onClick={handleDownload}
+              aria-label="Download code file"
               title="Download code file"
-              className="p-1.5 rounded-md bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 transition-colors active:translate-y-[1px]"
+              className="h-7 w-7 rounded-md bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 transition-colors active:translate-y-[1px] flex items-center justify-center"
             >
               <Download className="w-3.5 h-3.5" />
             </button>

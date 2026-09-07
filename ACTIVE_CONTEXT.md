@@ -37,6 +37,17 @@ Quantangle has successfully completed Phases 0 through 5:
 
 ## 3. Recent Changes Log
 - **2026-09-07**:
+  - **Layout & Typography Upgrade with Top Design Skills (`TASK-5.7`)**:
+    - Performed comprehensive research on premier UI/UX, accessibility, and design tokens skills: downloaded and added `.agents/skills/better-interface/`, `.agents/skills/better-colors/`, `.agents/skills/better-accessibility/`, `.agents/skills/frontend-ui-engineering/` (Addy Osmani), and `.agents/skills/design-tokens/` (DTCG).
+    - Upgraded `apps/web/src/app/globals.css` with semantic typography utility classes (`.type-display`, `.type-heading`, `.type-subheading`, `.type-label`, `.type-body`, `.type-telemetry`, `.type-code`), OpenType scientific glyph tuning (`cv02`, `cv03`, `cv04`, `cv11`, `tnum`, `zero`), concentric radii tokens, and WCAG 2.2 `:focus-visible` rings.
+    - Upgraded `Header.tsx` into 3 functional zones respecting the 2x gap rule (`gap-6`), unified `h-8` heights, and high-contrast telemetry.
+    - Upgraded `GatePalette.tsx` with 4 micro-categorized modules, 34px gate chips, tactile depression, and dynamic placement guidance banner.
+    - Refactored `CircuitCanvas.tsx` wire rails to 2px, tabular time-step numbers, and standardized toolbar buttons.
+    - Refactored `TimelineScrubber.tsx` transport buttons with accessible `aria-label`s, `h-8` heights, tabular step readout, and speed toggles.
+    - Refactored `QuantumCodeEditor.tsx` language tabs to `h-7`, high-contrast active states, and tabular line numbers.
+    - Elevated `QuCopilot.tsx` protocol starter cards, message typography, and added an accessible `h-9` chat input.
+    - Polished HUD corner pills on `BlochSphere.tsx`, `QSphere.tsx`, `ProbabilityHistogram.tsx`, and `StatevectorTable.tsx` with tabular coordinates and percentage formatting.
+    - Verified via TypeScript compilation (`npx tsc --noEmit` passed with 0 errors), AST unit tests (`npm test` passed with 3/3 tests), and live automated browser subagent testing (`layout_typography_demo_*.webp`).
   - **Layout & Typography Overhaul via Agent Skills (`TASK-5.6`)**:
     - Discovered and integrated premier agent skills: [`.agents/skills/better-typography/`](file:///c:/Users/shrey/Downloads/Quantangle/.agents/skills/better-typography/SKILL.md), [`.agents/skills/better-layout/`](file:///c:/Users/shrey/Downloads/Quantangle/.agents/skills/better-layout/SKILL.md), and [`.agents/skills/better-ui/`](file:///c:/Users/shrey/Downloads/Quantangle/.agents/skills/better-ui/SKILL.md).
     - Fixed font-family configuration in `tailwind.config.ts` so `JetBrains Mono` correctly resolves from `--font-mono` across all scientific code, telemetry, Dirac brackets, and matrix elements.

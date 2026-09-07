@@ -98,19 +98,82 @@ p, .text-pretty {
   transform: translateY(1px);
 }
 
-/* Tactile Active States & Focus Rings */
-button:focus-visible,
-input:focus-visible,
-select:focus-visible {
-  outline: 2px solid rgba(0, 229, 255, 0.6);
-  outline-offset: 1px;
+/* Typography Tokens & Utilities (better-typography & design-tokens) */
+.type-display {
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  text-wrap: balance;
+}
+
+.type-heading {
+  font-size: 0.8125rem;
+  line-height: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: #f8fafc;
+  text-wrap: balance;
+}
+
+.type-subheading {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  color: #cbd5e1;
+}
+
+.type-label {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.625rem;
+  line-height: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.type-body {
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+  color: #cbd5e1;
+  text-wrap: pretty;
+}
+
+.type-telemetry {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6875rem;
+  line-height: 0.9375rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "zero" 1;
+  letter-spacing: -0.01em;
+}
+
+.type-code {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  font-weight: 400;
 }
 
 /* Monospace Scientific Coordinates & Timings (better-typography) */
 .font-telemetry {
   font-family: var(--font-mono), monospace;
   font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum" 1, "zero" 1;
+  font-feature-settings: "tnum" 1, "zero" 1, "cv02" 1, "cv03" 1, "cv04" 1, "cv11" 1;
+  letter-spacing: -0.01em;
+}
+
+/* Tactile Active States & Accessible Focus Rings (better-accessibility) */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid rgba(0, 229, 255, 0.75);
+  outline-offset: 2px;
 }
 
 /* Concentric Radius Formula (better-ui & better-layout) */
@@ -123,10 +186,13 @@ select:focus-visible {
 .radius-control {
   border-radius: 6px;
 }
+.radius-badge {
+  border-radius: 4px;
+}
 
 /* Hardware Wire Rail */
 .wire-rail {
-  background-color: #1e293b;
+  background-color: #222d42;
   transition: background-color 150ms ease;
 }
 
@@ -134,7 +200,7 @@ select:focus-visible {
   background-color: #334155;
 }
 
-/* Respect Reduced Motion */
+/* Respect Reduced Motion (better-accessibility) */
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,
@@ -145,3 +211,4 @@ select:focus-visible {
     scroll-behavior: auto !important;
   }
 }
+

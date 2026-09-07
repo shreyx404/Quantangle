@@ -114,6 +114,10 @@
   - *Input*: Discovered premier UI agent skills (`better-typography`, `better-layout`, `better-ui` from Jakub Krehel) and user requirement to overhaul layout and typography.
   - *Output*: `.agents/skills/better-typography/`, `.agents/skills/better-layout/`, `.agents/skills/better-ui/`, corrected font mapping in `tailwind.config.ts` (JetBrains Mono + Inter OpenType `cv02`, `cv03`, `cv11`, `tnum`), concentric border radii formula ($R_{\text{outer}} = R_{\text{inner}} + \text{padding}$), categorized hardware gate modules with micro-labels, full-width default canvas view mode, non-clipped responsive Dual-Sync Code Studio header, and interactive quantum protocol starter cards eliminating the empty Qu-Copilot void.
   - *Acceptance Criteria*: Zero text clipping in split view; crisp JetBrains Mono on all telemetry/code; `tabular-nums` on all coordinates/timings; 100% production build pass (`next build`); visual verification in browser with 0 errors.
+- [x] **TASK-5.7: Layout & Typography Upgrade with Top Design Skills (better-interface, better-colors, better-accessibility, frontend-ui-engineering, design-tokens)**
+  - *Input*: Deep search of top frontend & UI/UX engineering skills (`jakubkrehel/skills`, `addyosmani/agent-skills`, `plugin87/ux-ui-agent-skills`).
+  - *Output*: `.agents/skills/better-interface/`, `.agents/skills/better-colors/`, `.agents/skills/better-accessibility/`, `.agents/skills/frontend-ui-engineering/`, `.agents/skills/design-tokens/`, updated `globals.css` with semantic typography tokens and focus rings, 3-zone header with 2x gap rule, 34px gate palette chips, 2px canvas wire rails, unified transport scrubber controls, accessible chat input in Qu-Copilot, and high-contrast HUD overlays on 3D visualizers.
+  - *Acceptance Criteria*: WCAG 2.2 AA compliance, target size $\ge 34\text{px}$, 100% TypeScript compile pass, AST tests pass, and complete browser subagent visual verification with zero regressions.
 
 ---
 

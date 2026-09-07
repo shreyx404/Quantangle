@@ -146,23 +146,23 @@ export const GatePalette: React.FC<GatePaletteProps> = ({
   const selectedDef = GATE_DEFINITIONS.find((g) => g.type === selectedGate);
 
   return (
-    <div className="bg-[#0b0f19] rounded-xl p-3 border border-white/[0.08] flex flex-col gap-2.5 shadow-sm">
+    <div className="bg-[#0b0f19] rounded-xl p-3 border border-white/[0.08] flex flex-col gap-3 shadow-sm">
       {/* Header */}
-      <div className="flex items-center justify-between pb-1">
+      <div className="flex items-center justify-between pb-1 border-b border-white/[0.04]">
         <div className="flex items-center gap-2">
           <Layers className="w-3.5 h-3.5 text-cyan-400" />
-          <span className="text-[10px] font-mono font-semibold tracking-widest uppercase text-slate-300">
+          <span className="type-label text-slate-300">
             Quantum Gate Palette
           </span>
-          <span className="text-[10px] text-slate-500 font-mono hidden sm:inline">
-            · Unitary Operations
+          <span className="text-[10px] text-slate-400 font-mono hidden sm:inline">
+            · Unitary Operations & Measurements
           </span>
         </div>
 
         {selectedGate && (
           <button
             onClick={() => onSelectGate(null)}
-            className="text-[10px] font-mono text-cyan-300 hover:text-white px-2 py-0.5 rounded-md bg-cyan-500/10 border border-cyan-500/30 flex items-center gap-1 transition-colors active:translate-y-[1px]"
+            className="text-[11px] font-mono text-cyan-300 hover:text-white px-2 py-0.5 rounded-md bg-cyan-500/10 border border-cyan-500/30 flex items-center gap-1 transition-colors active:translate-y-[1px]"
           >
             <span>Deselect [{selectedGate}]</span>
             <X className="w-3 h-3" />
@@ -170,14 +170,14 @@ export const GatePalette: React.FC<GatePaletteProps> = ({
         )}
       </div>
 
-      {/* Categorized Gate Rack Modules */}
-      <div className="flex flex-wrap items-stretch gap-2">
+      {/* Categorized Gate Rack Modules (2x Gap Rule: 12px inter-module, 6px intra-module) */}
+      <div className="flex flex-wrap items-stretch gap-3">
         {/* Module 1: Clifford & Pauli */}
-        <div className="flex flex-col bg-[#070b14]/70 rounded-lg p-1.5 border border-white/[0.05]">
-          <span className="text-[9px] font-mono font-semibold tracking-wider text-slate-500 uppercase px-1 mb-1">
+        <div className="flex flex-col bg-[#070b14]/80 rounded-lg p-2 border border-white/[0.05]">
+          <span className="type-label text-slate-400 px-1 mb-1.5">
             Pauli & Clifford
           </span>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1.5">
             {GATE_DEFINITIONS.filter((g) => g.category === "single").map((def) => {
               const isSelected = selectedGate === def.type;
               return (
@@ -185,7 +185,7 @@ export const GatePalette: React.FC<GatePaletteProps> = ({
                   key={def.type}
                   onClick={() => onSelectGate(isSelected ? null : def.type)}
                   title={def.desc}
-                  className={`h-7 min-w-[32px] px-2 rounded-md font-mono text-xs font-bold border transition-colors active:translate-y-[1px] flex items-center justify-center ${
+                  className={`h-8 min-w-[34px] px-2.5 rounded-md font-mono text-xs font-bold border transition-colors active:translate-y-[1px] flex items-center justify-center ${
                     isSelected ? def.selectedClass : def.chipClass
                   }`}
                 >
@@ -197,11 +197,11 @@ export const GatePalette: React.FC<GatePaletteProps> = ({
         </div>
 
         {/* Module 2: Two-Qubit Entangling Gates */}
-        <div className="flex flex-col bg-[#070b14]/70 rounded-lg p-1.5 border border-white/[0.05]">
-          <span className="text-[9px] font-mono font-semibold tracking-wider text-slate-500 uppercase px-1 mb-1">
+        <div className="flex flex-col bg-[#070b14]/80 rounded-lg p-2 border border-white/[0.05]">
+          <span className="type-label text-slate-400 px-1 mb-1.5">
             Entangling (2-Qubit)
           </span>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1.5">
             {GATE_DEFINITIONS.filter((g) => g.category === "two").map((def) => {
               const isSelected = selectedGate === def.type;
               return (
@@ -209,13 +209,13 @@ export const GatePalette: React.FC<GatePaletteProps> = ({
                   key={def.type}
                   onClick={() => onSelectGate(isSelected ? null : def.type)}
                   title={def.desc}
-                  className={`h-7 px-2.5 rounded-md font-mono text-xs font-bold border transition-colors active:translate-y-[1px] flex items-center gap-1.5 ${
+                  className={`h-8 px-2.5 rounded-md font-mono text-xs font-bold border transition-colors active:translate-y-[1px] flex items-center gap-1.5 ${
                     isSelected ? def.selectedClass : def.chipClass
                   }`}
                 >
                   <span>{def.name}</span>
                   {def.badge && (
-                    <span className="text-[9px] font-normal text-slate-400 bg-black/30 px-1 py-0.2 rounded">
+                    <span className="text-[9px] font-normal text-slate-300 bg-black/40 px-1 py-0.2 rounded font-mono">
                       {def.badge}
                     </span>
                   )}
@@ -226,11 +226,11 @@ export const GatePalette: React.FC<GatePaletteProps> = ({
         </div>
 
         {/* Module 3: Parametric Rotations */}
-        <div className="flex flex-col bg-[#070b14]/70 rounded-lg p-1.5 border border-white/[0.05]">
-          <span className="text-[9px] font-mono font-semibold tracking-wider text-slate-500 uppercase px-1 mb-1">
+        <div className="flex flex-col bg-[#070b14]/80 rounded-lg p-2 border border-white/[0.05]">
+          <span className="type-label text-slate-400 px-1 mb-1.5">
             Parametric Rotations
           </span>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1.5">
             {GATE_DEFINITIONS.filter((g) => g.category === "rotation").map((def) => {
               const isSelected = selectedGate === def.type;
               return (
@@ -238,13 +238,13 @@ export const GatePalette: React.FC<GatePaletteProps> = ({
                   key={def.type}
                   onClick={() => onSelectGate(isSelected ? null : def.type)}
                   title={def.desc}
-                  className={`h-7 px-2.5 rounded-md font-mono text-xs font-bold border transition-colors active:translate-y-[1px] flex items-center gap-1.5 ${
+                  className={`h-8 px-2.5 rounded-md font-mono text-xs font-bold border transition-colors active:translate-y-[1px] flex items-center gap-1.5 ${
                     isSelected ? def.selectedClass : def.chipClass
                   }`}
                 >
                   <span>{def.name}</span>
                   {def.badge && (
-                    <span className="text-[9px] font-normal text-violet-300 bg-black/30 px-1 py-0.2 rounded font-serif italic">
+                    <span className="text-[10px] font-normal text-violet-300 bg-black/40 px-1 py-0.2 rounded font-serif italic">
                       {def.badge}
                     </span>
                   )}
@@ -255,11 +255,11 @@ export const GatePalette: React.FC<GatePaletteProps> = ({
         </div>
 
         {/* Module 4: Measurement */}
-        <div className="flex flex-col bg-[#070b14]/70 rounded-lg p-1.5 border border-white/[0.05]">
-          <span className="text-[9px] font-mono font-semibold tracking-wider text-slate-500 uppercase px-1 mb-1">
+        <div className="flex flex-col bg-[#070b14]/80 rounded-lg p-2 border border-white/[0.05]">
+          <span className="type-label text-slate-400 px-1 mb-1.5">
             Measurement
           </span>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1.5">
             {GATE_DEFINITIONS.filter((g) => g.category === "measure").map((def) => {
               const isSelected = selectedGate === def.type;
               return (
@@ -267,7 +267,7 @@ export const GatePalette: React.FC<GatePaletteProps> = ({
                   key={def.type}
                   onClick={() => onSelectGate(isSelected ? null : def.type)}
                   title={def.desc}
-                  className={`h-7 px-3 rounded-md font-mono text-xs font-bold border transition-colors active:translate-y-[1px] flex items-center justify-center ${
+                  className={`h-8 px-3 rounded-md font-mono text-xs font-bold border transition-colors active:translate-y-[1px] flex items-center justify-center ${
                     isSelected ? def.selectedClass : def.chipClass
                   }`}
                 >
@@ -280,18 +280,22 @@ export const GatePalette: React.FC<GatePaletteProps> = ({
       </div>
 
       {/* Contextual Status / Instructions Readout */}
-      <div className="text-[11px] font-mono px-2 py-1 rounded-md bg-[#070b14]/40 border border-white/[0.03] text-slate-400 flex items-center gap-2">
+      <div className="text-xs font-telemetry px-2.5 py-1.5 rounded-lg bg-[#070b14]/60 border border-white/[0.04] text-slate-300 flex items-center gap-2.5">
         {selectedDef ? (
           <>
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse flex-shrink-0" />
-            <span className="text-cyan-300 font-semibold">[{selectedDef.type}]</span>
-            <span className="text-slate-300 text-pretty">{selectedDef.desc}</span>
-            <span className="text-cyan-400/80 ml-auto hidden md:inline flex-shrink-0">Click any wire slot to place.</span>
+            <span className="text-cyan-300 font-semibold font-mono">[{selectedDef.type}]</span>
+            <span className="text-slate-200 text-pretty">{selectedDef.desc}</span>
+            <span className="text-cyan-400/90 ml-auto hidden md:inline flex-shrink-0 font-mono text-[11px]">
+              Click any wire slot to place.
+            </span>
           </>
         ) : (
           <>
-            <span className="text-slate-500 font-medium">Ready:</span>
-            <span className="text-slate-400 text-pretty">Select a gate chip above, then click any grid cell on a qubit wire to insert.</span>
+            <span className="text-slate-400 font-medium font-mono text-[11px]">Ready:</span>
+            <span className="text-slate-300 text-pretty">
+              Select a gate chip above, then click any grid cell on a qubit wire to insert.
+            </span>
           </>
         )}
       </div>

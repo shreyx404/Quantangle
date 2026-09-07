@@ -22,14 +22,14 @@ export const StatevectorTable: React.FC = () => {
       <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
         <div className="flex items-center gap-2">
           <Binary className="w-3.5 h-3.5 text-cyan-400" />
-          <span className="text-xs font-semibold text-white tracking-wide">
+          <span className="type-heading font-mono text-white">
             Statevector Amplitudes |ψ⟩
           </span>
-          <span className="text-[10px] text-slate-500 font-mono hidden sm:inline">
+          <span className="text-[10px] text-slate-400 font-mono hidden sm:inline">
             · Quantum State Coefficients
           </span>
         </div>
-        <span className="text-[10px] font-telemetry text-cyan-300 bg-[#101726] px-2 py-0.5 rounded-md border border-white/[0.06] tabular-nums">
+        <span className="type-telemetry text-cyan-300 bg-[#101726] px-2.5 py-1 rounded-md border border-white/[0.08] tabular-nums font-semibold shadow-sm">
           Step {activeStep}
         </span>
       </div>
@@ -37,12 +37,12 @@ export const StatevectorTable: React.FC = () => {
       <div className="flex-1 overflow-y-auto max-h-[180px] pt-1 font-telemetry text-xs">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="border-b border-white/[0.06] text-[10px] text-slate-400 uppercase tracking-wider font-mono">
-              <th className="py-1.5 px-2 font-medium">Basis |j⟩</th>
-              <th className="py-1.5 px-2 font-medium">Re(α)</th>
-              <th className="py-1.5 px-2 font-medium">Im(α)</th>
-              <th className="py-1.5 px-2 font-medium">Phase θ</th>
-              <th className="py-1.5 px-2 text-right font-medium">P(|j⟩)</th>
+            <tr className="border-b border-white/[0.06] type-label text-slate-400 font-mono">
+              <th className="py-2 px-2.5 font-semibold">Basis |j⟩</th>
+              <th className="py-2 px-2.5 font-semibold">Re(α)</th>
+              <th className="py-2 px-2.5 font-semibold">Im(α)</th>
+              <th className="py-2 px-2.5 font-semibold">Phase θ</th>
+              <th className="py-2 px-2.5 text-right font-semibold">P(|j⟩)</th>
             </tr>
           </thead>
           <tbody>
@@ -60,19 +60,19 @@ export const StatevectorTable: React.FC = () => {
                   key={idx}
                   className={`border-b border-white/[0.04] transition-colors ${
                     isSignificant
-                      ? "bg-cyan-500/[0.06] text-cyan-200"
-                      : "text-slate-500 hover:text-slate-400"
+                      ? "bg-cyan-500/[0.07] text-cyan-200"
+                      : "text-slate-400 hover:text-slate-300"
                   }`}
                 >
-                  <td className="py-1.5 px-2 font-semibold text-white">
+                  <td className="py-2 px-2.5 font-bold font-mono text-white">
                     |{formatBasis(idx)}⟩
                   </td>
-                  <td className="py-1.5 px-2 tabular-nums">{re.toFixed(4)}</td>
-                  <td className="py-1.5 px-2 tabular-nums">{im.toFixed(4)}i</td>
-                  <td className="py-1.5 px-2 tabular-nums">
+                  <td className="py-2 px-2.5 tabular-nums text-slate-200">{re.toFixed(4)}</td>
+                  <td className="py-2 px-2.5 tabular-nums text-slate-200">{im.toFixed(4)}i</td>
+                  <td className="py-2 px-2.5 tabular-nums text-slate-300">
                     {prob > 0.0001 ? `${(phase / Math.PI).toFixed(2)}π` : "—"}
                   </td>
-                  <td className="py-1.5 px-2 text-right font-semibold tabular-nums text-slate-200">
+                  <td className="py-2 px-2.5 text-right font-bold tabular-nums text-cyan-300">
                     {(prob * 100).toFixed(1)}%
                   </td>
                 </tr>

@@ -148,9 +148,9 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
           <div
             key={stepIdx}
             onClick={() => setActiveStep(stepIdx)}
-            className={`w-14 text-center text-[11px] font-telemetry cursor-pointer transition-colors py-0.5 rounded-md ${
+            className={`w-14 text-center text-xs font-telemetry tabular-nums cursor-pointer transition-colors py-1 rounded-md ${
               activeStep === stepIdx
-                ? "text-cyan-300 font-semibold bg-cyan-500/15 border border-cyan-500/30"
+                ? "text-cyan-300 font-semibold bg-cyan-500/15 border border-cyan-500/35 shadow-sm"
                 : "text-slate-400 hover:text-slate-200"
             }`}
           >
@@ -164,14 +164,14 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
         {Array.from({ length: numQubits }).map((_, qIdx) => (
           <div key={qIdx} className="flex items-center relative group">
             {/* Qubit Label */}
-            <div className="w-20 pr-3 flex items-center justify-between text-xs font-telemetry font-semibold text-slate-300">
-              <span className="text-cyan-400">|q{qIdx}⟩</span>
-              <span className="text-[10px] text-slate-500 font-normal">|0⟩</span>
+            <div className="w-20 pr-3 flex items-center justify-between text-xs font-telemetry font-semibold text-slate-200 select-none">
+              <span className="text-cyan-400 font-mono">|q{qIdx}⟩</span>
+              <span className="text-[11px] text-slate-400 font-normal tabular-nums">|0⟩</span>
             </div>
 
             {/* Wire line running behind cells */}
             <div className="relative flex items-center">
-              <div className="absolute left-0 right-0 h-[1.5px] bg-[#222d42] group-hover:bg-[#324361] transition-colors z-0" />
+              <div className="absolute left-0 right-0 h-[2px] bg-[#222d42] group-hover:bg-[#334155] transition-colors z-0" />
 
               {/* Wire Cells */}
               {Array.from({ length: visibleStepsCount }).map((_, stepIdx) => {
@@ -187,14 +187,14 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
                     onClick={() => handleCellClick(stepIdx, qIdx)}
                     className={`relative w-14 h-12 flex items-center justify-center z-10 cursor-pointer transition-colors ${
                       activeStep === stepIdx
-                        ? "bg-cyan-500/[0.04] border-x border-cyan-500/15"
+                        ? "bg-cyan-500/[0.05] border-x border-cyan-500/20"
                         : "hover:bg-white/[0.02]"
                     }`}
                   >
                     {/* Two-qubit connector line if multi-qubit gate */}
                     {op && op.qubits.length > 1 && isControl && (
                       <div
-                        className="absolute w-[1.5px] bg-emerald-400 z-0 pointer-events-none"
+                        className="absolute w-[2px] bg-emerald-400 z-0 pointer-events-none shadow-sm"
                         style={{
                           top: "50%",
                           height: `${Math.abs(op.qubits[1] - op.qubits[0]) * 52}px`,
@@ -207,17 +207,17 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
                     {/* Placed Gate Badge */}
                     {op ? (
                       <div
-                        className={`relative px-2.5 py-1.5 rounded font-mono text-xs font-semibold border transition-colors ${getGateBadgeStyle(
+                        className={`relative px-2.5 py-1.5 rounded-md font-mono text-xs font-semibold border transition-colors ${getGateBadgeStyle(
                           op.gate
-                        )} group/gate hover:border-cyan-400`}
+                        )} group/gate hover:border-cyan-400 shadow-sm`}
                       >
                         {isControl ? (
-                          <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
+                          <div className="w-3 h-3 rounded-full bg-emerald-400 shadow-sm" />
                         ) : (
                           <span>
                             {op.gate}
                             {op.params && op.params.length > 0 && (
-                              <span className="text-[9px] block text-center opacity-80">
+                              <span className="text-[10px] block text-center font-telemetry tabular-nums opacity-85">
                                 {(op.params[0] / Math.PI).toFixed(2)}π
                               </span>
                             )}
@@ -255,9 +255,9 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
                         </div>
                       </div>
                     ) : isPendingControl ? (
-                      <div className="w-4 h-4 rounded-full border-2 border-emerald-400 bg-emerald-400/20" />
+                      <div className="w-4 h-4 rounded-full border-2 border-emerald-400 bg-emerald-400/20 shadow-sm" />
                     ) : (
-                      <div className="w-2 h-2 rounded-full bg-white/[0.04] group-hover:bg-cyan-500/30 transition-colors" />
+                      <div className="w-2 h-2 rounded-full bg-white/[0.06] group-hover:bg-cyan-500/40 transition-colors" />
                     )}
                   </div>
                 );
@@ -274,24 +274,24 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
       {/* Canvas Header & Toolbar */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/[0.06] pb-2.5">
         <div className="flex items-center gap-2.5">
-          <div className="w-5 h-5 rounded-md bg-cyan-500/10 border border-cyan-500/25 flex items-center justify-center text-cyan-400">
-            <Zap className="w-3 h-3" />
+          <div className="w-6 h-6 rounded-md bg-cyan-500/10 border border-cyan-500/25 flex items-center justify-center text-cyan-400 flex-shrink-0">
+            <Zap className="w-3.5 h-3.5" />
           </div>
-          <span className="text-xs font-semibold tracking-tight text-white uppercase font-mono">
+          <span className="type-heading font-mono text-white">
             Quantum Circuit Canvas
           </span>
-          <span className="text-[10px] font-telemetry px-2 py-0.5 rounded-md bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
-            Little-Endian · q₀ is LSB
+          <span className="type-telemetry px-2 py-0.5 rounded-md bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 font-semibold">
+            Little-Endian · q₀ LSB
           </span>
         </div>
 
         {/* Controls: View Modes, Qubits, Steps, Copilot */}
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2.5">
           {/* Dual-Sync View Mode Switcher */}
-          <div className="flex items-center bg-[#101726] rounded-lg p-0.5 border border-white/[0.08] text-xs">
+          <div className="h-8 flex items-center bg-[#101726] rounded-lg p-0.5 border border-white/[0.08] text-xs">
             <button
               onClick={() => setViewMode("canvas")}
-              className={`px-2.5 py-1 rounded-md flex items-center gap-1.5 font-medium transition-colors ${
+              className={`h-7 px-3 rounded-md flex items-center gap-1.5 font-medium transition-colors ${
                 viewMode === "canvas"
                   ? "bg-cyan-500/15 text-cyan-300 font-semibold border border-cyan-500/30"
                   : "text-slate-400 hover:text-white"
@@ -303,7 +303,7 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
             </button>
             <button
               onClick={() => setViewMode("split")}
-              className={`px-2.5 py-1 rounded-md flex items-center gap-1.5 font-medium transition-colors ${
+              className={`h-7 px-3 rounded-md flex items-center gap-1.5 font-medium transition-colors ${
                 viewMode === "split"
                   ? "bg-cyan-500/15 text-cyan-300 font-semibold border border-cyan-500/30"
                   : "text-slate-400 hover:text-white"
@@ -315,7 +315,7 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
             </button>
             <button
               onClick={() => setViewMode("code")}
-              className={`px-2.5 py-1 rounded-md flex items-center gap-1.5 font-medium transition-colors ${
+              className={`h-7 px-3 rounded-md flex items-center gap-1.5 font-medium transition-colors ${
                 viewMode === "code"
                   ? "bg-cyan-500/15 text-cyan-300 font-semibold border border-cyan-500/30"
                   : "text-slate-400 hover:text-white"
@@ -328,22 +328,24 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
           </div>
 
           {/* Qubit controls */}
-          <div className="flex items-center gap-1 bg-[#101726] rounded-lg px-2 py-0.5 border border-white/[0.08] text-xs">
+          <div className="h-8 flex items-center gap-1 bg-[#101726] rounded-lg px-2 border border-white/[0.08] text-xs">
             <span className="text-slate-400 pr-1 font-mono text-[11px]">Qubits:</span>
             <button
               onClick={() => setQubits(Math.max(1, numQubits - 1))}
               disabled={numQubits <= 1}
-              className="w-5 h-5 rounded-md flex items-center justify-center bg-white/[0.04] hover:bg-white/[0.08] disabled:opacity-40 transition-colors active:translate-y-[1px]"
+              aria-label="Decrease qubit count"
+              className="w-5 h-5 rounded flex items-center justify-center bg-white/[0.04] hover:bg-white/[0.08] disabled:opacity-40 transition-colors active:translate-y-[1px]"
             >
               <Minus className="w-2.5 h-2.5" />
             </button>
-            <span className="w-5 text-center font-telemetry font-semibold text-cyan-300 text-xs">
+            <span className="w-5 text-center font-telemetry font-semibold text-cyan-300 text-xs tabular-nums">
               {numQubits}
             </span>
             <button
               onClick={() => setQubits(Math.min(16, numQubits + 1))}
               disabled={numQubits >= 16}
-              className="w-5 h-5 rounded-md flex items-center justify-center bg-white/[0.04] hover:bg-white/[0.08] disabled:opacity-40 transition-colors active:translate-y-[1px]"
+              aria-label="Increase qubit count"
+              className="w-5 h-5 rounded flex items-center justify-center bg-white/[0.04] hover:bg-white/[0.08] disabled:opacity-40 transition-colors active:translate-y-[1px]"
             >
               <Plus className="w-2.5 h-2.5" />
             </button>
@@ -352,13 +354,13 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
           <div className="flex items-center gap-1.5">
             <button
               onClick={addStep}
-              className="px-2.5 py-1 rounded-md text-xs font-medium bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 transition-colors active:translate-y-[1px] flex items-center gap-1"
+              className="h-8 px-3 rounded-md text-xs font-medium bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-200 transition-colors active:translate-y-[1px] flex items-center gap-1"
             >
               <Plus className="w-3 h-3" /> Step
             </button>
             <button
               onClick={resetCircuit}
-              className="px-2.5 py-1 rounded-md text-xs font-medium bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-300 transition-colors active:translate-y-[1px] flex items-center gap-1"
+              className="h-8 px-3 rounded-md text-xs font-medium bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-300 transition-colors active:translate-y-[1px] flex items-center gap-1"
             >
               <RotateCcw className="w-3 h-3" /> Reset
             </button>
@@ -366,7 +368,7 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
             {!copilotOpen && onToggleCopilot && (
               <button
                 onClick={onToggleCopilot}
-                className="px-2.5 py-1 rounded-md text-xs font-medium bg-[#101726] hover:bg-[#162035] border border-cyan-500/30 text-cyan-300 transition-colors active:translate-y-[1px] flex items-center gap-1.5"
+                className="h-8 px-3 rounded-md text-xs font-medium bg-[#101726] hover:bg-[#162035] border border-cyan-500/30 text-cyan-300 transition-colors active:translate-y-[1px] flex items-center gap-1.5"
                 title="Open Qu-Copilot AI Tutor"
               >
                 <Bot className="w-3.5 h-3.5 text-cyan-400" />

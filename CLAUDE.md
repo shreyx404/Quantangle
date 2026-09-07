@@ -9,9 +9,9 @@
 Quantangle is an AI-based Interactive Quantum Algorithm Learning & Multi-Engine Simulation Platform.
 - **Frontend**: Next.js 14 (App Router) + React 18 + Vanilla CSS / CSS Modules + Lucide Icons + Monaco Editor + Three.js / React Three Fiber.
 - **Client Simulator**: Rust WebAssembly (`wasm-pack`, target `web`) running in a Web Worker.
-- **Cloud Backend**: Python 3.11+ / FastAPI + Qiskit Aer + PennyLane + Google Cirq.
+- **Cloud Backend**: Python 3.11+ / FastAPI + Qiskit Aer (MVP; PennyLane & Cirq targeted for v2).
 - **State Store**: Zustand for client-side circuit state, timeline history, and UI modes.
-- **AI & RAG**: LangChain / LlamaIndex + FastAPI streaming + Quantum AST Unitary Verifier.
+- **AI & RAG**: LangChain / LlamaIndex + FastAPI streaming + Verified Circuit Generation (AST Unitary Verifier).
 
 ---
 

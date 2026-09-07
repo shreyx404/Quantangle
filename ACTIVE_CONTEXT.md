@@ -40,6 +40,9 @@ Quantangle is being initialized as a production-grade interactive quantum learni
 ---
 
 ## 3. Recent Changes Log
+- **2026-09-07**:
+  - Narrowed MVP claim across all system specs (`PRD.md`, `ARCHITECTURE.md`, `TECH_STACK.md`, `TASKS.md`, `SYSTEM_PATTERNS.md`, `API_SPEC.md`, `README.md`, `AGENTS.md`, `CLAUDE.md`, `.cursorrules`) to **Qiskit + OpenQASM 3.0 only**, explicitly designating Google Cirq and Xanadu PennyLane as "v2 targets" to maintain an honest, high-integrity scope.
+  - Reframed AI integrity positioning from "zero hallucination" to **"Verified Circuit Generation"** ("*Every circuit suggestion is mathematically validated before being shown to the student*"), providing an authentic, mathematically sound guarantee without inviting skepticism.
 - **2026-09-06**:
   - Cleaned root workspace; archived pitch assets safely into `docs/pitch_archive/` and renamed presentation file typo (`Quantangle_SIH26140_Idea_PPT.pptx`).
   - Created `AGENTS.md` (Agent operating manifesto).
@@ -61,5 +64,7 @@ Quantangle is being initialized as a production-grade interactive quantum learni
 | Monorepo vs Multi-repo structure | **Resolved: Turborepo Monorepo** | Single repository containing `/apps/web` (Next.js), `/packages/wasm-engine` (Rust/Wasm), and `/apps/api` (FastAPI backend). |
 | Qubit Endianness Convention | **Resolved: Little-Endian** | Little-endian ($q_0$ is LSB) strictly enforced across all modules to ensure seamless compatibility with Qiskit and standard literature. |
 | Client vs Cloud Simulation Boundary | **Resolved: 16 Qubits** | $\le 16$ qubits run client-side in Rust WebAssembly (0ms latency, zero server cost). $>16$ qubits or noisy/VQE circuits offload to FastAPI backend. |
+| MVP Multi-SDK Scope | **Resolved: Qiskit + OpenQASM 3.0** | MVP focuses strictly on Qiskit + OpenQASM 3.0. Google Cirq and Xanadu PennyLane are designated as v2 targets. |
+| AI Tutor Integrity Framing | **Resolved: Verified Circuit Generation** | Replaced "zero hallucination" with "Verified Circuit Generation" ("Every circuit suggestion is mathematically validated before being shown to the student"). |
 | Code Fix Sync & Git Push Protocol | **Resolved: Mandatory Auto-Push** | After every code fix or task, all system markdown files must be updated and pushed to GitHub. |
 

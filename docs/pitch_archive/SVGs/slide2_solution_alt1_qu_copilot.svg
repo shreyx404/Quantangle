@@ -43,8 +43,8 @@
   <text x="440" y="163" fill="#047857" font-family="system-ui" font-size="10" font-weight="700" text-anchor="middle">Verified</text>
   <text x="440" y="175" fill="#047857" font-family="system-ui" font-size="9" font-weight="700" text-anchor="middle">Output</text>
 
-  <!-- Visual flair: Zero Hallucination -->
+  <!-- Visual flair: Verified Circuit Generation -->
   <rect x="20" y="220" width="460" height="30" rx="15" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
-  <text x="250" y="240" fill="#64748B" font-family="system-ui" font-size="10" font-weight="600" text-anchor="middle">Result: The first Zero-Hallucination Quantum AI Tutor</text>
+  <text x="250" y="240" fill="#64748B" font-family="system-ui" font-size="10" font-weight="600" text-anchor="middle">Result: Verified Circuit Generation — Mathematically Validated Before Shown</text>
 
 </svg>

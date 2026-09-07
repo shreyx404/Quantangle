@@ -94,8 +94,8 @@
 2. **Parameter 2: Innovation & Uniqueness (20 Marks)**
    * *Evaluation Questions:* How novel is the proposed approach compared to conventional methods? Is the solution substantially different from existing solutions? Does the idea show original thinking rather than a repackaged product?
    * *How Quantangle Scores 18–20:*
-     - **Qu-Copilot Unitary Verification Pipeline ($U^\dagger U = I, F \ge 0.999$):** The first closed-loop, zero-hallucination quantum AI (Artificial Intelligence) tutor that rejects unphysical code and self-corrects before rendering.
-     - **The LLVM (Low Level Virtual Machine) of Quantum Computing:** Bi-directional AST (Abstract Syntax Tree) transpilation via OpenQASM 3.0, compiling simultaneously to IBM (International Business Machines) Qiskit, Google Cirq, and Xanadu PennyLane.
+     - **Qu-Copilot Unitary Verification Pipeline ($U^\dagger U = I, F \ge 0.999$):** Closed-loop mathematical validation ensuring every circuit suggestion is mathematically validated before being shown to the student.
+     - **The LLVM (Low Level Virtual Machine) of Quantum Computing:** Bi-directional AST (Abstract Syntax Tree) transpilation via OpenQASM 3.0, compiling to Qiskit and OpenQASM 3.0 in MVP (expanding to Google Cirq and Xanadu PennyLane in v2).
      - **Quantum Time-Travel 3D State Inspector:** Scrubbing gate-by-gate on 3D Bloch Spheres and Q-Spheres, replacing black-box measurement histograms.
      - **Mathematical State-Fidelity Auto-Grading ($F \ge 0.999$):** Evaluates true quantum mechanics rather than brittle string matching.
 
@@ -132,7 +132,7 @@
 * **Tone:** Authoritative yet accessible, engineering-driven, passionate about democratizing deep tech.
 * **Avoid:** "We are trying to make...", "We hope to...", "This might work...".
 * **Use:** "Quantangle AI (Artificial Intelligence) solves this by...", "Our dual-engine architecture guarantees...", "Our empirical validation proves...".
-* **Key Narrative Arc:** *Quantum computing is India’s next technological frontier under the NQM (National Quantum Mission), but current learning tools are broken (too abstract, vendor-locked, math-heavy, 90% drop-off). Quantangle AI (Artificial Intelligence) solves this through a zero-cost edge simulation engine, multi-SDK (Software Development Kit) transpilation, and a zero-hallucination AI (Artificial Intelligence) tutor.*
+* **Key Narrative Arc:** *Quantum computing is India’s next technological frontier under the NQM (National Quantum Mission), but current learning tools are broken (too abstract, vendor-locked, math-heavy, 90% drop-off). Quantangle AI (Artificial Intelligence) solves this through a zero-cost edge simulation engine, dual-sync transpilation, and Verified Circuit Generation tutoring.*
 
 ### 2. Time Budget Breakdown (100% PPT (PowerPoint Presentation) Round — No Prototype Required)
 
@@ -203,7 +203,7 @@ Quantangle is Team Enigma's sovereign, browser-native answer to Problem Statemen
 > 2. **The Tooling & Infrastructure Barrier:** Setting up quantum software requires complex local Python virtual environments, C++ compilation for simulators like Qiskit Aer, or waiting in 45-minute queues for noisy cloud QPUs (Quantum Processing Units).
 > 3. **The Vendor Lock-In Barrier:** Existing resources lock students into a single SDK (Software Development Kit) — like IBM (International Business Machines) Qiskit — leaving them lost when they need to transition to Google Cirq or Xanadu PennyLane for Quantum Machine Learning.
 >
-> To solve this national bottleneck, we built **Quantangle** — a next-generation, browser-first interactive quantum computing and multi-engine simulation platform that transforms abstract mathematics into intuitive, visual, and zero-hallucination computational thinking.
+> To solve this national bottleneck, we built **Quantangle** — a next-generation, browser-first interactive quantum computing and multi-engine simulation platform that transforms abstract mathematics into intuitive, visual, and verified computational thinking.
 >
 > Let us walk you through our proposed solution on Slide 2."
 
@@ -224,9 +224,9 @@ Slide Header: Quantangle - AI (Artificial Intelligence) Based interactive Quantu
 Slide Heading: Quantangle — Proposed Solution :
 Exact Bullets Displayed on Slide:
 • All-in-One Quantum IDE (Integrated Development Environment): A browser-first platform combining visual circuit design, multi-SDK (Software Development Kit) coding, 3D quantum-state visualization, AI (Artificial Intelligence) tutoring, and hands-on quest labs — zero installs, runs on any device.
-• Dual-Sync Canvas: Drag-and-drop gates onto wires and the platform instantly generates equivalent Python code in Qiskit, Cirq, PennyLane, or OpenQASM 3.0 — or type code and watch the circuit diagram update automatically, synchronized bi-directionally via AST (Abstract Syntax Tree) parsing.
+• Dual-Sync Canvas: Drag-and-drop gates onto wires and the platform instantly generates equivalent Python code in Qiskit or OpenQASM 3.0 (with Cirq and PennyLane targeted for v2) — or type code and watch the circuit diagram update automatically, synchronized bi-directionally via AST (Abstract Syntax Tree) parsing.
 • 3D Quantum State Inspector: Interactive Bloch & Q-Spheres visualize quantum states gate-by-gate in real time, making superposition and entanglement easy to understand.
-• Qu-Copilot AI (Artificial Intelligence) Tutor: RAG (Retrieval-Augmented Generation)-based quantum tutor with simulation + unitary verification to prevent hallucinations.
+• Qu-Copilot AI (Artificial Intelligence) Tutor (Verified Circuit Generation): RAG-based quantum tutor with pre-execution simulation + unitary verification — every circuit suggestion is mathematically validated before being shown to the student.
 • Core Solution: 3D Bloch Sphere for visual learning + WebAssembly for offline simulations + gamified labs for better retention.
 Visual Anchors:
 1. SVGs (Scalable Vector Graphics)/slide2_solution_alt1_qu_copilot.svg (Qu-Copilot RAG (Retrieval-Augmented Generation) & Verification Flow)
@@ -239,7 +239,7 @@ Primary Speaker: Speaker 1 (or handoff to Speaker 2 at Qu-Copilot)
 ```
 
 ### Key Takeaway
-Quantangle is an all-in-one quantum IDE (Integrated Development Environment) that combines dual-sync multi-SDK (Software Development Kit) transpilation, real-time 3D state inspection, and **Qu-Copilot** — the world's first unitary-verified, zero-hallucination quantum AI (Artificial Intelligence) tutor.
+Quantangle is an all-in-one quantum IDE (Integrated Development Environment) that combines dual-sync transpilation, real-time 3D state inspection, and **Qu-Copilot** — featuring Verified Circuit Generation where every circuit suggestion is mathematically validated before being shown to the student.
 
 ### Master Verbatim Script (12-Minute Primary Track — [01:30 to 05:00])
 > "Moving to Slide 2: What is Quantangle?
@@ -250,7 +250,7 @@ Quantangle is an all-in-one quantum IDE (Integrated Development Environment) tha
 >
 > **1. Dual-Sync Canvas & Multi-SDK (Software Development Kit) Transpilation [Point to Bullet 2 & Middle SVG (Scalable Vector Graphics)]:**
 > Currently, students are forced into a false dichotomy: do they learn the visual drag-and-drop GUI (Graphical User Interface) of IBM (International Business Machines) Quantum Composer, or do they write raw Python code in Jupyter Notebooks? In Quantangle, they get both in real time.
-> Look at our Multi-SDK (Software Development Kit) diagram in the center: when a student drags a Hadamard or CNOT gate onto a circuit wire, our engine instantly generates syntactically flawless code simultaneously in **IBM (International Business Machines) Qiskit (`qc.h(0)`), Google Cirq (`cirq.H(q0)`), Xanadu PennyLane (`qml.Hadamard(0)`), and OpenQASM 3.0**.
+> Look at our Multi-SDK (Software Development Kit) diagram in the center: when a student drags a Hadamard or CNOT gate onto a circuit wire, our engine instantly generates syntactically flawless code in **IBM (International Business Machines) Qiskit (`qc.h(0)`) and OpenQASM 3.0** for MVP, with architected expansion to **Google Cirq and Xanadu PennyLane** in v2. Being honest about MVP scope is stronger than overpromising.
 > Conversely, if an instructor pastes Python code into our Monaco Editor, our AST (Abstract Syntax Tree) parser reconstructs the visual circuit in sub-milliseconds.
 > **We function exactly like the LLVM (Low Level Virtual Machine) compiler of quantum computing** — compiling visual abstractions through a universal Intermediate Representation so Indian students are never vendor-locked.
 >
@@ -260,22 +260,22 @@ Quantangle is an all-in-one quantum IDE (Integrated Development Environment) tha
 > - For separable states, they see an interactive **3D Bloch Sphere**, inspecting the polar angle $\theta$, the azimuthal phase $\phi$, and the statevector coordinates.
 > - For multi-qubit entangled states (like Bell or GHZ (Greenberger-Horne-Zeilinger) states), our **Q-Sphere** visualizes the global quantum phase color wheel and basis amplitudes. Superposition and entanglement cease to be abstract Greek letters on a board; students see them unfold geometrically.
 >
-> **3. Qu-Copilot: The Zero-Hallucination Quantum AI (Artificial Intelligence) Tutor [Point to Bullet 4 & Left SVG (Scalable Vector Graphics)]:**
+> **3. Qu-Copilot: Verified Circuit Generation [Point to Bullet 4 & Left SVG (Scalable Vector Graphics)]:**
 > This is our primary algorithmic innovation. Everyone knows generic LLMs (Large Language Models) like ChatGPT hallucinate code. But in quantum computing, hallucination is fatal: an LLM (Large Language Model) will invent non-unitary gates, violate the **No-Cloning Theorem**, or generate circuits with invalid phase rotations.
 > Look at our verification flow diagram on the left:
 > When a learner asks, *'How do I create a Bell State?'*, our Domain RAG (Retrieval-Augmented Generation) retrieves documentation from indexed Qiskit and PennyLane libraries. But before the AI (Artificial Intelligence)-generated code is ever shown to the student, it enters our **Unitary Verification Pipeline**.
 > Our background simulator verifies: Is the matrix unitary ($U^\dagger U = I$)? Does the resulting quantum state achieve a fidelity $F = |\langle\psi_{\text{target}}|\psi_{\text{sim}}\rangle|^2 \ge 0.999$?
 > If the circuit fails check — as shown by the dashed red loopback arrow — it is rejected, the simulation error is fed back into the LLM (Large Language Model) context, and the circuit is regenerated.
-> **The student only ever sees mathematically validated, physically possible quantum code. Quantangle delivers the first Zero-Hallucination Quantum AI (Artificial Intelligence) Tutor in academia.**
+> **The student only ever sees mathematically validated, physically possible quantum code. Quantangle delivers Verified Circuit Generation: every circuit suggestion is mathematically validated before being shown to the student.**
 >
 > **4. The Core Solution & Automated State-Fidelity Grading [Point to Bullet 5]:**
 > Finally, our evaluation engine auto-grades student lab assignments not by brittle string matching, but by computing the **quantum state fidelity** between the student's output and the target state. If a student uses an alternative valid gate decomposition, they still receive 100% marks, fostering true creative problem-solving."
 
 ### Backup Script (5-Minute Condensed Pace — 1 Minute 15 Seconds)
 > "On Slide 2, Quantangle delivers four breakthroughs:
-> First, our **Dual-Sync Canvas** acts like the LLVM (Low Level Virtual Machine) of quantum computing — drag gates on the canvas, and it instantly generates bi-directionally synchronized code across Qiskit, Cirq, PennyLane, and OpenQASM 3.0.
+> First, our **Dual-Sync Canvas** acts like the LLVM (Low Level Virtual Machine) of quantum computing — drag gates on the canvas, and it instantly generates bi-directionally synchronized code across Qiskit and OpenQASM 3.0 (with Cirq and PennyLane targeted for v2).
 > Second, our **3D State Inspector** lets students scrub gate-by-gate through time, viewing 3D Bloch Spheres and Q-Spheres at every intermediate nanosecond.
-> Third, **Qu-Copilot**: the first zero-hallucination quantum AI (Artificial Intelligence) tutor. Before showing AI (Artificial Intelligence)-generated circuits to students, our Unitary Verification Pipeline simulates the circuit. If state fidelity is below 0.999, it rejects and self-corrects via the red loopback arrow.
+> Third, **Qu-Copilot**: Verified Circuit Generation. Every circuit suggestion is mathematically validated before being shown to the student. If state fidelity is below 0.999, it rejects and self-corrects via the red loopback arrow.
 > Fourth, our **State-Fidelity Auto-Grader** tests actual physics ($F \ge 0.999$) rather than brittle text matching, ending student drop-off."
 
 ### Screen & Gesture Action Points
@@ -394,7 +394,7 @@ Over 90% cloud cost reduction via local WebAssembly; sustainable 3-tier institut
 >
 > **2. The 2x2 Risk & Mitigation Matrix [Point to Left SVG (Scalable Vector Graphics)]:**
 > We identified the four highest-impact failure modes in ed-tech and built engineering mitigations for each:
-> - **AI (Artificial Intelligence) Hallucinations (High Severity, High Probability):** Completely mitigated by our mathematical Unitary Verification Engine ($U^\dagger U = I$ and $F \ge 0.999$).
+> - **Unvalidated AI Code (High Severity, High Probability):** Completely mitigated by Verified Circuit Generation ($U^\dagger U = I$ and $F \ge 0.999$).
 > - **High Cloud Compute Costs (High Severity, Low Probability):** Completely mitigated by local WebAssembly client execution — zero server cost for everyday lessons.
 > - **Learner Drop-off (Medium Severity, High Probability):** Mitigated by gamified quest labs, algorithmic bug-hunting puzzles, daily problem streaks, and skill XP (Experience Points) badges that sustain long-term engagement.
 > - **Low Connectivity in Tier-2/3 Colleges (Medium Severity, Low Probability):** Mitigated by PWA (Progressive Web App) offline service workers and local WASM (WebAssembly) storage.
@@ -408,7 +408,7 @@ Over 90% cloud cost reduction via local WebAssembly; sustainable 3-tier institut
 ### Backup Script (5-Minute Condensed Pace — 50 Seconds)
 > "On Slide 4, Quantangle is financially viable:
 > 85%+ simulations run in WASM (WebAssembly), reducing cloud compute costs by **over 90%** and scaling to 100,000+ concurrent students.
-> Our 2x2 Risk Grid shows proactive mitigations: AI (Artificial Intelligence) hallucinations are stopped by Unitary Verification, cloud costs by WASM (WebAssembly), drop-off by gamified quest labs, and rural connectivity by PWA (Progressive Web App) offline mode.
+> Our 2x2 Risk Grid shows proactive mitigations: unvalidated AI circuits are stopped by Verified Circuit Generation, cloud costs by WASM (WebAssembly), drop-off by gamified quest labs, and rural connectivity by PWA (Progressive Web App) offline mode.
 > Our 3-tier Sustainability Model keeps core learning free for students, monetizing through university institutional lab grading licenses, verified certification fees, and research cloud tiers."
 
 ### Screen & Gesture Action Points
@@ -664,7 +664,7 @@ Quantangle provides an **institutional enterprise solution**:
 * **Answer:** "There are five critical differentiators:
   1. **Multi-SDK (Software Development Kit) Neutrality:** IBM (International Business Machines) locks you to Qiskit; Azure locks you to Q#. Quantangle teaches all three major SDKs (Software Development Kits) (Qiskit, Cirq, PennyLane) side-by-side with a common AST (Abstract Syntax Tree)/OpenQASM IR.
   2. **Zero-Setup Edge Compute:** No Python installation, no cloud queue waits. Our Rust-WASM (WebAssembly) engine runs instantly.
-  3. **Zero-Hallucination AI (Artificial Intelligence) Tutor:** No competitor offers unitary-verified AI (Artificial Intelligence) code generation.
+  3. **Verified Circuit Generation:** No competitor offers unitary-verified AI code generation where every circuit is mathematically validated before being shown to the student.
   4. **Vernacular Accessibility:** No existing quantum platform supports Indian regional languages.
   5. **State-Fidelity Grading:** No competitor auto-grades using mathematical quantum state comparison. They all use text-matching or manual review."
 

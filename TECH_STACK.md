@@ -20,8 +20,8 @@
 | **Edge Quantum Simulator** | **Rust + WebAssembly** | `Rust 1.75+`, `wasm-bindgen ^0.2.92` | True zero-latency ($\le 16$ qubits) client-side linear algebra simulation with zero server cost. |
 | **Rust Math Crates** | **num-complex, ndarray** | `num-complex 0.4`, `ndarray 0.15` | Fast complex number arithmetic and matrix operations. |
 | **Backend Framework** | **Python / FastAPI** | `Python 3.11+`, `FastAPI ^0.110.x` | Asynchronous high-throughput API with native support for scientific Python packages. |
-| **Quantum Cloud Engines** | **Qiskit, PennyLane, Cirq** | `qiskit ^1.0.x`, `pennylane ^0.35.x`, `cirq ^1.3.x` | Multi-SDK cloud execution for deep circuits, noisy simulations, and VQE/QAOA algorithms. |
-| **AI Tutor & RAG Engine** | **LangChain / LlamaIndex** | `^0.1.x` | Grounded retrieval with quantum literature vector index + Unitary verification loop. |
+| **Quantum Cloud Engines** | **Qiskit (MVP), PennyLane & Cirq (v2 Targets)** | `qiskit ^1.0.x` (MVP); `pennylane ^0.35.x`, `cirq ^1.3.x` (v2) | Cloud execution: Qiskit Aer for deep/noisy circuits in MVP; PennyLane & Cirq for VQE/QML in v2. |
+| **AI Tutor & RAG Engine** | **LangChain / LlamaIndex** | `^0.1.x` | Verified Circuit Generation: RAG retrieval with quantum literature vector index + mathematical Unitary verification loop ($F \ge 0.999$). |
 | **Primary Database** | **PostgreSQL** | `16.x` | Relational storage for users, labs, completed quests, and verifiable credentials. |
 | **Cache & Real-Time Queue** | **Redis** | `7.2.x` | Sorted Sets for national/college leaderboards and pub/sub message brokering. |
 | **Frontend Testing** | **Vitest + Playwright** | `Vitest ^1.4.x`, `Playwright ^1.42.x` | Fast unit testing for AST transpilers and end-to-end browser verification. |

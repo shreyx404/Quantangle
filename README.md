@@ -2,7 +2,7 @@
 
 <p align="center">
   <strong>AI-Based Interactive Quantum Algorithm Learning & Multi-Engine Simulation Platform</strong><br>
-  <em>Democratizing Quantum Education through Intelligent Multi-SDK Simulation, 3D Visual Computing, and Zero-Hallucination AI Tutoring</em>
+  <em>Democratizing Quantum Education through Dual-Sync Simulation, 3D Visual Computing, and Verified Circuit Generation</em>
 </p>
 
 ---
@@ -30,10 +30,10 @@ This repository is equipped with an enterprise-grade **AI Agent & Vibe Coding Op
 
 ## 🚀 Key Innovations & Pillars
 
-1. **Dual-Sync Quantum Circuit Designer**: Real-time bi-directional synchronization between graphical drag-and-drop circuit canvas and multi-framework code (Qiskit, PennyLane, Cirq, OpenQASM 3.0) via AST parsing.
+1. **Dual-Sync Quantum Circuit Designer**: Real-time bi-directional synchronization between graphical drag-and-drop circuit canvas and Python Qiskit / OpenQASM 3.0 code (with Cirq & PennyLane targeted for v2) via AST parsing.
 2. **0-Latency Edge Simulator (Rust-WASM)**: Client-side statevector simulator running in a Web Worker executing $\le 16$ qubits with zero cloud latency and full offline capability.
 3. **3D Quantum State Inspector**: Hardware-accelerated Three.js WebGL visualization of multi-qubit Bloch Spheres, Q-Spheres, and Density Matrices with gate-by-gate timeline scrubbing.
-4. **Qu-Copilot (Zero-Hallucination AI Tutor)**: Domain-specific RAG assistant with automated **Unitary Verification Pipeline ($F \ge 0.999$)** to validate circuit math before presenting answers to students.
+4. **Qu-Copilot (Verified Circuit Generation)**: Domain-specific RAG assistant with automated **Unitary Verification Pipeline ($F \ge 0.999$)** — every circuit suggestion is mathematically validated before being shown to the student.
 5. **Gamified Quest Labs & Challenge Arena**: Guided learning tracks, quantum bug-hunting sandboxes, daily streaks, and cryptographically verifiable micro-credentials aligned with India's National Quantum Mission.
 
 ---

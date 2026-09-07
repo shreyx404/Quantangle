@@ -72,12 +72,12 @@ Imagine you can either:
 
 And both views **update each other in real time, automatically!**
 
-Plus, whatever you build gets **auto-translated** into 3 different quantum coding languages:
-- **IBM Qiskit** (like C++ in the quantum world)
-- **Google Cirq** (Google's version)
-- **Xanadu PennyLane** (used for quantum machine learning)
+Plus, whatever you build gets **auto-translated** in real time:
+- **IBM Qiskit** (the industry-standard quantum SDK) [MVP]
+- **OpenQASM 3.0** (the quantum assembly standard) [MVP]
+- **Google Cirq** & **Xanadu PennyLane** (upcoming v2 expansion targets)
 
-> It's like having a universal remote that controls every brand of TV.
+> It's like having a universal remote designed for honesty and future growth.
 
 ---
 
@@ -90,19 +90,22 @@ Quantangle lets you **scrub through your circuit step by step**, like rewinding 
 
 ---
 
-### Superpower 3: Qu-Copilot — The Zero-Hallucination AI Tutor 🤖✅
+### Superpower 3: Qu-Copilot — Verified Circuit Generation 🤖✅
 
 This is the big one.
 
-You know how ChatGPT sometimes just **makes stuff up** (called hallucinations)? In quantum computing, that's **super dangerous** because a hallucinated quantum circuit is physically impossible and will just fail.
+You know how normal AI sometimes makes stuff up? In quantum computing, that's **super dangerous** because an invalid quantum circuit is physically impossible and will just fail.
 
-Qu-Copilot is a special AI tutor that:
-1. Generates a quantum code answer for your question
-2. **Actually runs the circuit in a simulator** to check if it's correct
-3. If it fails the math check (meaning the circuit is physically invalid), it **throws it away and tries again**
-4. Only shows you the answer once it's been **mathematically verified**
+Instead of making unverifiable claims, Qu-Copilot features **Verified Circuit Generation**:  
+*"Every circuit suggestion is mathematically validated before being shown to the student."*
 
-> It's like having a tutor who never gives you a wrong answer because they double-check everything in a scratch book before saying it out loud.
+Here's how it works:
+1. Generates a quantum circuit solution for your question.
+2. **Actually runs the circuit in a background simulator** to test its mathematical physics.
+3. If it fails the fidelity check, it **self-corrects and fixes the defect automatically**.
+4. Only shows you the circuit once it's been **mathematically validated** ($F \ge 0.999$).
+
+> It's like having a master tutor who never shows you a guess because every equation is proven on a chalkboard before they hand it to you.
 
 ---
 
@@ -269,4 +272,4 @@ To get **shortlisted for the Grand Finale**, Team Enigma needs **88–96+ out of
 
 ---
 
-> 💪 **You've got this, Team Enigma!** Quantangle is a genuinely brilliant idea — a zero-hallucination, multi-language, browser-native quantum education platform. Now go own that stage. 🚀
+> 💪 **You've got this, Team Enigma!** Quantangle is a genuinely brilliant idea — a verified, multi-framework, browser-native quantum education platform. Now go own that stage. 🚀

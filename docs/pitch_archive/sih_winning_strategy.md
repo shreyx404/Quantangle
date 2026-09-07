@@ -35,10 +35,10 @@ Every slide and jury response should trace back to these 4 pillars:
 │                                 THE 4 PILLARS OF SUCCESS                               │
 ├──────────────────────┬──────────────────────┬───────────────────┬──────────────────────┤
 │ 🔮 PILLAR 1          │ 🔄 PILLAR 2          │ 🤖 PILLAR 3       │ 🏆 PILLAR 4          │
-│ Live 3D Visual State │ Multi-SDK Transpiler │ Verified AI Tutor │ Quest Labs & Arena   │
+│ Live 3D Visual State │ Dual-Sync Transpiler │ Verified AI Tutor │ Quest Labs & Arena   │
 │                      │                      │                   │                      │
-│ Bloch & Q-Sphere     │ Qiskit ⇄ Cirq ⇄      │ Simulates & checks│ Algorithmic battles, │
-│ update at every gate │ PennyLane ⇄ QASM3    │ unitaries before  │ bug-hunting, streaks │
+│ Bloch & Q-Sphere     │ Qiskit ⇄ QASM3 (MVP) │ Simulates & checks│ Algorithmic battles, │
+│ update at every gate │ Cirq/PennyLane (v2)  │ unitaries before  │ bug-hunting, streaks │
 │ like a live debugger │ in 1 click via AST   │ suggesting code   │ & verifiable certs   │
 └──────────────────────┴──────────────────────┴───────────────────┴──────────────────────┘
 ```
@@ -48,15 +48,15 @@ Every slide and jury response should trace back to these 4 pillars:
 * **Solution:** Dragging a Hadamard gate onto a wire instantly animates the 3D Bloch Sphere rotating to the equator, with color-coded complex phase indicators and real-time statevector updates.
 * **Jury Hook:** *"Existing tools only show the destination (final measurement histogram). We show the entire road (gate-by-gate state evolution)."*
 
-### Pillar 2: "Framework-Agnostic" — Multi-SDK Transpiler
+### Pillar 2: "Framework-Agnostic" — Dual-Sync Transpiler
 * **Problem:** Vendor lock-in. A student learning Qiskit struggles to transition to Google Cirq or Xanadu PennyLane for Quantum Machine Learning.
-* **Solution:** Dual-sync canvas that transpiles between Qiskit, Cirq, PennyLane, and OpenQASM 3.0 in real time.
-* **Jury Hook:** *"A student trained in only one SDK is limited. We make them industry-ready across all quantum ecosystems from day one."*
+* **Solution:** Dual-sync canvas that transpiles between Qiskit and OpenQASM 3.0 in real time for MVP, with architected expansion to Cirq and PennyLane in v2. Being honest about MVP scope is stronger than overpromising.
+* **Jury Hook:** *"A student trained in only one SDK is limited. We build a clean bridge from Qiskit and OpenQASM 3.0 today to PennyLane and Cirq tomorrow."*
 
-### Pillar 3: "AI That Doesn't Hallucinate" — Mathematically Verified Tutoring
-* **Problem:** General LLMs (ChatGPT) frequently hallucinate invalid quantum gates, faulty phase oracles, or uncomputed ancillas.
-* **Solution:** Qu-Copilot's verification engine runs every suggested circuit through background simulation and unitary matrix validation before rendering it to the student.
-* **Jury Hook:** *"Every AI can generate text. Ours is the first quantum tutor that mathematically proves its circuits work before teaching them."*
+### Pillar 3: "Verified Circuit Generation" — Mathematically Validated Tutoring
+* **Problem:** General LLMs frequently output unverified, physically invalid quantum circuits (non-unitary matrices, uncomputed ancillas causing decoherence).
+* **Solution:** Qu-Copilot's Unitary Verification Pipeline simulates every candidate circuit before presenting it. Every circuit suggestion is mathematically validated before being shown to the student.
+* **Jury Hook:** *"Instead of overpromising 'zero hallucinations,' we deliver Verified Circuit Generation: every circuit suggestion is mathematically validated before being shown to the student. That's powerful and honest."*
 
 ### Pillar 4: "Active Learning & Mastery" — Guided Quest Labs & Challenge Arena
 * **Problem:** 90%+ drop-out rates in passive video courses (the MOOC trap).
@@ -148,8 +148,8 @@ We are Team [Name], and we present Quantangle AI."
 "Quantangle AI is an all-in-one browser-native quantum IDE and learning arena.
 It is built on 4 breakthrough pillars:
 1. Live 3D Visual Feedback on Bloch Spheres and Q-Spheres after every gate.
-2. Bi-directional Multi-SDK Transpilation between Qiskit, Cirq, and PennyLane.
-3. Qu-Copilot: A mathematically verified AI tutor with zero hallucinations.
+2. Dual-Sync Transpilation starting with Qiskit and OpenQASM 3.0 (expanding to Cirq and PennyLane in v2).
+3. Qu-Copilot: Verified Circuit Generation — every circuit suggestion is mathematically validated before being shown to the student.
 4. Guided Quest Labs & Challenge Arena with state-fidelity auto-grading and streaks."
 
 [2:00 - 3:15] TECHNICAL ARCHITECTURE:

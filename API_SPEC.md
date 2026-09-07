@@ -68,9 +68,9 @@ Standard Error Response Format:
 }
 ```
 
-### 2.2 Variational Algorithms (VQE & QAOA via PennyLane)
+### 2.2 Variational Algorithms (VQE & QAOA via PennyLane — v2 Target)
 - **Endpoint**: `POST /api/v1/sim/vqe`
-- **Description**: Runs variational hybrid optimization loops on cloud workers with automatic differentiation.
+- **Description**: (v2 Target) Runs variational hybrid optimization loops on cloud workers with automatic differentiation.
 - **Request Body**:
 ```json
 {
@@ -120,9 +120,9 @@ data: {"type": "verified_circuit", "circuit_ir": { ... }, "fidelity": 1.0, "stat
 data: {"type": "done"}
 ```
 
-### 3.2 Unitary Matrix & Circuit Verifier
+### 3.2 Verified Circuit Generation & Unitary Verifier
 - **Endpoint**: `POST /api/v1/copilot/verify`
-- **Description**: Internal/External verification of an AI-generated circuit before displaying it to the user.
+- **Description**: Evaluates and mathematically validates candidate circuits before presenting them to students, checking unitary constraints ($U^\dagger U = I$) and state fidelity ($F \ge 0.999$).
 - **Request Body**:
 ```json
 {

@@ -27,13 +27,13 @@
 ┌──────────────────────────────────┐            ┌────────────────────────────────────────┐
 │  EDGE LAYER (Client WebAssembly) │            │     BACKEND CLOUD SERVICES (FastAPI)   │
 │  • Rust-based Statevector Sim    │            │  ┌──────────────────────────────────┐  │
-│  • Dedicated Web Worker (0ms UI) │            │  │ Multi-SDK Execution Engine       │  │
-│  • Step-by-Step State Inspector  │            │  │ (Qiskit Aer, Cirq, PennyLane)    │  │
+│  • Dedicated Web Worker (0ms UI) │            │  │ Cloud Simulation Engine          │  │
+│  • Step-by-Step State Inspector  │            │  │ (Qiskit Aer [MVP]; PennyLane v2) │  │
 │  • PWA IndexedDB Offline Cache   │            │  └──────────────────────────────────┘  │
 └──────────────────────────────────┘            │  ┌──────────────────────────────────┐  │
                                                 │  │ Qu-Copilot AI & Quantum RAG      │  │
-                                                │  │ (LangChain / LlamaIndex / Q-AST) │  │
-                                                │  │ + Unitary Verifier (F >= 0.999)  │  │
+                                                │  │ • Verified Circuit Generation    │  │
+                                                │  │ • Unitary Verifier (F >= 0.999)  │  │
                                                 │  └──────────────────────────────────┘  │
                                                 │  ┌──────────────────────────────────┐  │
                                                 │  │ Automated Arena Grader           │  │
@@ -81,14 +81,13 @@ export interface GateOperation {
 1. **Canvas $\to$ Code**:
    - Canvas dispatch actions mutate the Zustand Circuit Store.
    - The Transpiler compiles `QuantumCircuitIR` to:
-     - **Qiskit**: `QuantumCircuit(qubits, clbits)` + `qc.h(0)`, `qc.cx(0, 1)`, etc.
-     - **PennyLane**: `@qml.qnode(dev)` + `qml.Hadamard(wires=0)`, etc.
-     - **Cirq**: `cirq.Circuit()` + `cirq.H(q0)`, etc.
-     - **OpenQASM 3.0**: Native `OPENQASM 3.0; include "stdgates.inc"; ...`
+     - **Qiskit (MVP)**: `QuantumCircuit(qubits, clbits)` + `qc.h(0)`, `qc.cx(0, 1)`, etc.
+     - **OpenQASM 3.0 (MVP)**: Native `OPENQASM 3.0; include "stdgates.inc"; ...`
+     - **PennyLane & Cirq (v2 Targets)**: `@qml.qnode(dev)` and `cirq.Circuit()` planned for v2 multi-SDK expansion.
 2. **Code $\to$ Canvas**:
    - Monaco debounces user keystrokes (250ms).
-   - AST parser parses Python / OpenQASM 3.0 into `QuantumCircuitIR`.
-   - If syntax or unitary validation succeeds, the Canvas nodes and wires update dynamically.
+   - AST parser parses Python Qiskit / OpenQASM 3.0 into `QuantumCircuitIR` (extensible to Cirq and PennyLane in v2).
+   - If syntax and unitary validation succeed, the Canvas nodes and wires update dynamically.
    - If invalid syntax, a non-intrusive Monaco inline warning appears without breaking the canvas state.
 
 ### 2.3 Edge Simulation Engine (Rust WebAssembly)
@@ -117,13 +116,15 @@ export interface GateOperation {
   - Basis states $|00\dots0\rangle$ at North Pole, $|11\dots1\rangle$ at South Pole, Hamming weight layers in between.
   - Node markers scaled by $|\alpha_i|$ and colored by complex phase $\arg(\alpha_i)$ using an HSV color wheel.
 
-### 2.5 Qu-Copilot RAG & Unitary Verification Pipeline
+### 2.5 Qu-Copilot RAG & Verified Circuit Generation Pipeline
+
+> **Core Guarantee**: Every circuit suggestion is mathematically validated before being shown to the student.
 
 ```
 [ Learner Query / Stuck Circuit ]
              │
              ▼
-[ Hybrid Retriever: Qiskit/PennyLane Docs + Nielsen & Chuang Knowledge ]
+[ Hybrid Retriever: Qiskit Docs + Nielsen & Chuang Knowledge ]
              │
              ▼
 [ LLM Generator (Code + Conceptual Explanation) ]
@@ -136,7 +137,7 @@ export interface GateOperation {
              │
       F >= 0.999 ?
      ┌───────┴───────┐
-     ▼ (YES)         ▼ (NO: Hallucination Detected)
+     ▼ (YES)         ▼ (NO: Verification Failed)
 [ Present to ]   [ Self-Reflection Loop: ]
 [  Learner   ]   [ "Discrepancy: missing phase kickback" ]
                  [ Re-prompt generator with error trace   ]

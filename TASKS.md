@@ -58,13 +58,13 @@
   - *Input*: UI design tokens and React components.
   - *Output*: `apps/web/src/components/canvas/CircuitCanvas.tsx` with dynamic qubit wires, time-step columns, drag-and-drop gate palette, and parameter sliders.
   - *Acceptance Criteria*: Users can add, move, delete gates and modify rotation angles smoothly.
-- [ ] **TASK-3.2: Implement AST Transpiler (Canvas $\leftrightarrow$ Qiskit / PennyLane / Cirq / QASM3)**
+- [ ] **TASK-3.2: Implement AST Transpiler (Canvas $\leftrightarrow$ Qiskit / OpenQASM 3.0 [Cirq & PennyLane in v2])**
   - *Input*: `QuantumCircuitIR` schemas.
-  - *Output*: `packages/quantum-ast/src/transpiler/` emitters and parsers.
-  - *Acceptance Criteria*: Transpiler round-trip test passes: Canvas edits reflect in Python code, typing valid code updates canvas nodes without loops.
+  - *Output*: `packages/quantum-ast/src/transpiler/` emitters and parsers for Qiskit and OpenQASM 3.0 (architected for v2 Cirq & PennyLane plugins).
+  - *Acceptance Criteria*: Transpiler round-trip test passes: Canvas edits reflect in Python Qiskit and OpenQASM 3.0 code, typing valid code updates canvas nodes without loops.
 - [ ] **TASK-3.3: Embed Monaco Editor with Syntax Highlighting & Diff Support**
   - *Input*: Monaco editor React wrapper.
-  - *Output*: `apps/web/src/components/editor/QuantumCodeEditor.tsx` with language toggles (Qiskit, PennyLane, Cirq, OpenQASM 3.0) and error squiggles.
+  - *Output*: `apps/web/src/components/editor/QuantumCodeEditor.tsx` with language toggles (Qiskit, OpenQASM 3.0; Cirq & PennyLane badge-marked as v2 targets) and error squiggles.
   - *Acceptance Criteria*: Code changes update circuit canvas with 250ms debounce; invalid code shows inline non-intrusive warning.
 
 ---
@@ -85,7 +85,7 @@
 
 ---
 
-## Phase 5: Qu-Copilot AI Quantum Tutor & Unitary Verifier
+## Phase 5: Qu-Copilot AI Quantum Tutor & Verified Circuit Generation
 - [ ] **TASK-5.1: Implement Quantum AST Parser & Pre-Execution Filter**
   - *Input*: AI-generated Python code string.
   - *Output*: `apps/api/services/ast_parser.py` converting LLM code into canonical `QuantumCircuitIR`.
@@ -93,7 +93,7 @@
 - [ ] **TASK-5.2: Implement Unitary Matrix & State Fidelity Verifier ($F \ge 0.999$)**
   - *Input*: Candidate circuit vs target specification.
   - *Output*: `apps/api/services/verifier.py` evaluating state fidelity $F = |\langle\psi_t|\psi_s\rangle|^2$.
-  - *Acceptance Criteria*: Automatically rejects invalid or hallucinated circuits and triggers self-correction loop.
+  - *Acceptance Criteria*: Guarantees Verified Circuit Generation — mathematically validates circuit suggestions before displaying them to students; rejects unphysical circuits and triggers self-correction loop.
 - [ ] **TASK-5.3: Build Qu-Copilot Chat UI with Verified Diff Apply**
   - *Input*: Streaming SSE chat endpoint.
   - *Output*: `apps/web/src/components/copilot/QuCopilot.tsx` with chat history, LaTeX math rendering, code snippets, and one-click "Apply to Canvas" button.

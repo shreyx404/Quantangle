@@ -15,14 +15,14 @@ interface CircuitState {
   numClbits: number;
   steps: CircuitStep[];
   selectedStep: number | null;
-  targetSDK: "qiskit" | "cirq" | "pennylane" | "qasm3";
+  targetSDK: "qiskit" | "qasm3" | "cirq" | "pennylane"; // MVP: "qiskit" | "qasm3"; v2 targets: "cirq" | "pennylane"
   
   // Actions
   addGate: (stepIndex: number, gate: GateOperation) => void;
   removeGate: (stepIndex: number, gateId: string) => void;
   setQubits: (n: number) => void;
   setSelectedStep: (step: number | null) => void;
-  setTargetSDK: (sdk: "qiskit" | "cirq" | "pennylane" | "qasm3") => void;
+  setTargetSDK: (sdk: "qiskit" | "qasm3" | "cirq" | "pennylane") => void;
   loadCircuitFromIR: (ir: QuantumCircuitIR) => void;
 }
 ```
@@ -133,11 +133,11 @@ quantangle/
 │   │   │   │   └── arena/       # Quest cards, streak trackers, leaderboards
 │   │   │   ├── stores/          # Zustand stores (useCircuitStore, useSimulationStore)
 │   │   │   ├── workers/         # Web Worker script & WASM loader
-│   │   │   ├── transpiler/      # AST parsers & emitters (Qiskit, PennyLane, Cirq, QASM3)
+│   │   │   ├── transpiler/      # AST parsers & emitters (MVP: Qiskit, QASM3; v2: PennyLane, Cirq)
 │   │   │   └── types/           # Shared TypeScript interfaces (IR, simulation types)
 │   └── api/                     # Python FastAPI Backend
 │       ├── routers/             # Endpoints (/sim, /copilot, /arena, /credentials)
-│       ├── services/            # Qiskit Aer, PennyLane VQE engine, RAG pipeline
+│       ├── services/            # Qiskit Aer, RAG pipeline & unitary verifier (v2: PennyLane VQE engine)
 │       └── models/              # Pydantic schemas
 └── packages/
     └── wasm-engine/             # Rust Statevector & Density Matrix Simulator

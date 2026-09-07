@@ -25,14 +25,14 @@
 
 ### Bullet Points on Slide:
 * **All-in-One Quantum IDE:** A browser-first platform combining visual circuit design, multi-SDK coding, 3D quantum-state visualization, AI tutoring, and hands-on quest labs — zero installs, runs on any device.
-* **Dual-Sync Canvas:** Drag-and-drop gates onto wires and the platform instantly generates equivalent Python code in Qiskit, Cirq, PennyLane, or OpenQASM 3.0 — or type code and watch the circuit diagram update automatically, synchronized bi-directionally via AST parsing.
+* **Dual-Sync Canvas:** Drag-and-drop gates onto wires and the platform instantly generates equivalent Python code in Qiskit or OpenQASM 3.0 (with Cirq and PennyLane targeted for v2) — or type code and watch the circuit diagram update automatically, synchronized bi-directionally via AST parsing.
 * **3D Quantum State Inspector:** Interactive Bloch & Q-Spheres visualize quantum states gate-by-gate in real time, making superposition and entanglement easy to understand.
-* **Qu-Copilot AI Tutor:** RAG-based quantum tutor with simulation + unitary verification to prevent hallucinations.
+* **Qu-Copilot AI Tutor (Verified Circuit Generation):** RAG-based quantum tutor with pre-execution simulation and unitary verification — every circuit suggestion is mathematically validated before being shown to the student.
 * **Core Solution:** 3D Bloch Sphere for visual learning + WebAssembly for offline simulations + gamified labs for better retention.
 
 ### Embedded Graphics / SVGs on Slide:
 1. **Qu-Copilot RAG & Verification Flow** (`slide2_solution_alt1_qu_copilot.svg`):
-   - User Query ("How to make a Bell State?") → Domain RAG (Qiskit/PennyLane Docs + Code Generation) → Unitary Verification Pipeline (Simulates circuit. Fidelity ≥ 0.999?) → [Fails check: red loopback arrow] → [Passes: Verified Output] → *Result: The first Zero-Hallucination Quantum AI Tutor*
+   - User Query ("How to make a Bell State?") → Domain RAG (Qiskit Docs + Code Generation) → Unitary Verification Pipeline (Simulates circuit. Fidelity ≥ 0.999?) → [Fails check: red loopback arrow] → [Passes: Verified Output] → *Result: Verified Circuit Generation — Every circuit suggestion is mathematically validated before being shown to the student*
 2. **Multi-SDK Interoperability & Transpilation** (`slide2_solution_alt2_multi_sdk.svg`):
    - Visual Canvas (H Gate) → AST / OpenQASM 3.0 Intermediate Representation → Multi-SDK code generation (Qiskit `qc.h(0)`, Cirq `cirq.H(q0)`, PennyLane `qml.Hadamard(0)`) → *Like LLVM, compiling multiple abstractions through a common IR*
 3. **Hero Quantum Graphic** (`slide1_hero_quantum.svg`):

@@ -12,7 +12,7 @@ You are a Senior Quantum Computing Software Architect and Principal Full-Stack E
 - **Framework**: Next.js 14 (App Router) + TypeScript (strict mode).
 - **Styling**: Modern CSS Modules / TailwindCSS with CSS custom properties.
 - **Circuit Canvas**: React Flow or custom HTML5/SVG canvas with smooth dragging, snap-to-grid wires, and live gate insertion.
-- **Code Editor**: Monaco Editor configured for Python (Qiskit, PennyLane, Cirq) and OpenQASM 3.0.
+- **Code Editor**: Monaco Editor configured for Python Qiskit and OpenQASM 3.0 for MVP (Cirq & PennyLane targeted for v2).
 - **3D Graphics**: Three.js / React Three Fiber.
   - Dispose geometries, materials, and textures on component unmount to prevent WebGL memory leaks.
   - Animate rotation phases smoothly using slerp or quaternion interpolation.
@@ -29,7 +29,8 @@ You are a Senior Quantum Computing Software Architect and Principal Full-Stack E
   - $S = \begin{bmatrix} 1 & 0 \\ 0 & i \end{bmatrix},\ T = \begin{bmatrix} 1 & 0 \\ 0 & e^{i\pi/4} \end{bmatrix}$
   - $CX$ (Control=0, Target=1) must match Little-Endian order: $|00\rangle \to |00\rangle, |01\rangle \to |11\rangle, |10\rangle \to |10\rangle, |11\rangle \to |01\rangle$.
 
-## 4. Qu-Copilot AI Integrity
+## 4. Qu-Copilot Verified Circuit Generation
+- **Core Principle**: Every circuit suggestion is mathematically validated before being shown to the student.
 - Never output an AI-suggested quantum circuit without simulating it and confirming state fidelity:
   $$F = |\langle\psi_{target}|\psi_{circuit}\rangle|^2 \ge 0.999$$
 - If fidelity < 0.999, identify the discrepancy (e.g. missing phase inversion or wrong control wire) and regenerate.

@@ -10,11 +10,11 @@
 You are working on **Quantangle**, an ultra-interactive, AI-guided Quantum Computing learning and multi-engine simulation platform designed for the Smart India Hackathon (SIH 2026 Problem Statement `SIH26140`).
 
 Your goal is to build an educational deep-tech platform combining:
-1. **Dual-Sync Circuit Designer** (Visual Drag-and-Drop $\leftrightarrow$ Bi-directional AST $\leftrightarrow$ Python Qiskit/Cirq/PennyLane/OpenQASM 3.0).
+1. **Dual-Sync Circuit Designer** (Visual Drag-and-Drop $\leftrightarrow$ Bi-directional AST $\leftrightarrow$ Python Qiskit & OpenQASM 3.0 for MVP; Cirq & PennyLane targeted for v2).
 2. **0-Latency Edge Simulation Engine** (Client-side Rust WebAssembly running $\le 16$ qubit statevector calculations in Web Workers).
-3. **Cloud Simulation Hub** (FastAPI backend handling $>16$ qubits, noisy simulation via Qiskit Aer, and variational algorithms via PennyLane).
+3. **Cloud Simulation Hub** (FastAPI backend handling $>16$ qubits and noisy simulation via Qiskit Aer for MVP; PennyLane variational algorithms targeted for v2).
 4. **3D Quantum State Inspector** (Three.js WebGL rendering of multi-qubit Bloch Spheres, Q-Spheres, and Density Matrices with gate-by-gate timeline scrubbing).
-5. **Qu-Copilot AI Tutor** (RAG-assisted quantum debugger with pre-execution AST & Unitary Matrix Verification guaranteeing zero hallucinations).
+5. **Qu-Copilot AI Tutor** (RAG-assisted quantum debugger with Verified Circuit Generation: every circuit suggestion is mathematically validated before being shown to the student).
 6. **Gamified Quest Arena** (Bite-sized quest rooms, daily streaks, circuit depth optimization battles, and verifiable credentials).
 
 ---
@@ -70,7 +70,8 @@ Whenever you (the AI agent) begin a new turn or pick up a task, follow this exac
    - In statevector arrays of length $2^n$, index `0` represents $|00\dots0\rangle$, index `1` represents $|00\dots1\rangle$ (qubit 0 is 1), index `2` represents $|00\dots10\rangle$ (qubit 1 is 1).
    - Never reverse or mix up endianness between the Rust-WASM engine, canvas, and code editor. See [SIMULATION_SPEC.md](file:///c:/Users/shrey/Downloads/Quantangle/SIMULATION_SPEC.md).
 
-2. **Zero-Hallucination AI Rule**:
+2. **Verified Circuit Generation Rule**:
+   - Every circuit suggestion is mathematically validated before being shown to the student.
    - Never show AI-generated circuit fixes to a learner without passing the **Unitary Verification Pipeline**.
    - A circuit suggestion must be evaluated against the target unitary or state fidelity $F = |\langle\psi_t|\psi_s\rangle|^2 \ge 0.999$. If it fails, trigger the internal self-correction loop.
 

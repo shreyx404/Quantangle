@@ -9,19 +9,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#080b14",
-        foreground: "#f0f4f8",
+        background: "#060912",
+        foreground: "#e2e8f0",
         surface: {
           50: "#1e293b",
           100: "#162032",
           200: "#111827",
           300: "#0d1322",
           DEFAULT: "#0d1322",
-          border: "rgba(255, 255, 255, 0.08)",
-          hover: "rgba(255, 255, 255, 0.05)",
+          border: "rgba(255, 255, 255, 0.06)",
+          hover: "rgba(255, 255, 255, 0.04)",
         },
         quantum: {
-          cyan: "#00f2fe",
+          cyan: "#00e5ff",
           blue: "#4facfe",
           violet: "#7928ca",
           magenta: "#b537f2",
@@ -35,15 +35,14 @@ const config: Config = {
         mono: ["var(--font-mono)", "JetBrains Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "monospace"],
       },
       boxShadow: {
-        glow: "0 0 25px -5px rgba(0, 242, 254, 0.3)",
-        "glow-violet": "0 0 25px -5px rgba(121, 40, 202, 0.3)",
-        "glow-emerald": "0 0 25px -5px rgba(16, 185, 129, 0.3)",
+        subtle: "0 1px 2px 0 rgba(0, 0, 0, 0.3)",
+        elevated: "0 4px 16px -2px rgba(0, 0, 0, 0.5)",
         glass: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "quantum-gradient": "linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #7928ca 100%)",
-        "quantum-card": "linear-gradient(180deg, rgba(22, 32, 50, 0.7) 0%, rgba(13, 19, 34, 0.8) 100%)",
+        "quantum-gradient": "linear-gradient(135deg, #00e5ff 0%, #4facfe 50%, #7928ca 100%)",
+        "quantum-card": "linear-gradient(180deg, rgba(17, 23, 38, 0.6) 0%, rgba(11, 15, 25, 0.7) 100%)",
       },
     },
   },

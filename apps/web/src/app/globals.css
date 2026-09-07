@@ -4,41 +4,42 @@
 
 :root {
   /* Precision Instrument Workstation Palette */
-  --surface-base: #07090e;
-  --surface-panel: #0c101a;
-  --surface-panel-border: rgba(255, 255, 255, 0.07);
+  --surface-base: #060912;
+  --surface-panel: #0b0f19;
+  --surface-panel-border: rgba(255, 255, 255, 0.05);
   --surface-elevated: #111726;
-  --surface-elevated-border: rgba(255, 255, 255, 0.12);
-  --surface-subtle: rgba(255, 255, 255, 0.03);
+  --surface-elevated-border: rgba(255, 255, 255, 0.08);
+  --surface-subtle: rgba(255, 255, 255, 0.025);
 
   /* Calibrated Telemetry Accents */
   --telemetry-cyan: #00e5ff;
-  --telemetry-cyan-dim: rgba(0, 229, 255, 0.15);
+  --telemetry-cyan-dim: rgba(0, 229, 255, 0.12);
   --telemetry-emerald: #10b981;
-  --telemetry-emerald-dim: rgba(16, 185, 129, 0.15);
+  --telemetry-emerald-dim: rgba(16, 185, 129, 0.12);
   --telemetry-amber: #f59e0b;
-  --telemetry-amber-dim: rgba(245, 158, 11, 0.15);
+  --telemetry-amber-dim: rgba(245, 158, 11, 0.12);
   --telemetry-violet: #8b5cf6;
-  --telemetry-violet-dim: rgba(139, 92, 246, 0.15);
+  --telemetry-violet-dim: rgba(139, 92, 246, 0.12);
   --telemetry-rose: #f43f5e;
-  --telemetry-rose-dim: rgba(244, 63, 94, 0.15);
+  --telemetry-rose-dim: rgba(244, 63, 94, 0.12);
 }
 
 body {
   background-color: var(--surface-base);
-  color: #f1f5f9;
+  color: #e2e8f0;
   font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11", "tnum";
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   font-optical-sizing: auto;
   overflow-x: hidden;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  letter-spacing: 0.005em;
 }
 
-/* Better-Typography: Text Wrapping by Role */
+/* Typography: Text Wrapping by Role */
 h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
 }
 
 p, .text-pretty {
@@ -52,36 +53,34 @@ p, .text-pretty {
 }
 
 ::-webkit-scrollbar-track {
-  background: #090c14;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.10);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 229, 255, 0.3);
+  background: rgba(255, 255, 255, 0.20);
 }
 
-/* Scientific Workstation Surfaces (Clean, Solid, Calibrated) */
+/* Surface System (Clean, Solid, Calibrated) */
 .instrument-panel,
 .glass-panel {
   background-color: #0b0f19;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .instrument-panel-elevated {
   background-color: #101625;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .instrument-interactive,
 .glass-panel-interactive {
   background-color: #0d121f;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   transition-property: border-color, background-color, transform;
   transition-duration: 150ms;
   transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
@@ -89,7 +88,7 @@ p, .text-pretty {
 
 .instrument-interactive:hover,
 .glass-panel-interactive:hover {
-  border-color: rgba(0, 229, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.14);
   background-color: #111728;
 }
 
@@ -98,45 +97,44 @@ p, .text-pretty {
   transform: translateY(1px);
 }
 
-/* Typography Tokens & Utilities (better-typography & design-tokens) */
+/* ── Typography Scale (Redesigned: clear hierarchy, no uppercase labels) ── */
+
 .type-display {
-  font-size: 1.125rem;
-  line-height: 1.5rem;
+  font-size: 1.375rem;
+  line-height: 1.75rem;
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   color: #ffffff;
   text-wrap: balance;
 }
 
 .type-heading {
-  font-size: 0.8125rem;
-  line-height: 1.125rem;
+  font-size: 0.9375rem;
+  line-height: 1.375rem;
   font-weight: 600;
-  letter-spacing: -0.015em;
-  color: #f8fafc;
+  letter-spacing: -0.01em;
+  color: #f1f5f9;
   text-wrap: balance;
 }
 
 .type-subheading {
-  font-size: 0.75rem;
-  line-height: 1rem;
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
   font-weight: 500;
   color: #cbd5e1;
 }
 
+/* Labels: sentence-case, no uppercase, no extra tracking */
 .type-label {
-  font-family: var(--font-mono), monospace;
-  font-size: 0.625rem;
-  line-height: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  font-weight: 500;
   color: #94a3b8;
 }
 
 .type-body {
-  font-size: 0.75rem;
-  line-height: 1.25rem;
+  font-size: 0.8125rem;
+  line-height: 1.375rem;
   font-weight: 400;
   color: #cbd5e1;
   text-wrap: pretty;
@@ -154,12 +152,12 @@ p, .text-pretty {
 
 .type-code {
   font-family: var(--font-mono), monospace;
-  font-size: 0.75rem;
-  line-height: 1.25rem;
+  font-size: 0.8125rem;
+  line-height: 1.375rem;
   font-weight: 400;
 }
 
-/* Monospace Scientific Coordinates & Timings (better-typography) */
+/* Monospace Scientific Coordinates & Timings */
 .font-telemetry {
   font-family: var(--font-mono), monospace;
   font-variant-numeric: tabular-nums;
@@ -167,27 +165,27 @@ p, .text-pretty {
   letter-spacing: -0.01em;
 }
 
-/* Tactile Active States & Accessible Focus Rings (better-accessibility) */
+/* Accessible Focus Rings */
 button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid rgba(0, 229, 255, 0.75);
+  outline: 2px solid rgba(0, 229, 255, 0.6);
   outline-offset: 2px;
 }
 
-/* Concentric Radius Formula (better-ui & better-layout) */
+/* Concentric Radius Formula */
 .radius-outer {
-  border-radius: 12px;
+  border-radius: 14px;
 }
 .radius-nested {
-  border-radius: 8px;
+  border-radius: 10px;
 }
 .radius-control {
-  border-radius: 6px;
+  border-radius: 8px;
 }
 .radius-badge {
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 /* Hardware Wire Rail */
@@ -200,7 +198,7 @@ select:focus-visible,
   background-color: #334155;
 }
 
-/* Respect Reduced Motion (better-accessibility) */
+/* Respect Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,
@@ -211,4 +209,3 @@ select:focus-visible,
     scroll-behavior: auto !important;
   }
 }
-

@@ -6,13 +6,10 @@ import { useSimulationStore } from "../../stores/useSimulationStore";
 import type { QuantumCircuitIR } from "@quantangle/quantum-ast";
 import {
   Atom,
-  Zap,
   Play,
-  RotateCcw,
-  Sparkles,
-  Share2,
-  Github,
+  Zap,
   BookOpen,
+  Github,
 } from "lucide-react";
 
 export const PRESET_CIRCUITS: Record<
@@ -145,52 +142,49 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className="bg-[#0b0f19] border-b border-white/[0.08] px-5 py-2.5 sticky top-0 z-40">
-      <div className="max-w-[1700px] mx-auto flex flex-wrap items-center justify-between gap-4 sm:gap-6">
-        {/* Zone 1: Logo, Brand & Hardware Specs */}
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-[#111726] border border-cyan-500/25 flex items-center justify-center text-cyan-400 shadow-sm flex-shrink-0">
-            <Atom className="w-4.5 h-4.5" />
+    <header className="bg-[#0a0e18] border-b border-white/[0.05] px-5 lg:px-8 py-3.5 sticky top-0 z-40">
+      <div className="max-w-[1800px] mx-auto flex flex-wrap items-center justify-between gap-4 sm:gap-6">
+        {/* Zone 1: Logo & Brand */}
+        <div className="flex items-center gap-3.5">
+          <div className="w-9 h-9 rounded-xl bg-[#111726] border border-white/[0.06] flex items-center justify-center text-cyan-400 flex-shrink-0">
+            <Atom className="w-5 h-5" />
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-sm font-semibold tracking-tight text-white flex items-center gap-1.5 font-mono">
+            <div className="flex items-center gap-2.5">
+              <h1 className="text-[15px] font-semibold tracking-tight text-white">
                 Quantangle
               </h1>
-              <span className="text-[10px] font-telemetry px-1.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 tabular-nums font-semibold">
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-md bg-white/[0.04] text-slate-400 border border-white/[0.06] tabular-nums">
                 SIH26140
               </span>
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-md bg-white/[0.05] text-slate-300 border border-white/[0.08] hidden sm:inline-block">
-                Little-Endian (q₀ LSB)
-              </span>
             </div>
-            <p className="text-xs text-slate-400 text-pretty leading-snug">
-              Interactive Quantum Circuit Designer & Multi-Engine Simulation Hub
+            <p className="text-[13px] text-slate-400 leading-snug mt-0.5">
+              Quantum Circuit Designer & Simulation Hub
             </p>
           </div>
         </div>
 
-        {/* Zone 2 & 3: Telemetry, Presets & Hardware Execution Controls */}
+        {/* Zone 2: Controls */}
         <div className="flex flex-wrap items-center gap-3">
-          {/* Sub-group: Live WASM Engine Telemetry */}
-          <div className="h-8 flex items-center gap-2 px-3 rounded-lg bg-[#101726] border border-white/[0.08] text-xs font-telemetry text-slate-300 tabular-nums shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
-            <span className="text-slate-200 font-medium">WASM Edge</span>
-            <span className="text-slate-500 font-normal">|</span>
-            <span className="text-emerald-400 font-semibold">0.08ms</span>
+          {/* Live WASM Engine Telemetry */}
+          <div className="h-9 flex items-center gap-2.5 px-3.5 rounded-xl bg-[#0d1220] border border-white/[0.05] text-[12px] text-slate-400">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0" />
+            <span className="text-slate-300 font-medium">WASM Edge</span>
+            <span className="text-white/[0.08]">·</span>
+            <span className="text-emerald-400 font-mono tabular-nums text-[11px]">0.08ms</span>
           </div>
 
-          {/* Sub-group: Preset Circuit Dropdown */}
-          <div className="h-8 flex items-center gap-1.5 bg-[#101726] rounded-lg px-2.5 border border-white/[0.08] text-xs hover:border-white/20 transition-colors shadow-sm">
-            <BookOpen className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0" />
+          {/* Preset Circuit Dropdown */}
+          <div className="h-9 flex items-center gap-2 bg-[#0d1220] rounded-xl px-3 border border-white/[0.05] text-[13px] hover:border-white/[0.10] transition-colors">
+            <BookOpen className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
             <select
               aria-label="Select a preset quantum circuit"
               onChange={(e) => handleSelectPreset(e.target.value)}
               defaultValue=""
-              className="bg-transparent text-slate-200 focus:outline-none cursor-pointer text-xs font-mono"
+              className="bg-transparent text-slate-300 focus:outline-none cursor-pointer text-[13px]"
             >
               <option value="" disabled>
-                Load Preset Circuit...
+                Load preset...
               </option>
               {Object.entries(PRESET_CIRCUITS).map(([key, item]) => (
                 <option key={key} value={key} className="bg-[#0b0f19] text-white">
@@ -200,32 +194,32 @@ export const Header: React.FC<HeaderProps> = ({
             </select>
           </div>
 
-          {/* Sub-group: Primary Simulate Trigger */}
+          {/* Simulate Button */}
           <button
             onClick={onRunSimulation}
             disabled={isRunningSimulation}
-            className="h-8 px-3.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold text-xs flex items-center gap-1.5 transition-colors active:translate-y-[1px] disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
+            className="h-9 px-4 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold text-[13px] flex items-center gap-2 transition-colors active:translate-y-[1px] disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isRunningSimulation ? (
               <>
-                <Zap className="w-3.5 h-3.5 animate-spin flex-shrink-0" />
+                <Zap className="w-4 h-4 animate-spin flex-shrink-0" />
                 <span>Simulating...</span>
               </>
             ) : (
               <>
-                <Play className="w-3.5 h-3.5 fill-current ml-0.5 flex-shrink-0" />
-                <span>Simulate Circuit</span>
+                <Play className="w-4 h-4 fill-current ml-0.5 flex-shrink-0" />
+                <span>Simulate</span>
               </>
             )}
           </button>
 
-          {/* Sub-group: External Repository Link */}
+          {/* GitHub Link */}
           <a
             href="https://github.com/shreyx404/Quantangle"
             target="_blank"
             rel="noreferrer"
             aria-label="View Quantangle on GitHub"
-            className="h-8 w-8 flex items-center justify-center rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-400 hover:text-white transition-colors active:translate-y-[1px]"
+            className="h-9 w-9 flex items-center justify-center rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.05] text-slate-400 hover:text-white transition-colors active:translate-y-[1px]"
             title="GitHub Repository"
           >
             <Github className="w-4 h-4" />

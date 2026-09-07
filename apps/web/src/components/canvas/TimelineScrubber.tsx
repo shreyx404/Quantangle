@@ -9,7 +9,6 @@ import {
   SkipBack,
   SkipForward,
   RotateCcw,
-  Clock,
   Zap,
 } from "lucide-react";
 
@@ -51,19 +50,19 @@ export const TimelineScrubber: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#0b0f19] rounded-xl p-3 border border-white/[0.08] flex flex-wrap items-center justify-between gap-3 shadow-sm">
-      {/* Playback Controls (Group 1: Transport) */}
-      <div className="flex items-center gap-1.5">
+    <div className="bg-[#0b0f19] rounded-2xl p-4 lg:p-5 border border-white/[0.05] flex flex-wrap items-center justify-between gap-4">
+      {/* Playback Controls */}
+      <div className="flex items-center gap-2">
         <button
           onClick={() => {
             setIsPlaying(false);
             setActiveStep(0);
           }}
           aria-label="Reset timeline to step t=0"
-          title="Reset to t=0 (Initial State)"
-          className="w-8 h-8 rounded-md bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-200 flex items-center justify-center transition-colors active:translate-y-[1px]"
+          title="Reset to t=0"
+          className="w-9 h-9 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.05] text-slate-300 flex items-center justify-center transition-colors active:translate-y-[1px]"
         >
-          <RotateCcw className="w-3.5 h-3.5" />
+          <RotateCcw className="w-4 h-4" />
         </button>
 
         <button
@@ -71,21 +70,21 @@ export const TimelineScrubber: React.FC = () => {
           disabled={activeStep <= 0}
           aria-label="Step backward"
           title="Step Backward"
-          className="w-8 h-8 rounded-md bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-200 disabled:opacity-30 flex items-center justify-center transition-colors active:translate-y-[1px]"
+          className="w-9 h-9 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.05] text-slate-300 disabled:opacity-25 flex items-center justify-center transition-colors active:translate-y-[1px]"
         >
-          <SkipBack className="w-3.5 h-3.5" />
+          <SkipBack className="w-4 h-4" />
         </button>
 
         <button
           onClick={() => setIsPlaying(!isPlaying)}
           aria-label={isPlaying ? "Pause Timeline Animation" : "Play Timeline Animation"}
-          title={isPlaying ? "Pause Timeline" : "Play Timeline Animation"}
-          className="w-8 h-8 rounded-md bg-cyan-500 hover:bg-cyan-400 text-slate-950 flex items-center justify-center transition-colors active:translate-y-[1px] shadow-sm font-semibold"
+          title={isPlaying ? "Pause" : "Play"}
+          className="w-9 h-9 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 flex items-center justify-center transition-colors active:translate-y-[1px] font-semibold"
         >
           {isPlaying ? (
-            <Pause className="w-3.5 h-3.5 fill-current" />
+            <Pause className="w-4 h-4 fill-current" />
           ) : (
-            <Play className="w-3.5 h-3.5 fill-current ml-0.5" />
+            <Play className="w-4 h-4 fill-current ml-0.5" />
           )}
         </button>
 
@@ -94,16 +93,16 @@ export const TimelineScrubber: React.FC = () => {
           disabled={activeStep >= maxSteps - 1}
           aria-label="Step forward"
           title="Step Forward"
-          className="w-8 h-8 rounded-md bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-200 disabled:opacity-30 flex items-center justify-center transition-colors active:translate-y-[1px]"
+          className="w-9 h-9 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.05] text-slate-300 disabled:opacity-25 flex items-center justify-center transition-colors active:translate-y-[1px]"
         >
-          <SkipForward className="w-3.5 h-3.5" />
+          <SkipForward className="w-4 h-4" />
         </button>
       </div>
 
-      {/* Scrubber Slider (Group 2: Timeline Bar) */}
-      <div className="flex-1 min-w-[220px] flex items-center gap-3">
-        <span className="text-xs font-telemetry text-cyan-300 font-semibold whitespace-nowrap bg-[#101726] px-2.5 py-1 rounded-md border border-white/[0.08] tabular-nums shadow-sm">
-          Step {String(activeStep).padStart(2, "0")} / {String(Math.max(0, maxSteps - 1)).padStart(2, "0")}
+      {/* Scrubber Slider */}
+      <div className="flex-1 min-w-[220px] flex items-center gap-3.5">
+        <span className="text-[12px] font-mono text-white whitespace-nowrap bg-[#0a0e18] px-3 py-1.5 rounded-xl border border-white/[0.05] tabular-nums">
+          {String(activeStep).padStart(2, "0")} / {String(Math.max(0, maxSteps - 1)).padStart(2, "0")}
         </span>
         <div className="flex-1 relative flex items-center">
           <input
@@ -121,22 +120,22 @@ export const TimelineScrubber: React.FC = () => {
         </div>
       </div>
 
-      {/* Speed & Simulator Info (Group 3: Telemetry) */}
-      <div className="flex items-center gap-2.5">
+      {/* Speed & Telemetry */}
+      <div className="flex items-center gap-3">
         {/* Speed toggle */}
-        <div className="h-8 flex items-center gap-0.5 bg-[#101726] rounded-md p-0.5 border border-white/[0.08] text-xs font-telemetry">
+        <div className="h-9 flex items-center gap-0.5 bg-[#0a0e18] rounded-xl p-0.5 border border-white/[0.05] text-[12px] font-mono">
           {[
-            { label: "0.5x", speed: 1500 },
-            { label: "1x", speed: 1000 },
-            { label: "2x", speed: 500 },
+            { label: "0.5×", speed: 1500 },
+            { label: "1×", speed: 1000 },
+            { label: "2×", speed: 500 },
           ].map((item) => (
             <button
               key={item.label}
               onClick={() => setPlaybackSpeed(item.speed)}
-              className={`h-7 px-2 rounded transition-colors ${
+              className={`h-8 px-2.5 rounded-lg transition-all tabular-nums ${
                 playbackSpeed === item.speed
-                  ? "bg-cyan-500/20 text-cyan-300 font-semibold border border-cyan-500/30"
-                  : "text-slate-400 hover:text-white"
+                  ? "bg-white/[0.07] text-white font-medium"
+                  : "text-slate-500 hover:text-slate-300"
               }`}
             >
               {item.label}
@@ -144,10 +143,10 @@ export const TimelineScrubber: React.FC = () => {
           ))}
         </div>
 
-        {/* Engine status indicator */}
-        <div className="h-8 flex items-center gap-1.5 px-2.5 rounded-md bg-[#101726] border border-white/[0.08] text-emerald-400 text-xs font-telemetry shadow-sm">
+        {/* Engine status */}
+        <div className="h-9 flex items-center gap-2 px-3.5 rounded-xl bg-[#0a0e18] border border-white/[0.05] text-emerald-400/80 text-[12px] font-mono">
           <Zap className="w-3.5 h-3.5 flex-shrink-0" />
-          <span className="tabular-nums font-semibold">
+          <span className="tabular-nums">
             {simulationTimeMs !== null
               ? `${simulationTimeMs.toFixed(2)} ms`
               : "0.08 ms"}

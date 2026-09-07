@@ -23,10 +23,6 @@ import {
   BarChart3,
   Code2,
   Bot,
-  Zap,
-  Layers,
-  Sparkles,
-  Maximize2,
 } from "lucide-react";
 
 export default function Home() {
@@ -89,20 +85,20 @@ export default function Home() {
   }, [steps, numQubits, runSimulation]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#080b14] text-[#f0f4f8]">
+    <div className="min-h-screen flex flex-col bg-[#060912]">
       {/* Header */}
       <Header
         onRunSimulation={runSimulation}
         isRunningSimulation={isRunning}
       />
 
-      {/* Main Workspace Layout */}
-      <main className="flex-1 max-w-[1700px] w-full mx-auto p-4 flex flex-col gap-4">
+      {/* Main Workspace Layout — generous spacing */}
+      <main className="flex-1 max-w-[1800px] w-full mx-auto px-5 lg:px-8 py-5 lg:py-6 flex flex-col gap-5">
         {/* Top Grid: Canvas & Copilot */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
           {/* Circuit Design Workspace (Canvas + Palette + Scrubber) */}
           <div
-            className={`flex flex-col gap-3 transition-all duration-300 ${
+            className={`flex flex-col gap-4 transition-all duration-300 ${
               copilotOpen ? "lg:col-span-8" : "lg:col-span-12"
             }`}
           >
@@ -136,78 +132,78 @@ export default function Home() {
         {!copilotOpen && (
           <button
             onClick={() => setCopilotOpen(true)}
-            className="fixed bottom-5 right-5 z-50 px-3 py-2 rounded-md bg-[#101726] hover:bg-[#162035] text-cyan-300 font-mono text-xs flex items-center gap-2 border border-cyan-500/30 shadow-lg active:translate-y-[1px] transition-colors"
+            className="fixed bottom-6 right-6 z-50 px-4 py-2.5 rounded-xl bg-[#101726] hover:bg-[#162035] text-slate-300 hover:text-white text-[13px] font-medium flex items-center gap-2.5 border border-white/[0.06] hover:border-white/[0.12] shadow-elevated active:translate-y-[1px] transition-all"
             title="Open Qu-Copilot AI Tutor"
           >
             <Bot className="w-4 h-4 text-cyan-400" />
-            <span>Open Qu-Copilot</span>
-            <span className="text-[10px] text-slate-500 border border-white/[0.1] px-1 rounded">AI</span>
+            <span>Qu-Copilot</span>
           </button>
         )}
 
-        {/* Bottom Inspector Tabs */}
-        <div className="bg-[#0b0f19] rounded-xl border border-white/[0.08] flex flex-col overflow-hidden shadow-sm">
+        {/* Bottom Inspector Panel */}
+        <div className="bg-[#0b0f19] rounded-2xl border border-white/[0.05] flex flex-col overflow-hidden">
           {/* Tab Selection Bar */}
-          <div className="flex flex-wrap items-center justify-between px-3 py-2 border-b border-white/[0.06] bg-[#0d121f]">
-            <div className="flex flex-wrap items-center gap-1.5">
+          <div className="flex flex-wrap items-center justify-between px-5 py-3 border-b border-white/[0.05] bg-[#0a0e18]">
+            <div className="flex flex-wrap items-center gap-1">
               <button
                 onClick={() => setActiveBottomTab("visualizer")}
-                className={`px-3 py-1.5 rounded-md text-xs font-mono flex items-center gap-2 transition-colors ${
+                className={`px-4 py-2 rounded-lg text-[13px] font-medium flex items-center gap-2 transition-all ${
                   activeBottomTab === "visualizer"
-                    ? "bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 font-semibold shadow-sm"
-                    : "text-slate-400 hover:text-white border border-transparent"
+                    ? "bg-white/[0.07] text-white shadow-subtle"
+                    : "text-slate-400 hover:text-slate-200 hover:bg-white/[0.03]"
                 }`}
               >
-                <Globe2 className="w-3.5 h-3.5" />
-                <span>3D Quantum State (Bloch & Q-Sphere)</span>
+                <Globe2 className="w-4 h-4" />
+                <span>Quantum State</span>
               </button>
 
               <button
                 onClick={() => setActiveBottomTab("measurements")}
-                className={`px-3 py-1.5 rounded-md text-xs font-mono flex items-center gap-2 transition-colors ${
+                className={`px-4 py-2 rounded-lg text-[13px] font-medium flex items-center gap-2 transition-all ${
                   activeBottomTab === "measurements"
-                    ? "bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 font-semibold shadow-sm"
-                    : "text-slate-400 hover:text-white border border-transparent"
+                    ? "bg-white/[0.07] text-white shadow-subtle"
+                    : "text-slate-400 hover:text-slate-200 hover:bg-white/[0.03]"
                 }`}
               >
-                <BarChart3 className="w-3.5 h-3.5" />
-                <span>Probabilities & State Amplitudes</span>
+                <BarChart3 className="w-4 h-4" />
+                <span>Probabilities</span>
               </button>
 
               <button
                 onClick={() => setActiveBottomTab("editor")}
-                className={`px-3 py-1.5 rounded-md text-xs font-mono flex items-center gap-2 transition-colors ${
+                className={`px-4 py-2 rounded-lg text-[13px] font-medium flex items-center gap-2 transition-all ${
                   activeBottomTab === "editor"
-                    ? "bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 font-semibold shadow-sm"
-                    : "text-slate-400 hover:text-white border border-transparent"
+                    ? "bg-white/[0.07] text-white shadow-subtle"
+                    : "text-slate-400 hover:text-slate-200 hover:bg-white/[0.03]"
                 }`}
               >
-                <Code2 className="w-3.5 h-3.5" />
-                <span>Dual-Sync Code Studio (Qiskit & OpenQASM 3.0)</span>
+                <Code2 className="w-4 h-4" />
+                <span>Code Studio</span>
               </button>
             </div>
 
-            <div className="hidden lg:flex items-center gap-2 text-[10px] font-telemetry text-slate-500">
-              <span className="px-2 py-0.5 rounded bg-white/[0.03] border border-white/[0.06]">
-                {numQubits} Qubits Active
+            <div className="hidden lg:flex items-center gap-3 text-[11px] font-mono text-slate-500">
+              <span className="tabular-nums">
+                {numQubits} qubits
               </span>
-              <span className="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
-                Fidelity F = 1.0000
+              <span className="text-white/[0.08]">·</span>
+              <span className="text-emerald-400/80 tabular-nums">
+                F = 1.0000
               </span>
             </div>
           </div>
 
           {/* Tab Content Panes */}
-          <div className="p-3">
+          <div className="p-5">
             {activeBottomTab === "visualizer" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <BlochSphere />
                 <QSphere />
               </div>
             )}
 
             {activeBottomTab === "measurements" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <ProbabilityHistogram />
                 <StatevectorTable />
               </div>
@@ -223,8 +219,9 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/[0.06] py-2.5 px-4 text-center text-[11px] text-slate-500 font-mono bg-[#07090e]">
-        Quantangle Platform — Smart India Hackathon (SIH 2026 Problem Statement SIH26140) • Little-Endian Architecture
+      <footer className="border-t border-white/[0.04] py-4 px-6 flex items-center justify-between text-[12px] text-slate-500 bg-[#060912]">
+        <span>Quantangle Platform · SIH 2026</span>
+        <span className="font-mono text-[11px] text-slate-600">Little-Endian Architecture</span>
       </footer>
     </div>
   );

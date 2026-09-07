@@ -9,8 +9,6 @@ build/
 out/
 .next/
 .turbo/
-packages/wasm-engine/pkg/
-**/pkg/
 target/
 **/target/
 

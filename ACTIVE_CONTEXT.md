@@ -37,6 +37,16 @@ Quantangle has successfully completed Phases 0 through 5:
 
 ## 3. Recent Changes Log
 - **2026-09-07**:
+  - **Layout & Typography Overhaul via Agent Skills (`TASK-5.6`)**:
+    - Discovered and integrated premier agent skills: [`.agents/skills/better-typography/`](file:///c:/Users/shrey/Downloads/Quantangle/.agents/skills/better-typography/SKILL.md), [`.agents/skills/better-layout/`](file:///c:/Users/shrey/Downloads/Quantangle/.agents/skills/better-layout/SKILL.md), and [`.agents/skills/better-ui/`](file:///c:/Users/shrey/Downloads/Quantangle/.agents/skills/better-ui/SKILL.md).
+    - Fixed font-family configuration in `tailwind.config.ts` so `JetBrains Mono` correctly resolves from `--font-mono` across all scientific code, telemetry, Dirac brackets, and matrix elements.
+    - Added OpenType font features (`cv02`, `cv03`, `cv04`, `cv11`, `tnum`) and `.font-telemetry` with `font-variant-numeric: tabular-nums` to eliminate number jitter during live playback.
+    - Redesigned `GatePalette.tsx` into 4 categorized hardware modules with micro-labels (`Pauli & Clifford`, `Entangling (2-Qubit)`, `Parametric Rotations`, `Measurement`) and concentric border radii.
+    - Set default view in `CircuitCanvas.tsx` to spacious full-width `Canvas` mode, with smooth responsive transition to `Dual-Sync` split mode.
+    - Redesigned `QuantumCodeEditor.tsx` split-view header with compact language tabs (`Qiskit`, `QASM`, `Cirq v2`, `PennyLane v2`), completely eliminating the ugly multi-row wrapping and truncated "PennyLane v" text bug.
+    - Replaced the large empty void in `QuCopilot.tsx` with 4 interactive quantum protocol starter cards (`Bell State |Φ⁺⟩`, `3-Qubit GHZ State`, `Quantum Teleportation`, `Grover Search Algorithm`).
+    - Upgraded all visualizer cards (`BlochSphere.tsx`, `QSphere.tsx`, `ProbabilityHistogram.tsx`, `StatevectorTable.tsx`) with concentric `rounded-xl` curves, corner HUD telemetry, and tabular numeric alignment.
+    - Verified with clean Next.js production build (`next build`) and automated browser subagent testing.
   - **Anti-AI-Slop Superconducting Quantum Workstation Overhaul (`TASK-5.5`)**:
     - Installed modern anti-AI-slop skills `.agents/skills/hallmark/` (58-gate validation suite and curated themes from Nutlope/hallmark) and `.agents/skills/frontend-design/` (aesthetic restraint and design direction from Anthropics).
     - Established `.agents/rules/anti-ai-slop.md` enforcing 10 auto-fail anti-slop gates and zero tolerance for generic AI hackathon tropes.

@@ -146,15 +146,15 @@ export default function Home() {
         )}
 
         {/* Bottom Inspector Tabs */}
-        <div className="bg-[#0b0f19] rounded-lg border border-white/[0.08] flex flex-col overflow-hidden shadow-sm">
+        <div className="bg-[#0b0f19] rounded-xl border border-white/[0.08] flex flex-col overflow-hidden shadow-sm">
           {/* Tab Selection Bar */}
-          <div className="flex flex-wrap items-center justify-between px-3 py-1.5 border-b border-white/[0.06] bg-[#0d121f]">
-            <div className="flex items-center gap-1.5">
+          <div className="flex flex-wrap items-center justify-between px-3 py-2 border-b border-white/[0.06] bg-[#0d121f]">
+            <div className="flex flex-wrap items-center gap-1.5">
               <button
                 onClick={() => setActiveBottomTab("visualizer")}
                 className={`px-3 py-1.5 rounded-md text-xs font-mono flex items-center gap-2 transition-colors ${
                   activeBottomTab === "visualizer"
-                    ? "bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 font-semibold"
+                    ? "bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 font-semibold shadow-sm"
                     : "text-slate-400 hover:text-white border border-transparent"
                 }`}
               >
@@ -166,7 +166,7 @@ export default function Home() {
                 onClick={() => setActiveBottomTab("measurements")}
                 className={`px-3 py-1.5 rounded-md text-xs font-mono flex items-center gap-2 transition-colors ${
                   activeBottomTab === "measurements"
-                    ? "bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 font-semibold"
+                    ? "bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 font-semibold shadow-sm"
                     : "text-slate-400 hover:text-white border border-transparent"
                 }`}
               >
@@ -178,13 +178,22 @@ export default function Home() {
                 onClick={() => setActiveBottomTab("editor")}
                 className={`px-3 py-1.5 rounded-md text-xs font-mono flex items-center gap-2 transition-colors ${
                   activeBottomTab === "editor"
-                    ? "bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 font-semibold"
+                    ? "bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 font-semibold shadow-sm"
                     : "text-slate-400 hover:text-white border border-transparent"
                 }`}
               >
                 <Code2 className="w-3.5 h-3.5" />
-                <span>Dual-Sync Code Editor (Qiskit & OpenQASM 3.0)</span>
+                <span>Dual-Sync Code Studio (Qiskit & OpenQASM 3.0)</span>
               </button>
+            </div>
+
+            <div className="hidden lg:flex items-center gap-2 text-[10px] font-telemetry text-slate-500">
+              <span className="px-2 py-0.5 rounded bg-white/[0.03] border border-white/[0.06]">
+                {numQubits} Qubits Active
+              </span>
+              <span className="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+                Fidelity F = 1.0000
+              </span>
             </div>
           </div>
 

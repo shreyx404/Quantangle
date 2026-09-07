@@ -31,7 +31,7 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
   onClearPaletteGate,
   copilotOpen,
   onToggleCopilot,
-  initialViewMode = "split",
+  initialViewMode = "canvas",
 }) => {
   const {
     numQubits,
@@ -148,9 +148,9 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
           <div
             key={stepIdx}
             onClick={() => setActiveStep(stepIdx)}
-            className={`w-14 text-center text-[11px] font-mono cursor-pointer transition-colors py-0.5 rounded ${
+            className={`w-14 text-center text-[11px] font-telemetry cursor-pointer transition-colors py-0.5 rounded-md ${
               activeStep === stepIdx
-                ? "text-cyan-300 font-semibold bg-cyan-500/10 border border-cyan-500/30"
+                ? "text-cyan-300 font-semibold bg-cyan-500/15 border border-cyan-500/30"
                 : "text-slate-400 hover:text-slate-200"
             }`}
           >
@@ -164,7 +164,7 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
         {Array.from({ length: numQubits }).map((_, qIdx) => (
           <div key={qIdx} className="flex items-center relative group">
             {/* Qubit Label */}
-            <div className="w-20 pr-3 flex items-center justify-between text-xs font-mono font-semibold text-slate-300">
+            <div className="w-20 pr-3 flex items-center justify-between text-xs font-telemetry font-semibold text-slate-300">
               <span className="text-cyan-400">|q{qIdx}⟩</span>
               <span className="text-[10px] text-slate-500 font-normal">|0⟩</span>
             </div>
@@ -270,40 +270,28 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
   );
 
   return (
-    <div className="bg-[#0b0f19] rounded-lg p-3.5 flex flex-col gap-3 border border-white/[0.08] relative overflow-hidden shadow-sm">
+    <div className="bg-[#0b0f19] rounded-xl p-3.5 flex flex-col gap-3 border border-white/[0.08] relative overflow-hidden shadow-sm">
       {/* Canvas Header & Toolbar */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/[0.06] pb-2.5">
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2">
-            <Zap className="w-3.5 h-3.5 text-cyan-400" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-white">
-              Quantum Circuit Canvas
-            </span>
+        <div className="flex items-center gap-2.5">
+          <div className="w-5 h-5 rounded-md bg-cyan-500/10 border border-cyan-500/25 flex items-center justify-center text-cyan-400">
+            <Zap className="w-3 h-3" />
           </div>
-          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
-            Little-Endian: q₀ is LSB
+          <span className="text-xs font-semibold tracking-tight text-white uppercase font-mono">
+            Quantum Circuit Canvas
+          </span>
+          <span className="text-[10px] font-telemetry px-2 py-0.5 rounded-md bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+            Little-Endian · q₀ is LSB
           </span>
         </div>
 
         {/* Controls: View Modes, Qubits, Steps, Copilot */}
         <div className="flex flex-wrap items-center gap-2">
           {/* Dual-Sync View Mode Switcher */}
-          <div className="flex items-center bg-[#101726] rounded-md p-0.5 border border-white/[0.08] text-xs">
-            <button
-              onClick={() => setViewMode("split")}
-              className={`px-2.5 py-1 rounded flex items-center gap-1.5 font-medium transition-colors ${
-                viewMode === "split"
-                  ? "bg-cyan-500/15 text-cyan-300 font-semibold border border-cyan-500/30"
-                  : "text-slate-400 hover:text-white"
-              }`}
-              title="Dual-Sync Split View: Visual Canvas + Live Python Qiskit Code"
-            >
-              <Columns className="w-3 h-3" />
-              <span>Dual-Sync</span>
-            </button>
+          <div className="flex items-center bg-[#101726] rounded-lg p-0.5 border border-white/[0.08] text-xs">
             <button
               onClick={() => setViewMode("canvas")}
-              className={`px-2.5 py-1 rounded flex items-center gap-1.5 font-medium transition-colors ${
+              className={`px-2.5 py-1 rounded-md flex items-center gap-1.5 font-medium transition-colors ${
                 viewMode === "canvas"
                   ? "bg-cyan-500/15 text-cyan-300 font-semibold border border-cyan-500/30"
                   : "text-slate-400 hover:text-white"
@@ -314,8 +302,20 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
               <span>Canvas</span>
             </button>
             <button
+              onClick={() => setViewMode("split")}
+              className={`px-2.5 py-1 rounded-md flex items-center gap-1.5 font-medium transition-colors ${
+                viewMode === "split"
+                  ? "bg-cyan-500/15 text-cyan-300 font-semibold border border-cyan-500/30"
+                  : "text-slate-400 hover:text-white"
+              }`}
+              title="Dual-Sync Split View: Visual Canvas + Live Python Qiskit Code"
+            >
+              <Columns className="w-3 h-3" />
+              <span>Dual-Sync</span>
+            </button>
+            <button
               onClick={() => setViewMode("code")}
-              className={`px-2.5 py-1 rounded flex items-center gap-1.5 font-medium transition-colors ${
+              className={`px-2.5 py-1 rounded-md flex items-center gap-1.5 font-medium transition-colors ${
                 viewMode === "code"
                   ? "bg-cyan-500/15 text-cyan-300 font-semibold border border-cyan-500/30"
                   : "text-slate-400 hover:text-white"
@@ -328,22 +328,22 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
           </div>
 
           {/* Qubit controls */}
-          <div className="flex items-center gap-1 bg-[#101726] rounded-md px-1.5 py-0.5 border border-white/[0.08] text-xs">
-            <span className="text-slate-400 px-1 font-mono text-[11px]">Qubits:</span>
+          <div className="flex items-center gap-1 bg-[#101726] rounded-lg px-2 py-0.5 border border-white/[0.08] text-xs">
+            <span className="text-slate-400 pr-1 font-mono text-[11px]">Qubits:</span>
             <button
               onClick={() => setQubits(Math.max(1, numQubits - 1))}
               disabled={numQubits <= 1}
-              className="w-5 h-5 rounded flex items-center justify-center bg-white/[0.04] hover:bg-white/[0.08] disabled:opacity-40 transition-colors"
+              className="w-5 h-5 rounded-md flex items-center justify-center bg-white/[0.04] hover:bg-white/[0.08] disabled:opacity-40 transition-colors active:translate-y-[1px]"
             >
               <Minus className="w-2.5 h-2.5" />
             </button>
-            <span className="w-4 text-center font-mono font-semibold text-cyan-300 text-xs">
+            <span className="w-5 text-center font-telemetry font-semibold text-cyan-300 text-xs">
               {numQubits}
             </span>
             <button
               onClick={() => setQubits(Math.min(16, numQubits + 1))}
               disabled={numQubits >= 16}
-              className="w-5 h-5 rounded flex items-center justify-center bg-white/[0.04] hover:bg-white/[0.08] disabled:opacity-40 transition-colors"
+              className="w-5 h-5 rounded-md flex items-center justify-center bg-white/[0.04] hover:bg-white/[0.08] disabled:opacity-40 transition-colors active:translate-y-[1px]"
             >
               <Plus className="w-2.5 h-2.5" />
             </button>
@@ -395,12 +395,12 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
       {/* Workspace Display Area based on View Mode */}
       {viewMode === "split" && (
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-3 items-stretch">
-          <div className="xl:col-span-7 flex flex-col justify-between overflow-x-auto pb-2 select-none min-w-0 bg-[#080c14] rounded-md p-2.5 border border-white/[0.06]">
+          <div className="xl:col-span-7 flex flex-col justify-between overflow-x-auto pb-2 select-none min-w-0 bg-[#070b14] rounded-lg p-3 border border-white/[0.05]">
             {renderGrid()}
           </div>
           <div className="xl:col-span-5 min-w-0 flex flex-col">
             <QuantumCodeEditor
-              height="270px"
+              height="280px"
               compact={true}
               showHeader={true}
               defaultSdk="qiskit"
@@ -410,7 +410,7 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
       )}
 
       {viewMode === "canvas" && (
-        <div className="overflow-x-auto pb-2 select-none bg-[#080c14] rounded-md p-2.5 border border-white/[0.06]">
+        <div className="overflow-x-auto pb-3 select-none bg-[#070b14] rounded-lg p-3 border border-white/[0.05]">
           {renderGrid()}
         </div>
       )}
@@ -418,7 +418,7 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
       {viewMode === "code" && (
         <div className="w-full">
           <QuantumCodeEditor
-            height="360px"
+            height="380px"
             compact={false}
             showHeader={true}
             defaultSdk="qiskit"

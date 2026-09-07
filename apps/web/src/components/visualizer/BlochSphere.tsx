@@ -167,13 +167,16 @@ export const BlochSphere: React.FC = () => {
   }, [blochVector, selectedQubit]);
 
   return (
-    <div className="bg-[#0b0f19] rounded-lg p-3 border border-white/[0.08] flex flex-col h-full min-h-[320px] shadow-sm">
+    <div className="bg-[#0b0f19] rounded-xl p-3 border border-white/[0.08] flex flex-col h-full min-h-[320px] shadow-sm">
       {/* Header with Qubit Selector */}
       <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
         <div className="flex items-center gap-2">
           <Globe2 className="w-3.5 h-3.5 text-cyan-400" />
           <span className="text-xs font-semibold text-white tracking-wide">
             3D Bloch Sphere
+          </span>
+          <span className="text-[10px] text-slate-500 font-mono hidden sm:inline">
+            · Single-Qubit State
           </span>
         </div>
 
@@ -183,7 +186,7 @@ export const BlochSphere: React.FC = () => {
           <select
             value={selectedQubit}
             onChange={(e) => setSelectedQubit(parseInt(e.target.value, 10))}
-            className="bg-[#101726] border border-white/[0.08] rounded px-2 py-0.5 text-xs font-mono text-cyan-300 focus:outline-none focus:border-cyan-400 cursor-pointer"
+            className="bg-[#101726] border border-white/[0.08] rounded-md px-2.5 py-0.5 text-xs font-telemetry text-cyan-300 focus:outline-none focus:border-cyan-400 cursor-pointer active:translate-y-[1px]"
           >
             {Array.from({ length: numQubits }).map((_, i) => (
               <option key={i} value={i} className="bg-[#0b0f19] text-white">
@@ -200,23 +203,23 @@ export const BlochSphere: React.FC = () => {
         className="flex-1 w-full min-h-[220px] relative cursor-grab active:cursor-grabbing"
       >
         {/* Cardinal State Pole Overlays */}
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 pointer-events-none text-[11px] font-mono font-semibold text-sky-300">
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 pointer-events-none text-[11px] font-telemetry font-semibold text-sky-300 bg-[#070b14]/70 px-2 py-0.5 rounded border border-white/[0.05]">
           |0⟩ (+Z)
         </div>
-        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 pointer-events-none text-[11px] font-mono font-semibold text-sky-400">
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 pointer-events-none text-[11px] font-telemetry font-semibold text-sky-400 bg-[#070b14]/70 px-2 py-0.5 rounded border border-white/[0.05]">
           |1⟩ (-Z)
         </div>
-        <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-[10px] font-mono text-amber-300/80">
+        <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-[10px] font-telemetry text-amber-300/90 bg-[#070b14]/70 px-1.5 py-0.5 rounded border border-white/[0.05]">
           |+⟩ (+X)
         </div>
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[10px] font-mono text-emerald-300/80">
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[10px] font-telemetry text-emerald-300/90 bg-[#070b14]/70 px-1.5 py-0.5 rounded border border-white/[0.05]">
           |+i⟩ (+Y)
         </div>
       </div>
 
       {/* Numerical Coordinate Readout */}
-      <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono">
-        <div className="flex items-center gap-2.5">
+      <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-telemetry tabular-nums">
+        <div className="flex items-center gap-3">
           <span className="text-amber-400">x: {blochVector.x.toFixed(3)}</span>
           <span className="text-emerald-400">y: {blochVector.y.toFixed(3)}</span>
           <span className="text-sky-400">z: {blochVector.z.toFixed(3)}</span>

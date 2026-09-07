@@ -110,6 +110,10 @@
   - *Input*: Anti-AI-slop skills (`hallmark` 58-gate validation suite and `frontend-design` aesthetic restraint) and user requirement to eliminate generic hackathon AI slop.
   - *Output*: `.agents/skills/hallmark/`, `.agents/skills/frontend-design/`, `.agents/rules/anti-ai-slop.md`, refactored `globals.css`, `Header.tsx`, `GatePalette.tsx`, `CircuitCanvas.tsx`, `TimelineScrubber.tsx`, `QuCopilot.tsx`, `page.tsx`, `QuantumCodeEditor.tsx`, `BlochSphere.tsx`, `QSphere.tsx`, `ProbabilityHistogram.tsx`, `StatevectorTable.tsx`.
   - *Acceptance Criteria*: Eliminated spinning atom logos, neon purple-to-cyan text gradients, floating candy pill buttons, and blurry glassmorphism; replaced with cryogenic void `#06080e`, copper/slate wire rails (`#222d42`), tactile gate depression (`active:translate-y-[1px]`), hardware transport scrubber, monospaced coordinate telemetry, and verified against all 10 anti-slop gates.
+- [x] **TASK-5.6: Layout & Typography Overhaul via Agent Skills (better-typography, better-layout, better-ui)**
+  - *Input*: Discovered premier UI agent skills (`better-typography`, `better-layout`, `better-ui` from Jakub Krehel) and user requirement to overhaul layout and typography.
+  - *Output*: `.agents/skills/better-typography/`, `.agents/skills/better-layout/`, `.agents/skills/better-ui/`, corrected font mapping in `tailwind.config.ts` (JetBrains Mono + Inter OpenType `cv02`, `cv03`, `cv11`, `tnum`), concentric border radii formula ($R_{\text{outer}} = R_{\text{inner}} + \text{padding}$), categorized hardware gate modules with micro-labels, full-width default canvas view mode, non-clipped responsive Dual-Sync Code Studio header, and interactive quantum protocol starter cards eliminating the empty Qu-Copilot void.
+  - *Acceptance Criteria*: Zero text clipping in split view; crisp JetBrains Mono on all telemetry/code; `tabular-nums` on all coordinates/timings; 100% production build pass (`next build`); visual verification in browser with 0 errors.
 
 ---
 

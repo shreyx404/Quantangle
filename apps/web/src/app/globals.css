@@ -28,9 +28,21 @@ body {
   background-color: var(--surface-base);
   color: #f1f5f9;
   font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11", "tnum";
+  font-optical-sizing: auto;
   overflow-x: hidden;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Better-Typography: Text Wrapping by Role */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+  letter-spacing: -0.015em;
+}
+
+p, .text-pretty {
+  text-wrap: pretty;
 }
 
 /* Precision Scrollbars */
@@ -94,10 +106,22 @@ select:focus-visible {
   outline-offset: 1px;
 }
 
-/* Monospace Scientific Coordinates & Timings */
+/* Monospace Scientific Coordinates & Timings (better-typography) */
 .font-telemetry {
   font-family: var(--font-mono), monospace;
-  font-feature-settings: "tnum" on, "zero" on;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "zero" 1;
+}
+
+/* Concentric Radius Formula (better-ui & better-layout) */
+.radius-outer {
+  border-radius: 12px;
+}
+.radius-nested {
+  border-radius: 8px;
+}
+.radius-control {
+  border-radius: 6px;
 }
 
 /* Hardware Wire Rail */

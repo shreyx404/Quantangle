@@ -51,7 +51,7 @@ export const TimelineScrubber: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#0b0f19] rounded-lg p-3 border border-white/[0.08] flex flex-wrap items-center justify-between gap-3 shadow-sm">
+    <div className="bg-[#0b0f19] rounded-xl p-3 border border-white/[0.08] flex flex-wrap items-center justify-between gap-3 shadow-sm">
       {/* Playback Controls */}
       <div className="flex items-center gap-1.5">
         <button
@@ -97,9 +97,9 @@ export const TimelineScrubber: React.FC = () => {
       </div>
 
       {/* Scrubber Slider */}
-      <div className="flex-1 min-w-[200px] flex items-center gap-3">
-        <span className="text-xs font-mono text-cyan-300 font-semibold whitespace-nowrap bg-[#101726] px-2 py-0.5 rounded border border-white/[0.06] tabular-nums">
-          Step {activeStep} / {Math.max(0, maxSteps - 1)}
+      <div className="flex-1 min-w-[220px] flex items-center gap-3">
+        <span className="text-xs font-telemetry text-cyan-300 font-semibold whitespace-nowrap bg-[#101726] px-2.5 py-1 rounded-md border border-white/[0.08] tabular-nums">
+          Step {String(activeStep).padStart(2, "0")} / {String(Math.max(0, maxSteps - 1)).padStart(2, "0")}
         </span>
         <div className="flex-1 relative flex items-center">
           <input
@@ -119,7 +119,7 @@ export const TimelineScrubber: React.FC = () => {
       {/* Speed & Simulator Info */}
       <div className="flex items-center gap-2.5">
         {/* Speed toggle */}
-        <div className="flex items-center gap-0.5 bg-[#101726] rounded-md p-0.5 border border-white/[0.08] text-[11px] font-mono">
+        <div className="flex items-center gap-0.5 bg-[#101726] rounded-md p-0.5 border border-white/[0.08] text-[11px] font-telemetry">
           {[
             { label: "0.5x", speed: 1500 },
             { label: "1x", speed: 1000 },
@@ -140,7 +140,7 @@ export const TimelineScrubber: React.FC = () => {
         </div>
 
         {/* Engine status indicator */}
-        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#101726] border border-white/[0.08] text-emerald-400 text-xs font-mono">
+        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#101726] border border-white/[0.08] text-emerald-400 text-xs font-telemetry">
           <Zap className="w-3 h-3" />
           <span>
             {simulationTimeMs !== null

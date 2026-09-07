@@ -34,7 +34,7 @@ export const ProbabilityHistogram: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#0b0f19] rounded-lg p-3 border border-white/[0.08] flex flex-col h-full min-h-[260px] shadow-sm">
+    <div className="bg-[#0b0f19] rounded-xl p-3 border border-white/[0.08] flex flex-col h-full min-h-[260px] shadow-sm">
       {/* Header */}
       <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
         <div className="flex items-center gap-2">
@@ -42,8 +42,11 @@ export const ProbabilityHistogram: React.FC = () => {
           <span className="text-xs font-semibold text-white tracking-wide">
             Measurement Probabilities P(|j⟩)
           </span>
+          <span className="text-[10px] text-slate-500 font-mono hidden sm:inline">
+            · Born Rule
+          </span>
         </div>
-        <div className="flex items-center gap-2 text-[10px] font-mono text-slate-400">
+        <div className="flex items-center gap-2 text-[10px] font-telemetry text-slate-400">
           <span>Phase Hue:</span>
           <div className="w-16 h-1.5 rounded-full bg-gradient-to-r from-red-500 via-yellow-400 via-cyan-400 to-purple-500 opacity-90" />
         </div>
@@ -63,7 +66,7 @@ export const ProbabilityHistogram: React.FC = () => {
               className="flex-1 min-w-[36px] max-w-[64px] flex flex-col items-center gap-1 group"
             >
               {/* Percentage label above bar */}
-              <span className="text-[10px] font-mono text-slate-300 font-medium tabular-nums">
+              <span className="text-[10px] font-telemetry text-slate-300 font-medium tabular-nums">
                 {percent > 0 ? `${percent}%` : ""}
               </span>
 
@@ -79,7 +82,7 @@ export const ProbabilityHistogram: React.FC = () => {
               </div>
 
               {/* Basis State Label */}
-              <span className="text-[11px] font-mono font-semibold text-slate-300 group-hover:text-cyan-300 transition-colors">
+              <span className="text-[11px] font-telemetry font-semibold text-slate-300 group-hover:text-cyan-300 transition-colors">
                 |{basisLabel}⟩
               </span>
             </div>
@@ -88,7 +91,7 @@ export const ProbabilityHistogram: React.FC = () => {
       </div>
 
       {/* Basis footer note */}
-      <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[10px] font-mono text-slate-500">
+      <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[10px] font-telemetry text-slate-500 tabular-nums">
         <span>Order: |q_{numQubits - 1}...q_1 q_0⟩ (LSB right)</span>
         <span>Σ P(|j⟩) = 1.000</span>
       </div>

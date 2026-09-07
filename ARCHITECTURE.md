@@ -120,28 +120,46 @@ export interface GateOperation {
 
 > **Core Guarantee**: Every circuit suggestion is mathematically validated before being shown to the student.
 
+#### 2.5.1 Pipeline Topology & Self-Correction Loop
 ```
 [ Learner Query / Stuck Circuit ]
              │
              ▼
-[ Hybrid Retriever: Qiskit Docs + Nielsen & Chuang Knowledge ]
+[ Hybrid Retriever: Vector Store (Nielsen & Chuang, Preskill, Qiskit Docs) ]
              │
              ▼
-[ LLM Generator (Code + Conceptual Explanation) ]
+[ LLM Generator: Google Gemini 2.5 Flash (Fallback: Gemini 2.5 Pro) ]
              │
              ▼
-[ Quantum AST Validator (Syntax & Valid Unitary Check) ]
+[ Quantum AST Validator (Syntax, Wire Index Bounds, Unitary Determinant) ]
              │
              ▼
-[ Background Fast Simulation (Target State vs AI State) ]
+[ Background Fast Simulation: Evaluate State Fidelity F = |<ψ_t|ψ_s>|² ]
              │
       F >= 0.999 ?
-     ┌───────┴───────┐
-     ▼ (YES)         ▼ (NO: Verification Failed)
-[ Present to ]   [ Self-Reflection Loop: ]
-[  Learner   ]   [ "Discrepancy: missing phase kickback" ]
-                 [ Re-prompt generator with error trace   ]
+     ┌───────┴────────────────────────────────────────┐
+     ▼ (YES)                                          ▼ (NO: Verification Failed)
+[ Present Verified Circuit ]             [ Iteration Counter < 3 ? ]
+[ & Grounded Explanation   ]              ┌───────────┴───────────┐
+                                          ▼ (YES)                 ▼ (NO: Max Retries Exceeded)
+                              [ Self-Reflection Loop: ]   [ Graceful Fallback: ]
+                              [ Feed error diagnostic ]   [ • Emit warning message ]
+                              [ back to LLM prompt    ]   [ • Present closest canonical circuit ]
+                                                          [ • Anchor to textbook citation ]
 ```
+
+#### 2.5.2 Convergence Guarantees & Fallback Protocol
+1. **Model Hierarchy**:
+   - **Tier 1 (Fast Generator)**: Google Gemini 2.5 Flash executes initial AST generation and conversational tutoring with sub-500ms time-to-first-token.
+   - **Tier 2 (Deep Reasoner)**: If the first attempt fails unitary verification, Google Gemini 2.5 Pro is invoked with the failure diagnostics (e.g. uncomputed ancilla, phase sign inversion) for deep quantum gate synthesis.
+2. **Convergence Bounds**:
+   - The self-correction loop is strictly capped at **3 iterations**.
+   - If $F < 0.999$ persists after 3 cycles, the engine triggers **Graceful Degradation**:
+     - Displays: *"Qu-Copilot was unable to synthesize a validated circuit matching your exact target specification ($F < 0.999$)."*
+     - Injects the nearest canonical reference circuit from the pre-verified curriculum repository.
+     - Cites specific authoritative literature sections (e.g., *Nielsen & Chuang, Quantum Computation and Quantum Information, Section 4.5*).
+3. **Hallucination-Proof Explanation Grounding**:
+   - The LLM explanation text is strictly bound to retrieved context chunks using citation anchors `[ref:N&C-4.3]`. Unsubstantiated claims trigger automated red-flag filters before user presentation.
 
 ### 2.6 State Fidelity Grader (The Automated Evaluator)
 Instead of matching Python strings, the Quantangle grading engine evaluates circuits mathematically:
@@ -151,6 +169,39 @@ Instead of matching Python strings, the Quantangle grading engine evaluates circ
    $$F = |\langle\psi_{\text{target}}|\psi_{\text{student}}\rangle|^2$$
 4. A submission passes if $F \ge 0.999$.
 5. Evaluates circuit depth and gate count for leaderboard rankings (bonus XP for minimal 2-qubit gate depth).
+
+### 2.7 Universal Design & Accessibility Engine
+To deliver an inclusive experience compliant with WCAG 2.1 AA and National Quantum Mission workforce goals:
+1. **Keyboard-First Virtual Focus Bus**:
+   - The circuit canvas implements a 2D virtual coordinate grid (`wireIndex`, `timeStepIndex`).
+   - Standard directional controls (`ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight`) traverse coordinates without DOM reflow.
+   - Shortcut palette: `H`, `X`, `Y`, `Z`, `C` (CNOT control), `T` (target), `R` (rotation dialog), `Delete` (remove gate).
+2. **ARIA Live Quantum State Narrator**:
+   - Implements an invisible `aria-live="polite"` speech region.
+   - Whenever gates are placed or scrubbed, the engine synthesizes mathematical states into clear natural language:
+     - *"Step 2: Applied Hadamard to Qubit 0. Qubit 0 is now in an equal superposition of state 0 and state 1 with zero relative phase."*
+3. **Multimodal State & Phase Encoding**:
+   - State amplitudes and phase angles do not rely on color hue alone.
+   - Each phase bracket is encoded via **dual-channel visual tokens**:
+     - *Color Channel*: Okabe-Ito color-blind safe 12-tier palette.
+     - *Pattern Channel*: Distinct SVG fill patterns (dots for $0$, diagonal stripes for $\pi/2$, cross-hatch for $\pi$, horizontal waves for $-\pi/2$).
+     - *Glyph Channel*: Directional phase-clock vector rendered inside each state node.
+
+### 2.8 Zero-Trust Cloud Execution & Sandboxing Architecture
+To safeguard infrastructure and student data:
+1. **gVisor / Firecracker Container Isolation**:
+   - Cloud simulation jobs (Qiskit Aer $>16$ qubits, v2 PennyLane optimization) run inside ephemeral, unprivileged microVM containers.
+   - Hard cgroup constraints: 10 seconds maximum CPU wall time, 512MB RAM ceiling, non-root user execution (`nobody:nogroup`).
+   - Network namespace is completely sandboxed: zero external network egress (`--net=none`), preventing data exfiltration or socket scraping.
+2. **Token Bucket Rate Limiting (Redis Gateway)**:
+   - Every API consumer is rate-limited via a Redis-backed token bucket:
+     - Cloud Simulation (`/api/v1/sim/cloud`): 10 requests / minute per user.
+     - Qu-Copilot Chat (`/api/v1/copilot/chat`): 30 requests / minute per user.
+   - Exceeded limits yield HTTP `429 Too Many Requests` with a descriptive `Retry-After` header.
+3. **Data Privacy & DPDP Act 2023 Compliance**:
+   - Explicit user consent for learning analytics collection; data minimization principle strictly enforced.
+   - At-rest encryption using AES-256-GCM for student profiles and grades; TLS 1.3 enforced for all transport.
+   - Automated cryptographic audit logging (SHA-256) of all credential issuances and AI verification results.
 
 ---
 

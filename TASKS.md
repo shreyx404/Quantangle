@@ -66,6 +66,10 @@
   - *Input*: Monaco editor React wrapper.
   - *Output*: `apps/web/src/components/editor/QuantumCodeEditor.tsx` with language toggles (Qiskit, OpenQASM 3.0; Cirq & PennyLane badge-marked as v2 targets) and error squiggles.
   - *Acceptance Criteria*: Code changes update circuit canvas with 250ms debounce; invalid code shows inline non-intrusive warning.
+- [x] **TASK-3.4: Dual-Sync Split View & Live Qiskit Python Code Visibility**
+  - *Input*: `QuantumCodeEditor` and `CircuitCanvas` workspace integration.
+  - *Output*: Real-time side-by-side Dual-Sync Split View mode in `CircuitCanvas.tsx`, View Mode switcher (`Dual-Sync` | `Canvas` | `Code`), reactivity to gate placements/deletions, explicit container heights eliminating Monaco 18px collapse, and expandable Qiskit snippets in Qu-Copilot.
+  - *Acceptance Criteria*: Qiskit Python code is immediately visible on app load; dropping gates immediately updates the Python code; code editing immediately updates canvas wires.
 
 ---
 

@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useCircuitStore } from "../../stores/useCircuitStore";
 import { useCopilotStore } from "../../stores/useCopilotStore";
 import type { QuantumCircuitIR } from "@quantangle/quantum-ast";
+import { circuitToQiskit } from "@quantangle/quantum-ast";
 import {
   Bot,
   Send,
@@ -14,6 +15,11 @@ import {
   CheckCircle2,
   X,
   Zap,
+  Code2,
+  ChevronDown,
+  ChevronUp,
+  Copy,
+  Check,
 } from "lucide-react";
 
 interface QuCopilotProps {
@@ -33,6 +39,8 @@ export const QuCopilot: React.FC<QuCopilotProps> = ({ onClose }) => {
   } = useCopilotStore();
 
   const [input, setInput] = useState("");
+  const [expandedQiskitMsgId, setExpandedQiskitMsgId] = useState<string | null>(null);
+  const [copiedCodeMsgId, setCopiedCodeMsgId] = useState<string | null>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -188,6 +196,58 @@ export const QuCopilot: React.FC<QuCopilotProps> = ({ onClose }) => {
                         )}
                       </React.Fragment>
                     ))}
+                  </div>
+
+                  {/* Expandable Qiskit Python Code Preview */}
+                  <div className="py-1">
+                    <button
+                      onClick={() =>
+                        setExpandedQiskitMsgId(
+                          expandedQiskitMsgId === msg.id ? null : msg.id
+                        )
+                      }
+                      className="text-[10px] font-mono text-cyan-400 hover:text-cyan-300 flex items-center gap-1 transition-colors"
+                    >
+                      <Code2 className="w-3 h-3" />
+                      <span>{expandedQiskitMsgId === msg.id ? "Hide Qiskit Code" : "View Qiskit Python Code"}</span>
+                      {expandedQiskitMsgId === msg.id ? (
+                        <ChevronUp className="w-3 h-3" />
+                      ) : (
+                        <ChevronDown className="w-3 h-3" />
+                      )}
+                    </button>
+
+                    {expandedQiskitMsgId === msg.id && msg.circuit && (
+                      <div className="mt-1 p-2 bg-black/60 rounded-lg border border-cyan-500/30 text-[10px] font-mono relative overflow-hidden">
+                        <div className="flex items-center justify-between pb-1 mb-1 border-b border-white/5 text-slate-400">
+                          <span className="text-cyan-300 font-semibold text-[10px]">Python Qiskit</span>
+                          <button
+                            onClick={() => {
+                              const codeStr = circuitToQiskit(msg.circuit!);
+                              navigator.clipboard.writeText(codeStr);
+                              setCopiedCodeMsgId(msg.id);
+                              setTimeout(() => setCopiedCodeMsgId(null), 2000);
+                            }}
+                            className="flex items-center gap-1 text-[10px] text-slate-300 hover:text-white"
+                          >
+                            {copiedCodeMsgId === msg.id ? (
+                              <>
+                                <Check className="w-2.5 h-2.5 text-emerald-400" />
+                                <span className="text-emerald-400 text-[9px]">Copied</span>
+                              </>
+                            ) : (
+                              <>
+                                <Copy className="w-2.5 h-2.5" />
+                                <span className="text-[9px]">Copy</span>
+                              </>
+                            )}
+                          </button>
+                        </div>
+                        <pre className="text-cyan-200/90 whitespace-pre overflow-x-auto max-h-32 text-[10px] leading-tight">
+                          {circuitToQiskit(msg.circuit)}
+                        </pre>
+                      </div>
+                    )}
                   </div>
 
                   {/* Apply Button with instant visual confirmation */}

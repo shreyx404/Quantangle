@@ -12,13 +12,18 @@ import {
   RotateCcw,
   Zap,
   Bot,
+  Columns,
+  Layers,
+  Code2,
 } from "lucide-react";
+import { QuantumCodeEditor } from "../editor/QuantumCodeEditor";
 
 interface CircuitCanvasProps {
   selectedPaletteGate: GateType | null;
   onClearPaletteGate: () => void;
   copilotOpen?: boolean;
   onToggleCopilot?: () => void;
+  initialViewMode?: "split" | "canvas" | "code";
 }
 
 export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
@@ -26,6 +31,7 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
   onClearPaletteGate,
   copilotOpen,
   onToggleCopilot,
+  initialViewMode = "split",
 }) => {
   const {
     numQubits,
@@ -40,6 +46,7 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
   } = useCircuitStore();
 
   const { activeStep, setActiveStep } = useSimulationStore();
+  const [viewMode, setViewMode] = useState<"split" | "canvas" | "code">(initialViewMode);
 
   const [activeParamModal, setActiveParamModal] = useState<{
     stepIndex: number;
@@ -117,7 +124,7 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
       case "T":
         return "bg-fuchsia-500/30 text-fuchsia-200 border-fuchsia-400";
       case "CX":
-        return "bg-emerald-500/30 text-emerald-200 border-emerald-400 shadow-[0_0_10px_rgba(16,185,129,0.3)]";
+        return "bg-emerald-500/30 text-emerald-200 border-emerald-400 shadow-[0_0_10px_rgba(168,85,247,0.3)]";
       case "CZ":
         return "bg-teal-500/30 text-teal-200 border-teal-400";
       case "SWAP":
@@ -132,6 +139,137 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
         return "bg-slate-700 text-slate-200 border-slate-500";
     }
   };
+
+  const renderGrid = () => (
+    <div className="inline-block min-w-full">
+      {/* Step numbers header row */}
+      <div className="flex items-center pl-20 mb-2">
+        {Array.from({ length: visibleStepsCount }).map((_, stepIdx) => (
+          <div
+            key={stepIdx}
+            onClick={() => setActiveStep(stepIdx)}
+            className={`w-14 text-center text-[11px] font-mono cursor-pointer transition-all ${
+              activeStep === stepIdx
+                ? "text-cyan-400 font-bold scale-110"
+                : "text-slate-500 hover:text-slate-300"
+            }`}
+          >
+            t{stepIdx}
+          </div>
+        ))}
+      </div>
+
+      {/* Qubit wire rows */}
+      <div className="flex flex-col gap-3">
+        {Array.from({ length: numQubits }).map((_, qIdx) => (
+          <div key={qIdx} className="flex items-center relative group">
+            {/* Qubit Label */}
+            <div className="w-20 pr-3 flex items-center justify-between text-xs font-mono font-semibold text-slate-300">
+              <span className="text-cyan-400">|q{qIdx}⟩</span>
+              <span className="text-[10px] text-slate-500">|0⟩</span>
+            </div>
+
+            {/* Wire line running behind cells */}
+            <div className="relative flex items-center">
+              <div className="absolute left-0 right-0 h-[2px] bg-slate-700 group-hover:bg-slate-600 transition-colors z-0" />
+
+              {/* Wire Cells */}
+              {Array.from({ length: visibleStepsCount }).map((_, stepIdx) => {
+                const op = getGateAt(stepIdx, qIdx);
+                const isControl = op && op.qubits.length > 1 && op.qubits[0] === qIdx;
+                const isTarget = op && op.qubits.length > 1 && op.qubits[1] === qIdx;
+                const isPendingControl =
+                  pendingControlQubit?.stepIndex === stepIdx &&
+                  pendingControlQubit.controlQubit === qIdx;
+
+                return (
+                  <div
+                    key={stepIdx}
+                    onClick={() => handleCellClick(stepIdx, qIdx)}
+                    className={`relative w-14 h-12 flex items-center justify-center z-10 cursor-pointer transition-all ${
+                      activeStep === stepIdx ? "bg-cyan-500/5 rounded-lg" : ""
+                    }`}
+                  >
+                    {/* Two-qubit connector line if multi-qubit gate */}
+                    {op && op.qubits.length > 1 && isControl && (
+                      <div
+                        className="absolute w-[2px] bg-emerald-400 z-0 pointer-events-none"
+                        style={{
+                          top: "50%",
+                          height: `${Math.abs(op.qubits[1] - op.qubits[0]) * 52}px`,
+                          transform: op.qubits[1] > op.qubits[0] ? "none" : "scaleY(-1)",
+                          transformOrigin: "top",
+                        }}
+                      />
+                    )}
+
+                    {/* Placed Gate Badge */}
+                    {op ? (
+                      <div
+                        className={`relative px-2.5 py-1.5 rounded-lg font-mono text-xs font-bold border transition-transform ${getGateBadgeStyle(
+                          op.gate
+                        )} group/gate hover:scale-110`}
+                      >
+                        {isControl ? (
+                          <div className="w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+                        ) : (
+                          <span>
+                            {op.gate}
+                            {op.params && op.params.length > 0 && (
+                              <span className="text-[9px] block text-center opacity-80">
+                                {(op.params[0] / Math.PI).toFixed(2)}π
+                              </span>
+                            )}
+                          </span>
+                        )}
+
+                        {/* Gate Actions Dropdown / Delete button */}
+                        <div className="absolute -top-2 -right-2 hidden group-hover/gate:flex items-center gap-1 z-30">
+                          {op.params && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setActiveParamModal({
+                                  stepIndex: stepIdx,
+                                  gateId: op.id,
+                                  angle: op.params![0],
+                                });
+                              }}
+                              title="Edit rotation angle"
+                              className="w-4 h-4 rounded-full bg-violet-600 text-white flex items-center justify-center text-[10px] hover:scale-110 shadow"
+                            >
+                              <Sliders className="w-2.5 h-2.5" />
+                            </button>
+                          )}
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              removeGate(stepIdx, op.id);
+                            }}
+                            title="Remove gate"
+                            className="w-4 h-4 rounded-full bg-rose-600 text-white flex items-center justify-center text-[10px] hover:scale-110 shadow"
+                          >
+                            ×
+                          </button>
+                        </div>
+                      </div>
+                    ) : isPendingControl ? (
+                      <div className="w-4 h-4 rounded-full bg-emerald-400 ring-4 ring-emerald-400/30 animate-pulse" />
+                    ) : (
+                      /* Empty slot hover target */
+                      <div className="w-8 h-8 rounded-lg border border-dashed border-slate-700/60 hover:border-cyan-400/80 hover:bg-cyan-500/10 flex items-center justify-center opacity-0 hover:opacity-100 transition-all">
+                        <Plus className="w-3 h-3 text-cyan-400" />
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 
   return (
     <div className="glass-panel rounded-xl p-4 flex flex-col gap-4 border border-white/10 relative overflow-hidden">
@@ -149,8 +287,49 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
           </span>
         </div>
 
-        {/* Qubit & Step controls */}
-        <div className="flex items-center gap-3">
+        {/* Controls: View Modes, Qubits, Steps, Copilot */}
+        <div className="flex flex-wrap items-center gap-2.5">
+          {/* Dual-Sync View Mode Switcher */}
+          <div className="flex items-center bg-black/50 rounded-lg p-0.5 border border-white/10 text-xs">
+            <button
+              onClick={() => setViewMode("split")}
+              className={`px-2 py-1 rounded flex items-center gap-1.5 font-medium transition-all ${
+                viewMode === "split"
+                  ? "bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30 shadow-[0_0_10px_rgba(0,242,254,0.2)]"
+                  : "text-slate-400 hover:text-white"
+              }`}
+              title="Dual-Sync Split View: Visual Canvas + Live Python Qiskit Code"
+            >
+              <Columns className="w-3.5 h-3.5" />
+              <span>Dual-Sync</span>
+            </button>
+            <button
+              onClick={() => setViewMode("canvas")}
+              className={`px-2 py-1 rounded flex items-center gap-1.5 font-medium transition-all ${
+                viewMode === "canvas"
+                  ? "bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30 shadow-[0_0_10px_rgba(0,242,254,0.2)]"
+                  : "text-slate-400 hover:text-white"
+              }`}
+              title="Canvas Only View"
+            >
+              <Layers className="w-3.5 h-3.5" />
+              <span>Canvas</span>
+            </button>
+            <button
+              onClick={() => setViewMode("code")}
+              className={`px-2 py-1 rounded flex items-center gap-1.5 font-medium transition-all ${
+                viewMode === "code"
+                  ? "bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30 shadow-[0_0_10px_rgba(0,242,254,0.2)]"
+                  : "text-slate-400 hover:text-white"
+              }`}
+              title="Full Code Editor View"
+            >
+              <Code2 className="w-3.5 h-3.5" />
+              <span>Code</span>
+            </button>
+          </div>
+
+          {/* Qubit controls */}
           <div className="flex items-center gap-1.5 bg-black/40 rounded-lg p-1 border border-white/5 text-xs">
             <span className="text-slate-400 px-1 font-mono">Qubits:</span>
             <button
@@ -215,137 +394,39 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
         </div>
       )}
 
-      {/* Grid Canvas Area */}
-      <div className="overflow-x-auto pb-2 select-none">
-        <div className="inline-block min-w-full">
-          {/* Step numbers header row */}
-          <div className="flex items-center pl-20 mb-2">
-            {Array.from({ length: visibleStepsCount }).map((_, stepIdx) => (
-              <div
-                key={stepIdx}
-                onClick={() => setActiveStep(stepIdx)}
-                className={`w-14 text-center text-[11px] font-mono cursor-pointer transition-all ${
-                  activeStep === stepIdx
-                    ? "text-cyan-400 font-bold scale-110"
-                    : "text-slate-500 hover:text-slate-300"
-                }`}
-              >
-                t{stepIdx}
-              </div>
-            ))}
+      {/* Workspace Display Area based on View Mode */}
+      {viewMode === "split" && (
+        <div className="grid grid-cols-1 xl:grid-cols-12 gap-3 items-stretch">
+          <div className="xl:col-span-7 flex flex-col justify-between overflow-x-auto pb-2 select-none min-w-0 bg-slate-950/40 rounded-xl p-2.5 border border-white/5">
+            {renderGrid()}
           </div>
-
-          {/* Qubit wire rows */}
-          <div className="flex flex-col gap-3">
-            {Array.from({ length: numQubits }).map((_, qIdx) => (
-              <div key={qIdx} className="flex items-center relative group">
-                {/* Qubit Label */}
-                <div className="w-20 pr-3 flex items-center justify-between text-xs font-mono font-semibold text-slate-300">
-                  <span className="text-cyan-400">|q{qIdx}⟩</span>
-                  <span className="text-[10px] text-slate-500">|0⟩</span>
-                </div>
-
-                {/* Wire line running behind cells */}
-                <div className="relative flex items-center">
-                  <div className="absolute left-0 right-0 h-[2px] bg-slate-700 group-hover:bg-slate-600 transition-colors z-0" />
-
-                  {/* Wire Cells */}
-                  {Array.from({ length: visibleStepsCount }).map((_, stepIdx) => {
-                    const op = getGateAt(stepIdx, qIdx);
-                    const isControl = op && op.qubits.length > 1 && op.qubits[0] === qIdx;
-                    const isTarget = op && op.qubits.length > 1 && op.qubits[1] === qIdx;
-                    const isPendingControl =
-                      pendingControlQubit?.stepIndex === stepIdx &&
-                      pendingControlQubit.controlQubit === qIdx;
-
-                    return (
-                      <div
-                        key={stepIdx}
-                        onClick={() => handleCellClick(stepIdx, qIdx)}
-                        className={`relative w-14 h-12 flex items-center justify-center z-10 cursor-pointer transition-all ${
-                          activeStep === stepIdx ? "bg-cyan-500/5 rounded-lg" : ""
-                        }`}
-                      >
-                        {/* Two-qubit connector line if multi-qubit gate */}
-                        {op && op.qubits.length > 1 && isControl && (
-                          <div
-                            className="absolute w-[2px] bg-emerald-400 z-0 pointer-events-none"
-                            style={{
-                              top: "50%",
-                              height: `${Math.abs(op.qubits[1] - op.qubits[0]) * 52}px`,
-                              transform: op.qubits[1] > op.qubits[0] ? "none" : "scaleY(-1)",
-                              transformOrigin: "top",
-                            }}
-                          />
-                        )}
-
-                        {/* Placed Gate Badge */}
-                        {op ? (
-                          <div
-                            className={`relative px-2.5 py-1.5 rounded-lg font-mono text-xs font-bold border transition-transform ${getGateBadgeStyle(
-                              op.gate
-                            )} group/gate hover:scale-110`}
-                          >
-                            {isControl ? (
-                              <div className="w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
-                            ) : (
-                              <span>
-                                {op.gate}
-                                {op.params && op.params.length > 0 && (
-                                  <span className="text-[9px] block text-center opacity-80">
-                                    {(op.params[0] / Math.PI).toFixed(2)}π
-                                  </span>
-                                )}
-                              </span>
-                            )}
-
-                            {/* Gate Actions Dropdown / Delete button */}
-                            <div className="absolute -top-2 -right-2 hidden group-hover/gate:flex items-center gap-1 z-30">
-                              {op.params && (
-                                <button
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    setActiveParamModal({
-                                      stepIndex: stepIdx,
-                                      gateId: op.id,
-                                      angle: op.params![0],
-                                    });
-                                  }}
-                                  title="Edit rotation angle"
-                                  className="w-4 h-4 rounded-full bg-violet-600 text-white flex items-center justify-center text-[10px] hover:scale-110 shadow"
-                                >
-                                  <Sliders className="w-2.5 h-2.5" />
-                                </button>
-                              )}
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  removeGate(stepIdx, op.id);
-                                }}
-                                title="Remove gate"
-                                className="w-4 h-4 rounded-full bg-rose-600 text-white flex items-center justify-center text-[10px] hover:scale-110 shadow"
-                              >
-                                ×
-                              </button>
-                            </div>
-                          </div>
-                        ) : isPendingControl ? (
-                          <div className="w-4 h-4 rounded-full bg-emerald-400 ring-4 ring-emerald-400/30 animate-pulse" />
-                        ) : (
-                          /* Empty slot hover target */
-                          <div className="w-8 h-8 rounded-lg border border-dashed border-slate-700/60 hover:border-cyan-400/80 hover:bg-cyan-500/10 flex items-center justify-center opacity-0 hover:opacity-100 transition-all">
-                            <Plus className="w-3 h-3 text-cyan-400" />
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
+          <div className="xl:col-span-5 min-w-0 flex flex-col">
+            <QuantumCodeEditor
+              height="270px"
+              compact={true}
+              showHeader={true}
+              defaultSdk="qiskit"
+            />
           </div>
         </div>
-      </div>
+      )}
+
+      {viewMode === "canvas" && (
+        <div className="overflow-x-auto pb-2 select-none">
+          {renderGrid()}
+        </div>
+      )}
+
+      {viewMode === "code" && (
+        <div className="w-full">
+          <QuantumCodeEditor
+            height="360px"
+            compact={false}
+            showHeader={true}
+            defaultSdk="qiskit"
+          />
+        </div>
+      )}
 
       {/* Rotation Parameter Modal */}
       {activeParamModal && (

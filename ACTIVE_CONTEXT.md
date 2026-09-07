@@ -37,6 +37,13 @@ Quantangle has successfully completed Phases 0 through 5:
 
 ## 3. Recent Changes Log
 - **2026-09-07**:
+  - **Live Qiskit Python Code Visibility & Dual-Sync Split View (`TASK-3.4`)**:
+    - Embedded a side-by-side **Dual-Sync Split View** in `CircuitCanvas.tsx` displaying the circuit schematic on the left and live synchronized Qiskit Python code on the right with default active state on initial load.
+    - Added a 3-way **Workspace View Mode Switcher** (`Dual-Sync` | `Canvas` | `Code`) in the canvas toolbar.
+    - Resolved Monaco 18px height collapse by configuring explicit heights and `automaticLayout: true`, plus an instant **IDE / Raw Syntax View** toggle.
+    - Wired `QuantumCodeEditor` reactively to `steps`, `numQubits`, and `numClbits` from `useCircuitStore`, enabling instant Python code updates upon gate placement and parameter adjustments.
+    - Added an expandable **"View Qiskit Python Code"** snippet in Qu-Copilot's verified circuit recommendation cards.
+    - Verified live dual-sync synchronization, gate placement reactivity, and IDE/Raw rendering across multiple automated browser subagent sessions.
   - **Qu-Copilot Design Fault & Layout Refactor Completed (`TASK-5.4`)**:
     - Eliminated unconstrained vertical expansion and scroll hijacking by bounding the message list with `min-h-0 flex-1 overflow-y-auto` and auto-scrolling directly on the chat container (`chatContainerRef.current.scrollTo`).
     - Anchored prompt chips and input bar to the bottom of the copilot panel, ensuring they are always visible without scrolling the window.

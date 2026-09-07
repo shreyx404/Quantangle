@@ -205,7 +205,7 @@ export default function Home() {
 
             {activeBottomTab === "editor" && (
               <div className="w-full">
-                <QuantumCodeEditor />
+                <QuantumCodeEditor height="420px" />
               </div>
             )}
           </div>

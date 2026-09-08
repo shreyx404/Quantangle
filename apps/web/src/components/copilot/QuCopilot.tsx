@@ -254,7 +254,7 @@ export const QuCopilot: React.FC<QuCopilotProps> = ({ onClose }) => {
                     className={`w-full py-2.5 px-3 rounded-xl text-[13px] font-semibold flex items-center justify-center gap-1.5 transition-colors active:translate-y-[1px] ${
                       isApplied
                         ? "bg-emerald-500/10 text-emerald-300/80 border border-emerald-500/20 cursor-default"
-                        : "bg-cyan-500 hover:bg-cyan-400 text-slate-950"
+                        : "bg-cyan-500 hover:bg-cyan-400 text-cyan-950"
                     }`}
                   >
                     {isApplied ? (
@@ -370,7 +370,7 @@ export const QuCopilot: React.FC<QuCopilotProps> = ({ onClose }) => {
           onClick={() => handleSend(input)}
           disabled={!input.trim() || isThinking}
           aria-label="Send message to Qu-Copilot"
-          className="h-10 w-10 rounded-xl bg-cyan-500 hover:bg-cyan-400 disabled:opacity-25 text-slate-950 transition-colors active:translate-y-[1px] flex items-center justify-center flex-shrink-0"
+          className="h-10 w-10 rounded-xl bg-cyan-500 hover:bg-cyan-400 disabled:opacity-25 text-cyan-950 transition-colors active:translate-y-[1px] flex items-center justify-center flex-shrink-0"
           title="Send"
         >
           <Send className="w-4 h-4" />

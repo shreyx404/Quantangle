@@ -322,7 +322,7 @@ Can you guide me on how to adjust my circuit to satisfy the fidelity constraint?
               {evaluation.passed && (
                 <button
                   onClick={openArena}
-                  className="h-8 px-3 rounded-lg text-[12px] font-semibold bg-emerald-500 hover:bg-emerald-400 text-slate-950 flex items-center gap-1.5 transition-all shadow-subtle"
+                  className="h-8 px-3 rounded-lg text-[12px] font-semibold bg-emerald-500 hover:bg-emerald-400 text-emerald-950 flex items-center gap-1.5 transition-all shadow-subtle"
                 >
                   <span>More Quests</span>
                   <ArrowRight className="w-3.5 h-3.5" />

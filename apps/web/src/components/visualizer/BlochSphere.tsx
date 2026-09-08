@@ -204,16 +204,16 @@ export const BlochSphere: React.FC = () => {
         className="flex-1 w-full min-h-[220px] relative cursor-grab active:cursor-grabbing"
       >
         {/* Cardinal State Pole Overlays */}
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 pointer-events-none type-telemetry font-semibold text-sky-300 bg-[#070b14]/80 px-2.5 py-1 rounded-md border border-white/[0.08] shadow-sm">
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 pointer-events-none type-telemetry font-semibold text-sky-300 bg-[#070b14]/80 px-2.5 py-1 rounded-md border border-white/[0.06]">
           |0⟩ (+Z)
         </div>
-        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 pointer-events-none type-telemetry font-semibold text-sky-400 bg-[#070b14]/80 px-2.5 py-1 rounded-md border border-white/[0.08] shadow-sm">
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 pointer-events-none type-telemetry font-semibold text-sky-400 bg-[#070b14]/80 px-2.5 py-1 rounded-md border border-white/[0.06]">
           |1⟩ (-Z)
         </div>
-        <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-xs font-telemetry text-amber-300 bg-[#070b14]/80 px-2 py-0.5 rounded-md border border-white/[0.08] shadow-sm">
+        <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none type-telemetry font-semibold text-amber-300 bg-[#070b14]/80 px-2.5 py-1 rounded-md border border-white/[0.06]">
           |+⟩ (+X)
         </div>
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-xs font-telemetry text-emerald-300 bg-[#070b14]/80 px-2 py-0.5 rounded-md border border-white/[0.08] shadow-sm">
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none type-telemetry font-semibold text-emerald-300 bg-[#070b14]/80 px-2.5 py-1 rounded-md border border-white/[0.06]">
           |+i⟩ (+Y)
         </div>
       </div>

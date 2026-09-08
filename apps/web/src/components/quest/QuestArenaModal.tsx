@@ -392,8 +392,8 @@ export const QuestArenaModal: React.FC = () => {
                           isCompleted
                             ? "bg-white/[0.06] hover:bg-white/[0.10] text-slate-200"
                             : quest.isBugHunt
-                            ? "bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold"
-                            : "bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold"
+                            ? "bg-amber-500 hover:bg-amber-400 text-amber-950 font-semibold"
+                            : "bg-cyan-500 hover:bg-cyan-400 text-cyan-950 font-semibold"
                         }`}
                       >
                         <Play className="w-3 h-3 fill-current" />
@@ -521,7 +521,7 @@ export const QuestArenaModal: React.FC = () => {
                             <button
                               onClick={() => handleClaimCredential(track.id)}
                               disabled={isClaiming === track.id}
-                              className="px-4 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-xs flex items-center gap-1.5 transition-all active:translate-y-[1px]"
+                              className="px-4 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-amber-950 font-semibold text-xs flex items-center gap-1.5 transition-all active:translate-y-[1px]"
                             >
                               <Award className="w-3.5 h-3.5" />
                               <span>{isClaiming === track.id ? "Signing..." : "Claim Micro-Credential"}</span>

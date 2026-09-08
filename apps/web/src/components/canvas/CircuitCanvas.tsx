@@ -471,7 +471,7 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
                   );
                   setActiveParamModal(null);
                 }}
-                className="flex-1 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold text-[13px] transition-colors active:translate-y-[1px]"
+                className="flex-1 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-cyan-950 font-semibold text-[13px] transition-colors active:translate-y-[1px]"
               >
                 Apply
               </button>

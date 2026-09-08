@@ -299,7 +299,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={onRunSimulation}
             disabled={isRunningSimulation}
-            className="h-9 px-4 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold text-[13px] flex items-center gap-2 transition-colors active:translate-y-[1px] disabled:opacity-50 disabled:cursor-not-allowed"
+            className="h-9 px-4 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-cyan-950 font-semibold text-[13px] flex items-center gap-2 transition-colors active:translate-y-[1px] disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isRunningSimulation ? (
               <>

@@ -161,7 +161,7 @@ function CredentialVerifier() {
         <button
           type="submit"
           disabled={loading || !inputQuery.trim()}
-          className="h-11 px-5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-xs flex items-center gap-2 transition-all active:translate-y-[1px] disabled:opacity-50"
+          className="h-11 px-5 rounded-xl bg-amber-500 hover:bg-amber-400 text-amber-950 font-semibold text-xs flex items-center gap-2 transition-all active:translate-y-[1px] disabled:opacity-50"
         >
           {loading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <ShieldCheck className="w-4 h-4" />}
           <span>Verify Credential</span>

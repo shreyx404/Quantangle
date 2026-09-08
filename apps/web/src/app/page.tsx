@@ -98,7 +98,7 @@ export default function Home() {
       />
 
       {/* Main Workspace Layout — generous spacing */}
-      <main className="flex-1 max-w-[1800px] w-full mx-auto px-5 lg:px-8 py-5 lg:py-6 flex flex-col gap-5">
+      <main className="flex-1 max-w-[1800px] w-full mx-auto px-5 lg:px-8 py-5 lg:py-6 flex flex-col gap-5 animate-instrument-ready">
         {/* Top Grid: Canvas & Copilot */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
           {/* Circuit Design Workspace (Canvas + Palette + Scrubber) */}
@@ -204,21 +204,21 @@ export default function Home() {
           {/* Tab Content Panes */}
           <div className="p-5">
             {activeBottomTab === "visualizer" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 tab-content-enter" key="tab-visualizer">
                 <BlochSphere />
                 <QSphere />
               </div>
             )}
 
             {activeBottomTab === "measurements" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 tab-content-enter" key="tab-measurements">
                 <ProbabilityHistogram />
                 <StatevectorTable />
               </div>
             )}
 
             {activeBottomTab === "editor" && (
-              <div className="w-full">
+              <div className="w-full tab-content-enter" key="tab-editor">
                 <QuantumCodeEditor height="420px" />
               </div>
             )}
@@ -227,9 +227,9 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/[0.04] py-4 px-6 flex items-center justify-between text-[12px] text-slate-500 bg-[#060912]">
-        <span>Quantangle Platform · SIH 2026</span>
-        <span className="font-mono text-[11px] text-slate-600">Little-Endian Architecture</span>
+      <footer className="border-t border-white/[0.03] py-3.5 px-6 lg:px-8 flex items-center justify-between text-[11px] text-slate-500/80 bg-[#060912]">
+        <span className="tracking-wide">Quantangle Platform · SIH 2026</span>
+        <span className="font-mono text-[10px] text-slate-600/70 tabular-nums">Little-Endian · |q₀⟩ LSB</span>
       </footer>
 
       {/* Quest Arena & Leaderboard Modal */}

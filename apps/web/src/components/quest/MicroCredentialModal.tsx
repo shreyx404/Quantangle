@@ -395,7 +395,7 @@ export const MicroCredentialModal: React.FC = () => {
 
                   <button
                     onClick={handlePrint}
-                    className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-xs flex items-center gap-1.5 transition-colors active:translate-y-[1px]"
+                    className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-amber-950 font-semibold text-xs flex items-center gap-1.5 transition-colors active:translate-y-[1px]"
                   >
                     <Printer className="w-3.5 h-3.5" />
                     <span>Print Certificate</span>
@@ -581,7 +581,7 @@ export const MicroCredentialModal: React.FC = () => {
                 <button
                   onClick={handleRunVerification}
                   disabled={isVerifying}
-                  className="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold text-xs flex items-center gap-2 transition-all active:translate-y-[1px]"
+                  className="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-cyan-950 font-semibold text-xs flex items-center gap-2 transition-all active:translate-y-[1px]"
                 >
                   {isVerifying ? (
                     <RefreshCw className="w-4 h-4 animate-spin" />

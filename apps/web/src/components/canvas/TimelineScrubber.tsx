@@ -79,7 +79,7 @@ export const TimelineScrubber: React.FC = () => {
           onClick={() => setIsPlaying(!isPlaying)}
           aria-label={isPlaying ? "Pause Timeline Animation" : "Play Timeline Animation"}
           title={isPlaying ? "Pause" : "Play"}
-          className="w-9 h-9 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 flex items-center justify-center transition-colors active:translate-y-[1px] font-semibold"
+          className="w-9 h-9 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-cyan-950 flex items-center justify-center transition-colors active:translate-y-[1px] font-semibold"
         >
           {isPlaying ? (
             <Pause className="w-4 h-4 fill-current" />

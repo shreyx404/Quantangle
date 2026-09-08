@@ -46,10 +46,8 @@ async def health_check():
 
 
 # ---------------------------------------------------------------------------
-# Router Registration (stubs — implemented in later phases)
+# Router Registration
 # ---------------------------------------------------------------------------
-# from routers import sim, copilot, arena, credentials
-# app.include_router(sim.router, prefix="/api/v1/sim", tags=["Simulation"])
-# app.include_router(copilot.router, prefix="/api/v1/copilot", tags=["Qu-Copilot"])
-# app.include_router(arena.router, prefix="/api/v1/arena", tags=["Arena"])
-# app.include_router(credentials.router, prefix="/api/v1/credentials", tags=["Credentials"])
+from routers import arena
+
+app.include_router(arena.router, prefix="/api/v1")

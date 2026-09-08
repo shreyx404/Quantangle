@@ -10,7 +10,10 @@ import {
   Zap,
   BookOpen,
   Github,
+  Trophy,
+  Flame,
 } from "lucide-react";
+import { useQuestStore } from "../../stores/useQuestStore";
 
 export const PRESET_CIRCUITS: Record<
   string,
@@ -133,6 +136,7 @@ export const Header: React.FC<HeaderProps> = ({
   isRunningSimulation,
 }) => {
   const { loadCircuitFromIR } = useCircuitStore();
+  const { openArena, streakDays, totalXP } = useQuestStore();
 
   const handleSelectPreset = (key: string) => {
     const preset = PRESET_CIRCUITS[key];
@@ -173,6 +177,25 @@ export const Header: React.FC<HeaderProps> = ({
             <span className="text-white/[0.08]">·</span>
             <span className="text-emerald-400 font-mono tabular-nums text-[11px]">0.08ms</span>
           </div>
+
+          {/* Quest Arena Button with Live Streak & XP Telemetry */}
+          <button
+            onClick={openArena}
+            className="h-9 px-3.5 rounded-xl bg-[#0d1220] hover:bg-[#131b2e] border border-amber-500/25 hover:border-amber-500/40 text-amber-300 font-medium text-[13px] flex items-center gap-2 transition-all active:translate-y-[1px]"
+            title="Open Quest Labs & Gamification Arena"
+          >
+            <Trophy className="w-4 h-4 text-amber-400 flex-shrink-0" />
+            <span>Quests</span>
+            <span className="text-white/[0.1]">·</span>
+            <span className="flex items-center gap-1 font-mono text-[11px] text-orange-400">
+              <Flame className="w-3.5 h-3.5 text-orange-400 fill-orange-400/20" />
+              <span>{streakDays}d</span>
+            </span>
+            <span className="text-white/[0.1]">·</span>
+            <span className="font-mono text-[11px] text-amber-300 font-semibold">
+              {totalXP} XP
+            </span>
+          </button>
 
           {/* Preset Circuit Dropdown */}
           <div className="h-9 flex items-center gap-2 bg-[#0d1220] rounded-xl px-3 border border-white/[0.05] text-[13px] hover:border-white/[0.10] transition-colors">

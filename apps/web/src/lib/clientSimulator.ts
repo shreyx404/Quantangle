@@ -255,3 +255,87 @@ function applyTwoQubitGate(
 
   return newState;
 }
+
+/**
+ * Evaluates the quantum state fidelity between target and student circuits:
+ * F = |<psi_target | psi_student>|^2
+ *
+ * Guaranteed Little-Endian standard: q0 is LSB, index 0 is |00...0⟩.
+ * Threshold for passing is F >= 0.999 per SIH26140 Prime Directive.
+ */
+export function evaluateCircuitFidelity(
+  targetIR: QuantumCircuitIR,
+  studentIR: QuantumCircuitIR,
+  threshold: number = 0.999
+): {
+  fidelity: number;
+  passed: boolean;
+  actualDepth: number;
+  diagnosis?: string;
+} {
+  const targetSteps = simulateCircuitClient(targetIR);
+  const studentSteps = simulateCircuitClient(studentIR);
+
+  const targetFinal = targetSteps[targetSteps.length - 1];
+  const studentFinal = studentSteps[studentSteps.length - 1];
+
+  const actualDepth = studentIR.steps.filter((s) => s.operations.length > 0).length;
+
+  if (targetIR.qubits !== studentIR.qubits) {
+    return {
+      fidelity: 0.0,
+      passed: false,
+      actualDepth,
+      diagnosis: `Qubit count mismatch: target circuit requires ${targetIR.qubits} qubits, but student circuit has ${studentIR.qubits} qubits.`,
+    };
+  }
+
+  const numStates = 1 << targetIR.qubits;
+  const psi_t = targetFinal.statevector;
+  const psi_s = studentFinal.statevector;
+
+  // Inner product <psi_t | psi_s> = sum_i (psi_t[i])* * psi_s[i]
+  let inner_re = 0.0;
+  let inner_im = 0.0;
+
+  for (let i = 0; i < numStates; i++) {
+    const t_re = psi_t[i * 2];
+    const t_im = psi_t[i * 2 + 1];
+    const s_re = psi_s[i * 2];
+    const s_im = psi_s[i * 2 + 1];
+
+    // (t_re - i * t_im) * (s_re + i * s_im)
+    inner_re += t_re * s_re + t_im * s_im;
+    inner_im += t_re * s_im - t_im * s_re;
+  }
+
+  const fidelity = Math.min(1.0, inner_re * inner_re + inner_im * inner_im);
+  const passed = fidelity >= threshold;
+
+  let diagnosis: string | undefined;
+  if (!passed) {
+    let probMaxDiff = 0.0;
+    for (let i = 0; i < numStates; i++) {
+      const diff = Math.abs(
+        targetFinal.probabilities[i] - studentFinal.probabilities[i]
+      );
+      if (diff > probMaxDiff) probMaxDiff = diff;
+    }
+
+    if (probMaxDiff < 0.05) {
+      diagnosis =
+        "Basis measurement probabilities match, but relative phase is incorrect (Phase Error). Check Pauli-Z, S, or T gates.";
+    } else {
+      diagnosis = `Basis probabilities diverge by up to ${(probMaxDiff * 100).toFixed(
+        1
+      )}%. Bit flips or entanglement wiring need adjustment.`;
+    }
+  }
+
+  return {
+    fidelity: Number(fidelity.toFixed(5)),
+    passed,
+    actualDepth,
+    diagnosis,
+  };
+}

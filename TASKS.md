@@ -122,15 +122,15 @@
 ---
 
 ## Phase 6: Quest Labs & Gamification Arena
-- [ ] **TASK-6.1: Build Quest Catalog for Tracks 1 & 2**
+- [x] **TASK-6.1: Build Quest Catalog for Tracks 1 & 2**
   - *Input*: Foundations & Entanglement curriculum.
   - *Output*: `apps/web/src/content/quests/` containing structured JSON labs for Superposition, Pauli Gates, Bell States, and Teleportation.
   - *Acceptance Criteria*: Each quest specifies starting circuit, target state fidelity, explanation markdown, and XP rewards.
-- [ ] **TASK-6.2: Build Quantum Bug-Hunting Sandbox**
+- [x] **TASK-6.2: Build Quantum Bug-Hunting Sandbox**
   - *Input*: Broken circuit challenges (e.g. inverted CNOT, missing phase kickback).
   - *Output*: Interactive challenge screen where student must diagnose and patch the circuit to reach $F \ge 0.999$.
   - *Acceptance Criteria*: Automated grader evaluates submission upon clicking "Run Verification" and rewards XP on success.
-- [ ] **TASK-6.3: Implement Daily Streaks & Redis Leaderboard Engine**
+- [x] **TASK-6.3: Implement Daily Streaks & Redis Leaderboard Engine**
   - *Input*: User completions and XP transactions.
   - *Output*: `apps/api/routers/arena.py` managing Redis Sorted Sets for national and college-level rankings.
   - *Acceptance Criteria*: Leaderboard queries resolve in $<20$ms; streak counter increments on daily activity.

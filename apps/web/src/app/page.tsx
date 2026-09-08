@@ -11,10 +11,13 @@ import { ProbabilityHistogram } from "../components/visualizer/ProbabilityHistog
 import { StatevectorTable } from "../components/visualizer/StatevectorTable";
 import { QuantumCodeEditor } from "../components/editor/QuantumCodeEditor";
 import { QuCopilot } from "../components/copilot/QuCopilot";
+import { QuestMissionHUD } from "../components/quest/QuestMissionHUD";
+import { QuestArenaModal } from "../components/quest/QuestArenaModal";
 
 import { useCircuitStore } from "../stores/useCircuitStore";
 import { useSimulationStore } from "../stores/useSimulationStore";
 import { useCopilotStore } from "../stores/useCopilotStore";
+import { useQuestStore } from "../stores/useQuestStore";
 import { simulateCircuitClient } from "../lib/clientSimulator";
 import type { GateType } from "@quantangle/quantum-ast";
 
@@ -39,6 +42,7 @@ export default function Home() {
     "visualizer"
   );
   const { isOpen: copilotOpen, setOpen: setCopilotOpen } = useCopilotStore();
+  const { activeQuestId } = useQuestStore();
 
   // Initialize with Bell State |Φ⁺⟩ on first load
   const initializedRef = useRef(false);
@@ -102,6 +106,9 @@ export default function Home() {
               copilotOpen ? "lg:col-span-8" : "lg:col-span-12"
             }`}
           >
+            {/* Active Quest Mission HUD */}
+            {activeQuestId && <QuestMissionHUD />}
+
             {/* Gate Palette */}
             <GatePalette
               selectedGate={selectedPaletteGate}
@@ -223,6 +230,9 @@ export default function Home() {
         <span>Quantangle Platform · SIH 2026</span>
         <span className="font-mono text-[11px] text-slate-600">Little-Endian Architecture</span>
       </footer>
+
+      {/* Quest Arena & Leaderboard Modal */}
+      <QuestArenaModal />
     </div>
   );
 }

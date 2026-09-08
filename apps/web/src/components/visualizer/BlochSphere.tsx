@@ -5,7 +5,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three-stdlib";
 import { useSimulationStore } from "../../stores/useSimulationStore";
 import { useCircuitStore } from "../../stores/useCircuitStore";
-import { Globe2, Info } from "lucide-react";
+import { Globe2 } from "lucide-react";
 
 export const BlochSphere: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -13,7 +13,6 @@ export const BlochSphere: React.FC = () => {
   const { stepStates, activeStep } = useSimulationStore();
   const [selectedQubit, setSelectedQubit] = useState(0);
 
-  // Get current Bloch vector for the selected qubit
   const currentStepState = stepStates[activeStep];
   const blochVector = currentStepState?.blochVectors?.find(
     (b) => b.qubit === selectedQubit
@@ -23,7 +22,6 @@ export const BlochSphere: React.FC = () => {
     const mount = mountRef.current;
     if (!mount) return;
 
-    // Scene setup
     const scene = new THREE.Scene();
     const width = mount.clientWidth || 300;
     const height = mount.clientHeight || 300;
@@ -43,21 +41,19 @@ export const BlochSphere: React.FC = () => {
     controls.minDistance = 1.5;
     controls.maxDistance = 6;
 
-    // Ambient & directional lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
     scene.add(ambientLight);
 
-    const dirLight = new THREE.DirectionalLight(0x00f2fe, 1.2);
+    const dirLight = new THREE.DirectionalLight(0x00f0ff, 1.2);
     dirLight.position.set(5, 10, 7);
     scene.add(dirLight);
 
-    // 1. Translucent Geodesic Sphere
+    // 1. Geodesic Sphere
     const sphereGeo = new THREE.SphereGeometry(1, 32, 32);
     const sphereMat = new THREE.MeshPhongMaterial({
-      color: 0x0f172a,
+      color: 0x0a1120,
       transparent: true,
       opacity: 0.35,
-      wireframe: false,
       shininess: 90,
     });
     const sphere = new THREE.Mesh(sphereGeo, sphereMat);
@@ -66,47 +62,40 @@ export const BlochSphere: React.FC = () => {
     // 2. Wireframe overlay
     const wireGeo = new THREE.WireframeGeometry(sphereGeo);
     const wireMat = new THREE.LineBasicMaterial({
-      color: 0x334155,
+      color: 0x1e293b,
       transparent: true,
       opacity: 0.3,
     });
     const wireframe = new THREE.LineSegments(wireGeo, wireMat);
     scene.add(wireframe);
 
-    // 3. Equator and Meridian Guide Rings
+    // 3. Equator and Meridian Rings
     const createRing = (rotation: [number, number, number], color: number) => {
       const ringGeo = new THREE.RingGeometry(0.995, 1.005, 64);
       const ringMat = new THREE.MeshBasicMaterial({
         color,
         side: THREE.DoubleSide,
         transparent: true,
-        opacity: 0.5,
+        opacity: 0.45,
       });
       const ring = new THREE.Mesh(ringGeo, ringMat);
       ring.rotation.set(...rotation);
       return ring;
     };
 
-    scene.add(createRing([Math.PI / 2, 0, 0], 0x00f2fe)); // XY Equator (cyan)
-    scene.add(createRing([0, 0, 0], 0x475569)); // XZ Meridian
-    scene.add(createRing([0, Math.PI / 2, 0], 0x475569)); // YZ Meridian
+    scene.add(createRing([Math.PI / 2, 0, 0], 0x00f0ff)); // XY Equator (cyan)
+    scene.add(createRing([0, 0, 0], 0x334155)); // XZ Meridian
+    scene.add(createRing([0, Math.PI / 2, 0], 0x334155)); // YZ Meridian
 
-    // 4. Coordinate Axes (X: Red/Amber, Y: Emerald, Z: Cyan)
-    // Note: Three.js coordinates: Y is up (Z-axis in quantum standard convention!)
-    // We map Quantum (x, y, z) -> Three.js (x, z, -y) or (x, z, y):
-    // Standard Quantum: |0⟩ is +Z (Up), |1⟩ is -Z (Down)
-    // Three.js: +Y is Up, -Y is Down.
-    // So Three.js Y = Quantum Z.
-    // Three.js X = Quantum X.
-    // Three.js Z = Quantum Y.
+    // 4. Coordinate Axes (Quantum Z = Three.js Y)
     const createAxis = (from: THREE.Vector3, to: THREE.Vector3, color: number) => {
       const points = [from, to];
       const geometry = new THREE.BufferGeometry().setFromPoints(points);
-      const material = new THREE.LineBasicMaterial({ color, linewidth: 2 });
+      const material = new THREE.LineBasicMaterial({ color });
       return new THREE.Line(geometry, material);
     };
 
-    // Z-axis (Vertical: |0⟩ at top, |1⟩ at bottom)
+    // Z-axis (Up/Down in Three.js)
     scene.add(createAxis(new THREE.Vector3(0, -1.3, 0), new THREE.Vector3(0, 1.3, 0), 0x38bdf8));
     // X-axis
     scene.add(createAxis(new THREE.Vector3(-1.3, 0, 0), new THREE.Vector3(1.3, 0, 0), 0xf59e0b));
@@ -114,27 +103,24 @@ export const BlochSphere: React.FC = () => {
     scene.add(createAxis(new THREE.Vector3(0, 0, -1.3), new THREE.Vector3(0, 0, 1.3), 0x10b981));
 
     // 5. State Vector Arrow
-    // Dynamic ArrowHelper
     const dir = new THREE.Vector3(blochVector.x, blochVector.z, blochVector.y).normalize();
     const length = Math.max(0.01, blochVector.purity);
     const arrow = new THREE.ArrowHelper(
       dir,
       new THREE.Vector3(0, 0, 0),
       length,
-      0x00f2fe,
+      0x00f0ff,
       0.15,
       0.08
     );
     scene.add(arrow);
 
-    // Tip sphere
     const tipGeo = new THREE.SphereGeometry(0.04, 16, 16);
-    const tipMat = new THREE.MeshBasicMaterial({ color: 0x00f2fe });
+    const tipMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff });
     const tipMesh = new THREE.Mesh(tipGeo, tipMat);
     tipMesh.position.copy(dir.clone().multiplyScalar(length));
     scene.add(tipMesh);
 
-    // Animation Loop
     let animationFrameId: number;
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
@@ -143,7 +129,6 @@ export const BlochSphere: React.FC = () => {
     };
     animate();
 
-    // Resize Handler
     const handleResize = () => {
       if (!mount) return;
       const newW = mount.clientWidth;
@@ -154,7 +139,6 @@ export const BlochSphere: React.FC = () => {
     };
     window.addEventListener("resize", handleResize);
 
-    // Cleanup
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener("resize", handleResize);
@@ -167,30 +151,30 @@ export const BlochSphere: React.FC = () => {
   }, [blochVector, selectedQubit]);
 
   return (
-    <div className="bg-[#0b0f19] rounded-xl p-3 border border-white/[0.08] flex flex-col h-full min-h-[320px] shadow-sm">
-      {/* Header with Qubit Selector */}
-      <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
+    <div className="bg-[#0b0f1a] rounded-xl p-3.5 border border-white/[0.06] flex flex-col h-full min-h-[310px] shadow-sm">
+      {/* Header */}
+      <div className="flex items-center justify-between pb-2 border-b border-white/[0.05]">
         <div className="flex items-center gap-2">
           <Globe2 className="w-3.5 h-3.5 text-cyan-400" />
-          <span className="type-heading font-mono text-white">
+          <span className="text-xs font-semibold font-mono text-white">
             3D Bloch Sphere
           </span>
-          <span className="text-[10px] text-slate-400 font-mono hidden sm:inline">
-            · Single-Qubit Reduced State
+          <span className="text-[10px] text-slate-500 font-mono hidden sm:inline">
+            · Reduced State Density
           </span>
         </div>
 
         {/* Qubit Selector */}
         <div className="flex items-center gap-1.5">
-          <span className="text-xs text-slate-300 font-mono">Qubit:</span>
+          <span className="text-xs text-slate-400 font-mono">Qubit:</span>
           <select
             value={selectedQubit}
             aria-label="Select qubit to inspect on Bloch Sphere"
             onChange={(e) => setSelectedQubit(parseInt(e.target.value, 10))}
-            className="h-7 bg-[#101726] border border-white/[0.08] rounded-md px-2.5 text-xs font-telemetry text-cyan-300 focus:outline-none focus:border-cyan-400 cursor-pointer active:translate-y-[1px] shadow-sm tabular-nums"
+            className="h-7 bg-[#070b14] border border-white/[0.06] rounded px-2 text-xs font-mono text-cyan-300 focus:outline-none focus:border-cyan-400 cursor-pointer tabular-nums"
           >
             {Array.from({ length: numQubits }).map((_, i) => (
-              <option key={i} value={i} className="bg-[#0b0f19] text-white">
+              <option key={i} value={i} className="bg-[#0b0f1a] text-white">
                 q[{i}]
               </option>
             ))}
@@ -198,48 +182,43 @@ export const BlochSphere: React.FC = () => {
         </div>
       </div>
 
-      {/* 3D WebGL Canvas Container */}
+      {/* 3D WebGL Canvas */}
       <div
         ref={mountRef}
-        className="flex-1 w-full min-h-[220px] relative cursor-grab active:cursor-grabbing"
+        className="flex-1 w-full min-h-[210px] relative cursor-grab active:cursor-grabbing"
       >
-        {/* Cardinal State Pole Overlays */}
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 pointer-events-none type-telemetry font-semibold text-sky-300 bg-[#070b14]/80 px-2.5 py-1 rounded-md border border-white/[0.06]">
+        {/* Cardinal Poles HUD */}
+        <div className="absolute top-1.5 left-1/2 -translate-x-1/2 pointer-events-none text-[10px] font-mono font-semibold text-sky-300 bg-[#070b14]/80 backdrop-blur-sm px-2 py-0.5 rounded border border-white/[0.06]">
           |0⟩ (+Z)
         </div>
-        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 pointer-events-none type-telemetry font-semibold text-sky-400 bg-[#070b14]/80 px-2.5 py-1 rounded-md border border-white/[0.06]">
+        <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 pointer-events-none text-[10px] font-mono font-semibold text-sky-400 bg-[#070b14]/80 backdrop-blur-sm px-2 py-0.5 rounded border border-white/[0.06]">
           |1⟩ (-Z)
         </div>
-        <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none type-telemetry font-semibold text-amber-300 bg-[#070b14]/80 px-2.5 py-1 rounded-md border border-white/[0.06]">
+        <div className="absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none text-[10px] font-mono font-semibold text-amber-300 bg-[#070b14]/80 backdrop-blur-sm px-2 py-0.5 rounded border border-white/[0.06]">
           |+⟩ (+X)
         </div>
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none type-telemetry font-semibold text-emerald-300 bg-[#070b14]/80 px-2.5 py-1 rounded-md border border-white/[0.06]">
+        <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-[10px] font-mono font-semibold text-emerald-300 bg-[#070b14]/80 backdrop-blur-sm px-2 py-0.5 rounded border border-white/[0.06]">
           |+i⟩ (+Y)
         </div>
       </div>
 
-      {/* Numerical Coordinate Readout */}
-      <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-xs font-telemetry tabular-nums">
-        <div className="flex items-center gap-3">
-          <span className="text-amber-400 font-semibold">x: {blochVector.x.toFixed(3)}</span>
-          <span className="text-emerald-400 font-semibold">y: {blochVector.y.toFixed(3)}</span>
-          <span className="text-sky-400 font-semibold">z: {blochVector.z.toFixed(3)}</span>
+      {/* Coordinate & Purity Readout */}
+      <div className="pt-2 border-t border-white/[0.05] flex items-center justify-between text-xs font-mono tabular-nums">
+        <div className="flex items-center gap-2.5 text-[11px]">
+          <span className="text-amber-400">x: {blochVector.x.toFixed(3)}</span>
+          <span className="text-emerald-400">y: {blochVector.y.toFixed(3)}</span>
+          <span className="text-sky-400">z: {blochVector.z.toFixed(3)}</span>
         </div>
-        <div className="flex items-center gap-1.5">
-          <span className="text-slate-300">Purity r:</span>
+        <div className="flex items-center gap-1 text-[11px]">
+          <span className="text-slate-400">Purity:</span>
           <span
             className={`font-semibold ${
               blochVector.purity < 0.99
-                ? "text-violet-400 underline decoration-dotted"
+                ? "text-violet-400 font-bold"
                 : "text-emerald-400"
             }`}
-            title={
-              blochVector.purity < 0.99
-                ? "Purity < 1 indicates quantum entanglement with other qubits!"
-                : "Pure state (r = 1.0)"
-            }
           >
-            {blochVector.purity.toFixed(3)}
+            r = {blochVector.purity.toFixed(3)}
             {blochVector.purity < 0.99 && " (Entangled)"}
           </span>
         </div>

@@ -38,6 +38,15 @@ Quantangle has successfully completed Phases 0 through 6:
 
 ## 3. Recent Changes Log
 - **2026-09-08**:
+  - **Complete UI Redesign via Impeccable Design Suite (`impeccable`, `operate`, `craft-floor`)**:
+    - **Surface & Aesthetic Foundation (`globals.css`, `tailwind.config.ts`)**: Built a unified Cryogenic Quantum Workstation design system (`#06080f` obsidian void, `#0b0f1a` precision panels) with hairline calibrated borders (`rgba(255, 255, 255, 0.06)`), eliminated text gradients and rainbow chip clutter, and themed range sliders, scrollbars, selection tokens, and focus rings.
+    - **Header & Telemetry Console (`Header.tsx`)**: Rebuilt into a 3-zone layout respecting the 2x gap rule with unified h-8 heights, interactive WASM edge telemetry pill, NQM certificate badge, and client mount guard eradicating SSR hydration warnings.
+    - **Quantum Instruction Rack (`GatePalette.tsx`)**: Consolidated into a disciplined hardware rack with 4 categorized modules (Pauli & Clifford, Entangling 2Q, Rotations, Measurement), tactile key travel (`active:translate-y-[1px]`), and dynamic placement status banner.
+    - **Circuit Schematic Canvas (`CircuitCanvas.tsx`)**: Implemented superconducting dual-rail guides, active time-slice vertical beam (`active-step-column`), multi-qubit entangling bus line with control/target markers, tactile qubit stepper, and angle presets modal (π/4, π/2, π, 3π/2, 2π).
+    - **Phase Transport Deck (`TimelineScrubber.tsx`)**: Engineered audio/video style quantum playback transport with unified h-8 buttons, discrete step notches, speed switchers (0.5x, 1x, 2x), and tabular step counter.
+    - **3D Quantum State Inspector (`BlochSphere.tsx`, `QSphere.tsx`, `ProbabilityHistogram.tsx`, `StatevectorTable.tsx`)**: Transformed into an integrated laboratory HUD with cardinal pole tags (|0⟩, |1⟩, |+⟩, |+i⟩), coordinate readouts (x, y, z, purity r), Hamming weight latitude indicators, phase-hue gradient histograms, and tabular complex amplitude tables.
+    - **Qu-Copilot AI Tutor (`QuCopilot.tsx`)**: Redesigned conversational cards, interactive protocol synthesizers (Bell State, GHZ, Teleportation, Grover), gate pipeline tokens, and one-click "Apply to Canvas" actions.
+    - **Automated & Visual Verification**: Next.js production build passed (7/7 routes), TypeScript check passed (0 errors), AST tests passed (3/3), Python FastAPI tests passed (19/19), and end-to-end browser subagent verification completed (`impeccable_redesign_verification_*.webp`).
   - **Impeccable Design Suite Installation (`pbakaus/impeccable`)**:
     - Installed official Impeccable design skill suite into `.agents/skills/impeccable` with compiled native engine `impeccable.exe` (`v0.1.3`, `windows-x64`) and command runner.
     - Pinned all 21 specialized design commands as standalone agent skills in `.agents/skills/` (`init`, `shape`, `document`, `extract`, `critique`, `audit`, `bolder`, `quieter`, `distill`, `harden`, `onboard`, `live`, `animate`, `colorize`, `typeset`, `layout`, `delight`, `overdrive`, `clarify`, `adapt`, `optimize`, and `polish`).

@@ -62,7 +62,7 @@ export default function Home() {
     }
   }, [loadCircuitFromIR]);
 
-  // Simulation runner function
+  // Simulation runner
   const runSimulation = useCallback(() => {
     setRunning(true);
     const startTime = performance.now();
@@ -81,7 +81,7 @@ export default function Home() {
     }
   }, [getCircuitIR, setRunning, setStepStates, setSimulationTime]);
 
-  // Debounced auto-simulation on circuit mutations
+  // Auto-simulation debounced
   useEffect(() => {
     const timer = setTimeout(() => {
       runSimulation();
@@ -90,33 +90,33 @@ export default function Home() {
   }, [steps, numQubits, runSimulation]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#060912]">
-      {/* Header */}
+    <div className="min-h-screen flex flex-col bg-[#06080f]">
+      {/* Precision Instrument Header */}
       <Header
         onRunSimulation={runSimulation}
         isRunningSimulation={isRunning}
       />
 
-      {/* Main Workspace Layout — generous spacing */}
-      <main className="flex-1 max-w-[1800px] w-full mx-auto px-5 lg:px-8 py-5 lg:py-6 flex flex-col gap-5 animate-instrument-ready">
-        {/* Top Grid: Canvas & Copilot */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
-          {/* Circuit Design Workspace (Canvas + Palette + Scrubber) */}
+      {/* Main Workspace */}
+      <main className="flex-1 max-w-[1800px] w-full mx-auto px-4 lg:px-6 py-4 lg:py-5 flex flex-col gap-4 animate-instrument-ready">
+        {/* Top Grid: Canvas & Qu-Copilot */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
+          {/* Circuit Design Workspace */}
           <div
-            className={`flex flex-col gap-4 transition-all duration-300 ${
+            className={`flex flex-col gap-3.5 transition-all duration-300 ${
               copilotOpen ? "lg:col-span-8" : "lg:col-span-12"
             }`}
           >
             {/* Active Quest Mission HUD */}
             {activeQuestId && <QuestMissionHUD />}
 
-            {/* Gate Palette */}
+            {/* Instruction Gate Palette */}
             <GatePalette
               selectedGate={selectedPaletteGate}
               onSelectGate={setSelectedPaletteGate}
             />
 
-            {/* Circuit Grid Canvas */}
+            {/* Quantum Circuit Canvas */}
             <CircuitCanvas
               selectedPaletteGate={selectedPaletteGate}
               onClearPaletteGate={() => setSelectedPaletteGate(null)}
@@ -124,94 +124,94 @@ export default function Home() {
               onToggleCopilot={() => setCopilotOpen(!copilotOpen)}
             />
 
-            {/* Step-by-Step Timeline Scrubber */}
+            {/* Timeline Phase Scrubber */}
             <TimelineScrubber />
           </div>
 
-          {/* Qu-Copilot AI Tutor Sidebar */}
+          {/* Qu-Copilot AI Sidebar */}
           {copilotOpen && (
-            <div className="lg:col-span-4 flex flex-col h-full">
+            <div className="lg:col-span-4 flex flex-col h-full min-h-[500px]">
               <QuCopilot onClose={() => setCopilotOpen(false)} />
             </div>
           )}
         </div>
 
-        {/* Docked Action Button when Qu-Copilot is collapsed */}
+        {/* Floating Quick Action Button when Qu-Copilot is collapsed */}
         {!copilotOpen && (
           <button
             onClick={() => setCopilotOpen(true)}
-            className="fixed bottom-6 right-6 z-50 px-4 py-2.5 rounded-xl bg-[#101726] hover:bg-[#162035] text-slate-300 hover:text-white text-[13px] font-medium flex items-center gap-2.5 border border-white/[0.06] hover:border-white/[0.12] shadow-elevated active:translate-y-[1px] transition-all"
-            title="Open Qu-Copilot AI Tutor"
+            className="fixed bottom-6 right-6 z-50 px-3.5 py-2 rounded-xl bg-[#0e1424] hover:bg-[#131b2e] text-slate-300 hover:text-white text-xs font-semibold flex items-center gap-2 border border-white/[0.08] hover:border-cyan-400/40 shadow-xl active:translate-y-[1px] transition-all"
+            title="Open Qu-Copilot AI Quantum Tutor"
           >
             <Bot className="w-4 h-4 text-cyan-400" />
             <span>Qu-Copilot</span>
           </button>
         )}
 
-        {/* Bottom Inspector Panel */}
-        <div className="bg-[#0b0f19] rounded-2xl border border-white/[0.05] flex flex-col overflow-hidden">
-          {/* Tab Selection Bar */}
-          <div className="flex flex-wrap items-center justify-between px-5 py-3 border-b border-white/[0.05] bg-[#0a0e18]">
-            <div className="flex flex-wrap items-center gap-1">
+        {/* Bottom Quantum Inspector Panel */}
+        <div className="bg-[#0b0f1a] rounded-xl border border-white/[0.06] flex flex-col overflow-hidden shadow-sm">
+          {/* Inspector Tab Bar */}
+          <div className="flex flex-wrap items-center justify-between px-4 py-2.5 border-b border-white/[0.05] bg-[#070b14]">
+            <div className="flex flex-wrap items-center gap-1.5">
               <button
                 onClick={() => setActiveBottomTab("visualizer")}
-                className={`px-4 py-2 rounded-lg text-[13px] font-medium flex items-center gap-2 transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2 transition-all ${
                   activeBottomTab === "visualizer"
-                    ? "bg-white/[0.07] text-white shadow-subtle"
+                    ? "bg-white/[0.08] text-white shadow-sm"
                     : "text-slate-400 hover:text-slate-200 hover:bg-white/[0.03]"
                 }`}
               >
-                <Globe2 className="w-4 h-4" />
-                <span>Quantum State</span>
+                <Globe2 className="w-3.5 h-3.5 text-cyan-400" />
+                <span>Quantum State (3D)</span>
               </button>
 
               <button
                 onClick={() => setActiveBottomTab("measurements")}
-                className={`px-4 py-2 rounded-lg text-[13px] font-medium flex items-center gap-2 transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2 transition-all ${
                   activeBottomTab === "measurements"
-                    ? "bg-white/[0.07] text-white shadow-subtle"
+                    ? "bg-white/[0.08] text-white shadow-sm"
                     : "text-slate-400 hover:text-slate-200 hover:bg-white/[0.03]"
                 }`}
               >
-                <BarChart3 className="w-4 h-4" />
-                <span>Probabilities</span>
+                <BarChart3 className="w-3.5 h-3.5 text-cyan-400" />
+                <span>Probabilities & Amplitudes</span>
               </button>
 
               <button
                 onClick={() => setActiveBottomTab("editor")}
-                className={`px-4 py-2 rounded-lg text-[13px] font-medium flex items-center gap-2 transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2 transition-all ${
                   activeBottomTab === "editor"
-                    ? "bg-white/[0.07] text-white shadow-subtle"
+                    ? "bg-white/[0.08] text-white shadow-sm"
                     : "text-slate-400 hover:text-slate-200 hover:bg-white/[0.03]"
                 }`}
               >
-                <Code2 className="w-4 h-4" />
+                <Code2 className="w-3.5 h-3.5 text-cyan-400" />
                 <span>Code Studio</span>
               </button>
             </div>
 
-            <div className="hidden lg:flex items-center gap-3 text-[11px] font-mono text-slate-500">
-              <span className="tabular-nums">
-                {numQubits} qubits
+            <div className="hidden lg:flex items-center gap-2.5 text-[11px] font-mono text-slate-400">
+              <span className="tabular-nums font-semibold text-slate-300">
+                {numQubits} Qubits
               </span>
-              <span className="text-white/[0.08]">·</span>
-              <span className="text-emerald-400/80 tabular-nums">
-                F = 1.0000
+              <span className="text-white/[0.12]">·</span>
+              <span className="text-emerald-400 font-semibold tabular-nums">
+                F = 1.0000 (Coherent)
               </span>
             </div>
           </div>
 
-          {/* Tab Content Panes */}
-          <div className="p-5">
+          {/* Active Tab View */}
+          <div className="p-4">
             {activeBottomTab === "visualizer" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 tab-content-enter" key="tab-visualizer">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 tab-content-enter" key="tab-visualizer">
                 <BlochSphere />
                 <QSphere />
               </div>
             )}
 
             {activeBottomTab === "measurements" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 tab-content-enter" key="tab-measurements">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 tab-content-enter" key="tab-measurements">
                 <ProbabilityHistogram />
                 <StatevectorTable />
               </div>
@@ -219,7 +219,7 @@ export default function Home() {
 
             {activeBottomTab === "editor" && (
               <div className="w-full tab-content-enter" key="tab-editor">
-                <QuantumCodeEditor height="420px" />
+                <QuantumCodeEditor height="380px" />
               </div>
             )}
           </div>
@@ -227,15 +227,15 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/[0.03] py-3.5 px-6 lg:px-8 flex items-center justify-between text-[11px] text-slate-500/80 bg-[#060912]">
-        <span className="tracking-wide">Quantangle Platform · SIH 2026</span>
-        <span className="font-mono text-[10px] text-slate-600/70 tabular-nums">Little-Endian · |q₀⟩ LSB</span>
+      <footer className="border-t border-white/[0.04] py-3 px-6 lg:px-8 flex items-center justify-between text-xs text-slate-500 bg-[#06080f]">
+        <span className="tracking-tight">Quantangle Platform · SIH 2026</span>
+        <span className="font-mono text-[10px] text-slate-500 tabular-nums">
+          Little-Endian Standard · |q₀⟩ LSB
+        </span>
       </footer>
 
-      {/* Quest Arena & Leaderboard Modal */}
+      {/* Modals */}
       <QuestArenaModal />
-
-      {/* National Quantum Mission Micro-Credential Modal */}
       <MicroCredentialModal />
     </div>
   );

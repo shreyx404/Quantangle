@@ -3,29 +3,34 @@
 @tailwind utilities;
 
 :root {
-  /* Precision Instrument Workstation Palette */
-  --surface-base: #060912;
-  --surface-panel: #0b0f19;
-  --surface-panel-border: rgba(255, 255, 255, 0.05);
-  --surface-elevated: #111726;
-  --surface-elevated-border: rgba(255, 255, 255, 0.08);
-  --surface-subtle: rgba(255, 255, 255, 0.025);
+  /* Precision Cryogenic Workstation Palette */
+  --surface-void: #06080f;
+  --surface-base: #070a13;
+  --surface-panel: #0b0f1a;
+  --surface-elevated: #101524;
+  --surface-overlay: #141c30;
+  
+  /* Hairline Precision Borders */
+  --border-hairline: rgba(255, 255, 255, 0.06);
+  --border-subtle: rgba(255, 255, 255, 0.09);
+  --border-hover: rgba(255, 255, 255, 0.16);
+  --border-focus: rgba(0, 229, 255, 0.5);
 
-  /* Calibrated Telemetry Accents */
-  --telemetry-cyan: #00e5ff;
-  --telemetry-cyan-dim: rgba(0, 229, 255, 0.12);
-  --telemetry-emerald: #10b981;
-  --telemetry-emerald-dim: rgba(16, 185, 129, 0.12);
-  --telemetry-amber: #f59e0b;
-  --telemetry-amber-dim: rgba(245, 158, 11, 0.12);
-  --telemetry-violet: #8b5cf6;
-  --telemetry-violet-dim: rgba(139, 92, 246, 0.12);
-  --telemetry-rose: #f43f5e;
-  --telemetry-rose-dim: rgba(244, 63, 94, 0.12);
+  /* Calibrated Semantic Accents */
+  --accent-cyan: #00f0ff;
+  --accent-cyan-dim: rgba(0, 240, 255, 0.12);
+  --accent-emerald: #10b981;
+  --accent-emerald-dim: rgba(16, 185, 129, 0.12);
+  --accent-amber: #f59e0b;
+  --accent-amber-dim: rgba(245, 158, 11, 0.12);
+  --accent-indigo: #6366f1;
+  --accent-indigo-dim: rgba(99, 102, 241, 0.12);
+  --accent-coral: #f43f5e;
+  --accent-coral-dim: rgba(244, 63, 94, 0.12);
 }
 
 body {
-  background-color: var(--surface-base);
+  background-color: var(--surface-void);
   color: #e2e8f0;
   font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
@@ -36,7 +41,7 @@ body {
   letter-spacing: 0.005em;
 }
 
-/* Typography: Text Wrapping by Role */
+/* Typography: Text Wrapping & Optical Balance */
 h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
   letter-spacing: -0.02em;
@@ -46,7 +51,7 @@ p, .text-pretty {
   text-wrap: pretty;
 }
 
-/* Precision Scrollbars */
+/* Precision Calibrated Scrollbars */
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
@@ -57,60 +62,56 @@ p, .text-pretty {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.20);
+  background: rgba(255, 255, 255, 0.18);
 }
 
-/* Surface System (Clean, Solid, Calibrated) */
-.instrument-panel,
-.glass-panel {
-  background-color: #0b0f19;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+/* Surface Cards System */
+.panel-workstation {
+  background-color: var(--surface-panel);
+  border: 1px solid var(--border-hairline);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
 }
 
-.instrument-panel-elevated {
-  background-color: #101625;
-  border: 1px solid rgba(255, 255, 255, 0.07);
+.panel-elevated {
+  background-color: var(--surface-elevated);
+  border: 1px solid var(--border-subtle);
 }
 
-.instrument-interactive,
-.glass-panel-interactive {
-  background-color: #0d121f;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+.interactive-card {
+  background-color: var(--surface-elevated);
+  border: 1px solid var(--border-hairline);
   transition-property: border-color, background-color, transform;
   transition-duration: 150ms;
   transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.instrument-interactive:hover,
-.glass-panel-interactive:hover {
-  border-color: rgba(255, 255, 255, 0.14);
-  background-color: #111728;
+.interactive-card:hover {
+  border-color: var(--border-hover);
+  background-color: var(--surface-overlay);
 }
 
-.instrument-interactive:active,
-.glass-panel-interactive:active {
+.interactive-card:active {
   transform: translateY(1px);
 }
 
-/* ── Typography Scale (Redesigned: clear hierarchy, no uppercase labels) ── */
-
+/* Typography Scale (Operate Mode: Clear, Sentence-Case, Balanced) */
 .type-display {
-  font-size: 1.375rem;
-  line-height: 1.75rem;
+  font-size: 1.25rem;
+  line-height: 1.625rem;
   font-weight: 600;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   color: #ffffff;
   text-wrap: balance;
 }
 
 .type-heading {
-  font-size: 0.9375rem;
-  line-height: 1.375rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   font-weight: 600;
   letter-spacing: -0.01em;
   color: #f1f5f9;
@@ -119,15 +120,14 @@ p, .text-pretty {
 
 .type-subheading {
   font-size: 0.8125rem;
-  line-height: 1.25rem;
+  line-height: 1.1875rem;
   font-weight: 500;
   color: #cbd5e1;
 }
 
-/* Labels: sentence-case, no uppercase, no extra tracking */
 .type-label {
   font-size: 0.6875rem;
-  line-height: 1rem;
+  line-height: 0.9375rem;
   font-weight: 500;
   color: #94a3b8;
 }
@@ -170,32 +170,118 @@ button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid rgba(0, 229, 255, 0.6);
+  outline: 2px solid rgba(0, 240, 255, 0.6);
   outline-offset: 2px;
 }
 
-/* Concentric Radius Formula */
-.radius-outer {
-  border-radius: 14px;
-}
-.radius-nested {
-  border-radius: 10px;
-}
-.radius-control {
-  border-radius: 8px;
-}
-.radius-badge {
-  border-radius: 6px;
-}
-
-/* Hardware Wire Rail */
+/* Superconducting Wire Rail */
 .wire-rail {
-  background-color: #222d42;
+  background-color: #1e293b;
   transition: background-color 150ms ease;
 }
 
 .wire-rail:hover {
   background-color: #334155;
+}
+
+/* Themed Range Slider */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  height: 20px;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: #1c2638;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #00f0ff;
+  border: 2px solid #06080f;
+  margin-top: -5.5px;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+  transition: box-shadow 150ms ease, transform 150ms ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.6);
+  transform: scale(1.1);
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 6px rgba(0, 240, 255, 0.5);
+}
+
+input[type="range"]::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: #1c2638;
+  border: none;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #00f0ff;
+  border: 2px solid #06080f;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+}
+
+/* Input Caret Theming */
+input,
+textarea,
+[contenteditable="true"] {
+  caret-color: #00f0ff;
+}
+
+/* Authored Entrance: Instrument Power-Up */
+@keyframes instrumentReady {
+  from {
+    opacity: 0.9;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-instrument-ready {
+  animation: instrumentReady 250ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Tab Crossfade */
+.tab-content-enter {
+  animation: tabFadeIn 150ms ease-out both;
+}
+
+@keyframes tabFadeIn {
+  from {
+    opacity: 0.5;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Active Time-Slice Vertical Beam */
+.active-step-column {
+  background: linear-gradient(180deg, rgba(0, 240, 255, 0.08) 0%, rgba(0, 240, 255, 0.02) 100%);
+  border-left: 1px solid rgba(0, 240, 255, 0.25);
+  border-right: 1px solid rgba(0, 240, 255, 0.25);
 }
 
 /* Respect Reduced Motion */
@@ -209,104 +295,3 @@ select:focus-visible,
     scroll-behavior: auto !important;
   }
 }
-
-/* ── Themed Range Slider (Instrument-Panel Identity) ── */
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  background: transparent;
-  cursor: pointer;
-  height: 20px;
-}
-
-input[type="range"]::-webkit-slider-runnable-track {
-  height: 4px;
-  border-radius: 2px;
-  background: #1e2a3e;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #00e5ff;
-  border: 2px solid #060912;
-  margin-top: -6px;
-  box-shadow: 0 0 8px rgba(0, 229, 255, 0.35);
-  transition: box-shadow 150ms ease, transform 150ms ease;
-}
-
-input[type="range"]::-webkit-slider-thumb:hover {
-  box-shadow: 0 0 14px rgba(0, 229, 255, 0.55);
-  transform: scale(1.1);
-}
-
-input[type="range"]::-webkit-slider-thumb:active {
-  transform: scale(0.95);
-  box-shadow: 0 0 6px rgba(0, 229, 255, 0.4);
-}
-
-/* Firefox */
-input[type="range"]::-moz-range-track {
-  height: 4px;
-  border-radius: 2px;
-  background: #1e2a3e;
-  border: none;
-}
-
-input[type="range"]::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #00e5ff;
-  border: 2px solid #060912;
-  box-shadow: 0 0 8px rgba(0, 229, 255, 0.35);
-}
-
-input[type="range"]::-moz-range-thumb:hover {
-  box-shadow: 0 0 14px rgba(0, 229, 255, 0.55);
-}
-
-/* ── Input Caret Theming ── */
-input,
-textarea,
-[contenteditable="true"] {
-  caret-color: #00e5ff;
-}
-
-/* ── Authored Entrance: Instrument Power-Up ── */
-@keyframes instrumentReady {
-  from {
-    opacity: 0.88;
-    transform: translateY(6px);
-    filter: brightness(0.92);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: brightness(1);
-  }
-}
-
-.animate-instrument-ready {
-  animation: instrumentReady 400ms cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-/* ── Tab Crossfade ── */
-.tab-content-enter {
-  animation: tabFadeIn 150ms ease-out both;
-}
-
-@keyframes tabFadeIn {
-  from {
-    opacity: 0.4;
-    transform: translateY(3px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-

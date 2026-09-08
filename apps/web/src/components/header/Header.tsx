@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useCircuitStore } from "../../stores/useCircuitStore";
 import { useSimulationStore } from "../../stores/useSimulationStore";
 import type { QuantumCircuitIR } from "@quantangle/quantum-ast";
@@ -14,8 +14,6 @@ import {
   Flame,
   ShieldCheck,
   Download,
-  Wifi,
-  WifiOff,
 } from "lucide-react";
 import { useQuestStore } from "../../stores/useQuestStore";
 import { usePwaStore } from "../../stores/usePwaStore";
@@ -59,13 +57,10 @@ export const PRESET_CIRCUITS: Record<
       qubits: 3,
       clbits: 2,
       steps: [
-        // Prepare arbitrary state on q0: H + T
         { stepIndex: 0, operations: [{ id: "t1", gate: "H", qubits: [0] }] },
         { stepIndex: 1, operations: [{ id: "t2", gate: "T", qubits: [0] }] },
-        // Create Bell pair between q1 and q2
         { stepIndex: 2, operations: [{ id: "t3", gate: "H", qubits: [1] }] },
         { stepIndex: 3, operations: [{ id: "t4", gate: "CX", qubits: [1, 2] }] },
-        // Bell measurement on q0 and q1
         { stepIndex: 4, operations: [{ id: "t5", gate: "CX", qubits: [0, 1] }] },
         { stepIndex: 5, operations: [{ id: "t6", gate: "H", qubits: [0] }] },
         {
@@ -86,7 +81,6 @@ export const PRESET_CIRCUITS: Record<
       qubits: 2,
       clbits: 2,
       steps: [
-        // 1. Equal superposition
         {
           stepIndex: 0,
           operations: [
@@ -94,9 +88,7 @@ export const PRESET_CIRCUITS: Record<
             { id: "gr2", gate: "H", qubits: [1] },
           ],
         },
-        // 2. Oracle for |11⟩: CZ gate
         { stepIndex: 1, operations: [{ id: "gr3", gate: "CZ", qubits: [0, 1] }] },
-        // 3. Diffuser (Inversion about average)
         {
           stepIndex: 2,
           operations: [
@@ -140,6 +132,7 @@ export const Header: React.FC<HeaderProps> = ({
   onRunSimulation,
   isRunningSimulation,
 }) => {
+  const [mounted, setMounted] = useState(false);
   const { loadCircuitFromIR } = useCircuitStore();
   const {
     openArena,
@@ -154,8 +147,12 @@ export const Header: React.FC<HeaderProps> = ({
     canInstall,
     triggerInstall,
     toggleSimulatedOffline,
-    isSimulatedOffline,
   } = usePwaStore();
+
+  // Mount guard to prevent hydration mismatch on client-persisted store items
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleSelectPreset = (key: string) => {
     const preset = PRESET_CIRCUITS[key];
@@ -164,45 +161,49 @@ export const Header: React.FC<HeaderProps> = ({
     }
   };
 
+  const certsCount = mounted ? Object.keys(issuedCredentials).length : 0;
+  const currentStreak = mounted ? streakDays : 5;
+  const currentXP = mounted ? totalXP : 350;
+
   return (
-    <header className="bg-[#0a0e18] border-b border-white/[0.05] px-5 lg:px-8 py-3.5 sticky top-0 z-40">
-      <div className="max-w-[1800px] mx-auto flex flex-wrap items-center justify-between gap-4 sm:gap-6">
-        {/* Zone 1: Logo & Brand */}
-        <div className="flex items-center gap-3.5">
-          <div className="w-9 h-9 rounded-xl bg-[#111726] border border-white/[0.06] flex items-center justify-center text-cyan-400 flex-shrink-0">
-            <Atom className="w-5 h-5" />
+    <header className="bg-[#070b14] border-b border-white/[0.06] px-5 lg:px-8 py-3 sticky top-0 z-40">
+      <div className="max-w-[1800px] mx-auto flex flex-wrap items-center justify-between gap-4">
+        {/* Zone 1: Brand & Hardware Tag */}
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-[#0e1422] border border-white/[0.08] flex items-center justify-center text-cyan-400 flex-shrink-0 shadow-sm">
+            <Atom className="w-4 h-4" />
           </div>
           <div>
-            <div className="flex items-center gap-2.5">
-              <h1 className="text-[15px] font-semibold tracking-tight text-white">
+            <div className="flex items-center gap-2">
+              <h1 className="text-sm font-semibold tracking-tight text-white">
                 Quantangle
               </h1>
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-md bg-white/[0.04] text-slate-400 border border-white/[0.06] tabular-nums">
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/[0.04] text-slate-400 border border-white/[0.06] tabular-nums">
                 SIH26140
               </span>
             </div>
-            <p className="text-[13px] text-slate-400 leading-snug mt-0.5">
+            <p className="text-xs text-slate-400 leading-none mt-0.5">
               Quantum Circuit Designer & Simulation Hub
             </p>
           </div>
         </div>
 
-        {/* Zone 2: Controls */}
-        <div className="flex flex-wrap items-center gap-3">
-          {/* Live WASM Edge & Network Telemetry Pill (Clickable: Interactive Offline Simulation Toggle) */}
+        {/* Zone 2: Telemetry Deck */}
+        <div className="flex flex-wrap items-center gap-2.5">
+          {/* Live WASM Edge / Offline Sim Status */}
           <button
             id="pwa-offline-toggle-btn"
             data-testid="pwa-offline-toggle-btn"
             onClick={toggleSimulatedOffline}
-            className={`h-9 flex items-center gap-2.5 px-3.5 rounded-xl border text-[12px] transition-all active:translate-y-[1px] ${
+            className={`h-8 flex items-center gap-2 px-3 rounded-lg border text-xs transition-all active:translate-y-[1px] ${
               effectiveOnline
-                ? "bg-[#0d1220] border-white/[0.05] hover:border-emerald-500/30 text-slate-400 hover:text-slate-200"
-                : "bg-amber-950/25 border-amber-500/40 text-amber-300 hover:bg-amber-950/40 shadow-[0_0_12px_rgba(245,158,11,0.15)]"
+                ? "bg-[#0b101c] border-white/[0.06] hover:border-emerald-500/30 text-slate-300"
+                : "bg-amber-950/30 border-amber-500/40 text-amber-300"
             }`}
             title={
               effectiveOnline
-                ? "Online: WASM Edge Active (Click to toggle Simulated Offline Mode)"
-                : "Offline Mode Active: Local Rust WASM simulating 100% locally with 0ms latency (Click to resume online)"
+                ? "Online: Rust WASM Edge Active (Click to toggle Simulated Offline Mode)"
+                : "Offline Mode: Local Rust WASM executing with 0ms edge latency (Click to resume online)"
             }
           >
             <span
@@ -210,12 +211,12 @@ export const Header: React.FC<HeaderProps> = ({
                 effectiveOnline ? "bg-emerald-400" : "bg-amber-400 animate-pulse"
               }`}
             />
-            <span className={`font-medium ${effectiveOnline ? "text-slate-300" : "text-amber-200"}`}>
+            <span className="font-medium">
               {effectiveOnline ? "WASM Edge" : "Offline Sim"}
             </span>
-            <span className="text-white/[0.08]">·</span>
+            <span className="text-white/[0.12]">·</span>
             <span
-              className={`font-mono tabular-nums text-[11px] ${
+              className={`font-mono text-[11px] tabular-nums ${
                 effectiveOnline ? "text-emerald-400" : "text-amber-400 font-semibold"
               }`}
             >
@@ -224,10 +225,10 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
 
           {/* Install PWA Standalone App Button */}
-          {canInstall && (
+          {mounted && canInstall && (
             <button
               onClick={() => triggerInstall()}
-              className="h-9 px-3 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 font-medium text-[13px] flex items-center gap-1.5 transition-all active:translate-y-[1px]"
+              className="h-8 px-2.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/15 border border-cyan-500/25 text-cyan-300 font-medium text-xs flex items-center gap-1.5 transition-all active:translate-y-[1px]"
               title="Install Quantangle as a Standalone Desktop/Mobile App"
             >
               <Download className="w-3.5 h-3.5 text-cyan-400" />
@@ -235,80 +236,83 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
           )}
 
-          {/* Quest Arena Button with Live Streak & XP Telemetry */}
+          {/* Quest Arena Button with Live Streak & XP */}
           <button
             onClick={openArena}
-            className="h-9 px-3.5 rounded-xl bg-[#0d1220] hover:bg-[#131b2e] border border-amber-500/25 hover:border-amber-500/40 text-amber-300 font-medium text-[13px] flex items-center gap-2 transition-all active:translate-y-[1px]"
+            className="h-8 px-3 rounded-lg bg-[#0b101c] hover:bg-[#101726] border border-amber-500/20 hover:border-amber-500/35 text-amber-300 font-medium text-xs flex items-center gap-2 transition-all active:translate-y-[1px]"
             title="Open Quest Labs & Gamification Arena"
           >
-            <Trophy className="w-4 h-4 text-amber-400 flex-shrink-0" />
+            <Trophy className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
             <span>Quests</span>
-            <span className="text-white/[0.1]">·</span>
+            <span className="text-white/[0.12]">·</span>
             <span className="flex items-center gap-1 font-mono text-[11px] text-orange-400">
-              <Flame className="w-3.5 h-3.5 text-orange-400 fill-orange-400/20" />
-              <span>{streakDays}d</span>
+              <Flame className="w-3 h-3 text-orange-400 fill-orange-400/20" />
+              <span className="tabular-nums">{currentStreak}d</span>
             </span>
-            <span className="text-white/[0.1]">·</span>
-            <span className="font-mono text-[11px] text-amber-300 font-semibold">
-              {totalXP} XP
+            <span className="text-white/[0.12]">·</span>
+            <span className="font-mono text-[11px] text-amber-300 font-semibold tabular-nums">
+              {currentXP} XP
             </span>
           </button>
 
           {/* NQM Micro-Credentials Button */}
           <button
             onClick={() => {
-              if (Object.keys(issuedCredentials).length > 0) {
+              if (certsCount > 0) {
                 openCredentialModal();
               } else {
                 openArena();
               }
             }}
-            className="h-9 px-3 rounded-xl bg-[#0d1220] hover:bg-[#131b2e] border border-amber-500/20 hover:border-amber-500/40 text-amber-300 font-medium text-[13px] flex items-center gap-1.5 transition-all active:translate-y-[1px]"
+            className="h-8 px-3 rounded-lg bg-[#0b101c] hover:bg-[#101726] border border-amber-500/20 hover:border-amber-500/35 text-amber-300 font-medium text-xs flex items-center gap-1.5 transition-all active:translate-y-[1px]"
             title="National Quantum Mission Micro-Credentials"
           >
-            <ShieldCheck className="w-4 h-4 text-amber-400 flex-shrink-0" />
+            <ShieldCheck className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
             <span>NQM Certs</span>
-            {Object.keys(issuedCredentials).length > 0 && (
-              <span className="px-1.5 py-0.5 rounded-md bg-amber-500/20 text-amber-300 text-[10px] font-mono leading-none">
-                {Object.keys(issuedCredentials).length}
+            {certsCount > 0 && (
+              <span className="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[10px] font-mono leading-none tabular-nums">
+                {certsCount}
               </span>
             )}
           </button>
+        </div>
 
+        {/* Zone 3: Control Deck */}
+        <div className="flex flex-wrap items-center gap-2.5">
           {/* Preset Circuit Dropdown */}
-          <div className="h-9 flex items-center gap-2 bg-[#0d1220] rounded-xl px-3 border border-white/[0.05] text-[13px] hover:border-white/[0.10] transition-colors">
+          <div className="h-8 flex items-center gap-2 bg-[#0b101c] rounded-lg px-2.5 border border-white/[0.06] hover:border-white/[0.12] transition-colors text-xs">
             <BookOpen className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
             <select
               aria-label="Select a preset quantum circuit"
               onChange={(e) => handleSelectPreset(e.target.value)}
               defaultValue=""
-              className="bg-transparent text-slate-300 focus:outline-none cursor-pointer text-[13px]"
+              className="bg-transparent text-slate-300 focus:outline-none cursor-pointer text-xs pr-1"
             >
               <option value="" disabled>
                 Load preset...
               </option>
               {Object.entries(PRESET_CIRCUITS).map(([key, item]) => (
-                <option key={key} value={key} className="bg-[#0b0f19] text-white">
+                <option key={key} value={key} className="bg-[#0b101c] text-white">
                   {item.name}
                 </option>
               ))}
             </select>
           </div>
 
-          {/* Simulate Button */}
+          {/* Primary Action: Simulate */}
           <button
             onClick={onRunSimulation}
             disabled={isRunningSimulation}
-            className="h-9 px-4 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-cyan-950 font-semibold text-[13px] flex items-center gap-2 transition-colors active:translate-y-[1px] disabled:opacity-50 disabled:cursor-not-allowed"
+            className="h-8 px-3.5 rounded-lg bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-semibold text-xs flex items-center gap-1.5 transition-all active:translate-y-[1px] disabled:opacity-50 shadow-sm"
           >
             {isRunningSimulation ? (
               <>
-                <Zap className="w-4 h-4 animate-spin flex-shrink-0" />
+                <Zap className="w-3.5 h-3.5 animate-spin flex-shrink-0" />
                 <span>Simulating...</span>
               </>
             ) : (
               <>
-                <Play className="w-4 h-4 fill-current ml-0.5 flex-shrink-0" />
+                <Play className="w-3.5 h-3.5 fill-current ml-0.5 flex-shrink-0" />
                 <span>Simulate</span>
               </>
             )}
@@ -320,10 +324,10 @@ export const Header: React.FC<HeaderProps> = ({
             target="_blank"
             rel="noreferrer"
             aria-label="View Quantangle on GitHub"
-            className="h-9 w-9 flex items-center justify-center rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.05] text-slate-400 hover:text-white transition-colors active:translate-y-[1px]"
+            className="h-8 w-8 flex items-center justify-center rounded-lg bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] text-slate-400 hover:text-white transition-colors active:translate-y-[1px]"
             title="GitHub Repository"
           >
-            <Github className="w-4 h-4" />
+            <Github className="w-3.5 h-3.5" />
           </a>
         </div>
       </div>

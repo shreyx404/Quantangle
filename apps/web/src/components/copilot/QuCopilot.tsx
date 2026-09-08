@@ -19,6 +19,7 @@ import {
   Copy,
   Check,
   Cpu,
+  Sparkles,
 } from "lucide-react";
 
 interface QuCopilotProps {
@@ -43,7 +44,6 @@ export const QuCopilot: React.FC<QuCopilotProps> = ({ onClose }) => {
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Auto-scroll chat container directly without scrolling parent window
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTo({
@@ -73,7 +73,6 @@ export const QuCopilot: React.FC<QuCopilotProps> = ({ onClose }) => {
     }
   };
 
-  // Helper to extract a concise gate pipeline representation for previews
   const getCircuitPreviewTokens = (circuit: QuantumCircuitIR): string[] => {
     const tokens: string[] = [];
     circuit.steps.forEach((step) => {
@@ -91,57 +90,57 @@ export const QuCopilot: React.FC<QuCopilotProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="bg-[#0b0f19] rounded-2xl p-4 lg:p-5 border border-white/[0.05] flex flex-col h-full overflow-hidden relative">
-      {/* Copilot Header */}
-      <div className="flex-shrink-0 flex items-center justify-between pb-4 border-b border-white/[0.04]">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-[#0d1220] border border-white/[0.05] flex items-center justify-center text-cyan-400 flex-shrink-0">
-            <Bot className="w-5 h-5" />
+    <div className="bg-[#0b0f1a] rounded-xl p-4 border border-white/[0.06] flex flex-col h-full overflow-hidden relative shadow-sm">
+      {/* Header */}
+      <div className="flex-shrink-0 flex items-center justify-between pb-3 border-b border-white/[0.05]">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg bg-[#070b14] border border-white/[0.06] flex items-center justify-center text-cyan-400 flex-shrink-0">
+            <Bot className="w-4 h-4" />
           </div>
           <div>
-            <span className="text-[15px] font-semibold text-white block">
+            <span className="text-xs font-semibold text-white block tracking-tight">
               Qu-Copilot
             </span>
-            <span className="text-[11px] text-slate-500">
-              Verified circuit synthesizer
+            <span className="text-[10px] text-slate-400 font-mono">
+              Verified Circuit Synthesizer
             </span>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          {/* Verified Badge */}
+        <div className="flex items-center gap-1.5">
+          {/* Verified Fidelity Badge */}
           <div
-            className="flex items-center gap-1.5 text-[11px] font-mono px-2.5 py-1.5 rounded-lg bg-emerald-500/8 border border-emerald-500/15 text-emerald-400/80 tabular-nums"
-            title="Unitary Verification Pipeline evaluates fidelity F = |⟨ψt|ψs⟩|² ≥ 0.999 before display."
+            className="flex items-center gap-1 text-[10px] font-mono px-2 py-1 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 tabular-nums"
+            title="Every circuit suggestion is verified: state fidelity F ≥ 0.999"
           >
-            <ShieldCheck className="w-3.5 h-3.5 flex-shrink-0" />
-            <span className="hidden sm:inline">F ≥ 0.999</span>
+            <ShieldCheck className="w-3 h-3 flex-shrink-0" />
+            <span className="hidden sm:inline font-semibold">F ≥ 0.999</span>
           </div>
 
           <button
             onClick={clearChat}
             aria-label="Clear chat conversation"
-            className="w-8 h-8 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] text-slate-400 hover:text-white border border-white/[0.05] transition-colors active:translate-y-[1px] flex items-center justify-center"
-            title="Clear chat"
+            className="w-7 h-7 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] text-slate-400 hover:text-white border border-white/[0.06] transition-colors active:translate-y-[1px] flex items-center justify-center"
+            title="Reset conversation"
           >
-            <RotateCcw className="w-3.5 h-3.5" />
+            <RotateCcw className="w-3 h-3" />
           </button>
 
           <button
             onClick={handleClose}
             aria-label="Collapse Qu-Copilot sidebar"
-            className="w-8 h-8 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] text-slate-400 hover:text-white border border-white/[0.05] transition-colors active:translate-y-[1px] flex items-center justify-center"
+            className="w-7 h-7 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] text-slate-400 hover:text-white border border-white/[0.06] transition-colors active:translate-y-[1px] flex items-center justify-center"
             title="Close"
           >
-            <X className="w-3.5 h-3.5" />
+            <X className="w-3 h-3" />
           </button>
         </div>
       </div>
 
-      {/* Chat Messages Container */}
+      {/* Messages Feed */}
       <div
         ref={chatContainerRef}
-        className="flex-1 min-h-0 overflow-y-auto py-4 pr-1 flex flex-col gap-3"
+        className="flex-1 min-h-0 overflow-y-auto py-3 pr-1 flex flex-col gap-2.5"
       >
         {messages.map((msg) => {
           const isUser = msg.sender === "user";
@@ -150,46 +149,48 @@ export const QuCopilot: React.FC<QuCopilotProps> = ({ onClose }) => {
           return (
             <div
               key={msg.id}
-              className={`flex flex-col gap-2 max-w-[94%] text-[13px] ${
+              className={`flex flex-col gap-1.5 max-w-[94%] text-xs ${
                 isUser
-                  ? "self-end bg-[#111b2e] text-slate-100 border border-white/[0.06] rounded-2xl rounded-br-lg p-3.5"
-                  : "self-start bg-[#0a0e18] text-slate-200 border border-white/[0.04] rounded-2xl rounded-bl-lg p-3.5"
+                  ? "self-end bg-[#101828] text-slate-100 border border-white/[0.08] rounded-xl rounded-br-sm p-3"
+                  : "self-start bg-[#070b14] text-slate-200 border border-white/[0.05] rounded-xl rounded-bl-sm p-3"
               }`}
             >
-              <div className="flex items-center gap-1.5 text-[11px] text-slate-500">
+              <div className="flex items-center gap-1.5 text-[10px] text-slate-500 font-mono">
                 {isUser ? (
-                  <span className="text-slate-400 font-medium">You</span>
+                  <span className="text-slate-400 font-semibold">You</span>
                 ) : (
-                  <span className="text-cyan-400/70 font-medium flex items-center gap-1">
+                  <span className="text-cyan-400 font-semibold flex items-center gap-1">
                     <Cpu className="w-3 h-3" /> Qu-Copilot
                   </span>
                 )}
               </div>
 
-              <p className="type-body whitespace-pre-wrap text-slate-200 leading-relaxed">{msg.text}</p>
+              <p className="type-body whitespace-pre-wrap text-slate-200 leading-relaxed text-xs">
+                {msg.text}
+              </p>
 
               {/* Verified Circuit Suggestion Card */}
               {msg.circuit && (
-                <div className="mt-2 p-3.5 rounded-xl bg-[#070a12] border border-emerald-500/20 flex flex-col gap-2.5">
-                  <div className="flex items-center justify-between border-b border-white/[0.04] pb-2">
-                    <div className="flex items-center gap-1.5 text-[11px] font-mono text-emerald-400/80 tabular-nums">
+                <div className="mt-1.5 p-3 rounded-lg bg-[#0a0f1d] border border-emerald-500/25 flex flex-col gap-2 shadow-sm">
+                  <div className="flex items-center justify-between border-b border-white/[0.05] pb-1.5">
+                    <div className="flex items-center gap-1 text-[11px] font-mono text-emerald-400 font-bold tabular-nums">
                       <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" />
-                      <span>F = 1.0000</span>
+                      <span>F = 1.0000 (Verified)</span>
                     </div>
-                    <span className="text-[11px] text-slate-500 font-mono tabular-nums">
+                    <span className="text-[10px] text-slate-400 font-mono tabular-nums">
                       {msg.circuit.qubits}Q · {msg.circuit.steps.length} steps
                     </span>
                   </div>
 
                   {/* Gate sequence badges */}
-                  <div className="flex flex-wrap items-center gap-1.5 py-0.5">
+                  <div className="flex flex-wrap items-center gap-1 py-0.5">
                     {getCircuitPreviewTokens(msg.circuit).map((token, i, arr) => (
                       <React.Fragment key={i}>
-                        <span className="px-2 py-0.5 rounded-md bg-white/[0.04] text-slate-300 font-mono text-[11px] border border-white/[0.04]">
+                        <span className="px-1.5 py-0.5 rounded bg-white/[0.05] text-slate-300 font-mono text-[10px] border border-white/[0.05]">
                           {token}
                         </span>
                         {i < arr.length - 1 && (
-                          <ArrowRight className="w-3 h-3 text-slate-600 flex-shrink-0" />
+                          <ArrowRight className="w-2.5 h-2.5 text-slate-600 flex-shrink-0" />
                         )}
                       </React.Fragment>
                     ))}
@@ -203,10 +204,10 @@ export const QuCopilot: React.FC<QuCopilotProps> = ({ onClose }) => {
                           expandedQiskitMsgId === msg.id ? null : msg.id
                         )
                       }
-                      className="text-[12px] text-slate-400 hover:text-slate-200 flex items-center gap-1.5 transition-colors"
+                      className="text-[11px] text-slate-400 hover:text-slate-200 flex items-center gap-1 transition-colors font-mono"
                     >
-                      <Code2 className="w-3.5 h-3.5" />
-                      <span>{expandedQiskitMsgId === msg.id ? "Hide code" : "View Qiskit code"}</span>
+                      <Code2 className="w-3 h-3" />
+                      <span>{expandedQiskitMsgId === msg.id ? "Hide Qiskit code" : "View Qiskit code"}</span>
                       {expandedQiskitMsgId === msg.id ? (
                         <ChevronUp className="w-3 h-3" />
                       ) : (
@@ -215,9 +216,9 @@ export const QuCopilot: React.FC<QuCopilotProps> = ({ onClose }) => {
                     </button>
 
                     {expandedQiskitMsgId === msg.id && msg.circuit && (
-                      <div className="mt-2 p-3 bg-black/50 rounded-lg border border-white/[0.04] text-[12px] font-mono relative overflow-hidden">
-                        <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/[0.04] text-slate-500">
-                          <span className="text-slate-400 text-[11px]">Python Qiskit</span>
+                      <div className="mt-1.5 p-2.5 bg-black/60 rounded border border-white/[0.05] text-[11px] font-mono relative overflow-hidden">
+                        <div className="flex items-center justify-between pb-1.5 mb-1.5 border-b border-white/[0.05] text-slate-400 text-[10px]">
+                          <span>Python Qiskit</span>
                           <button
                             onClick={() => {
                               const codeStr = circuitToQiskit(msg.circuit!);
@@ -225,7 +226,7 @@ export const QuCopilot: React.FC<QuCopilotProps> = ({ onClose }) => {
                               setCopiedCodeMsgId(msg.id);
                               setTimeout(() => setCopiedCodeMsgId(null), 2000);
                             }}
-                            className="flex items-center gap-1 text-[11px] text-slate-400 hover:text-white transition-colors"
+                            className="flex items-center gap-1 text-slate-400 hover:text-white transition-colors"
                           >
                             {copiedCodeMsgId === msg.id ? (
                               <>
@@ -240,30 +241,30 @@ export const QuCopilot: React.FC<QuCopilotProps> = ({ onClose }) => {
                             )}
                           </button>
                         </div>
-                        <pre className="text-slate-300 whitespace-pre overflow-x-auto max-h-36 text-[12px] leading-relaxed">
+                        <pre className="text-cyan-300/90 whitespace-pre overflow-x-auto max-h-32 text-[11px] leading-relaxed">
                           {circuitToQiskit(msg.circuit)}
                         </pre>
                       </div>
                     )}
                   </div>
 
-                  {/* Apply Button */}
+                  {/* Apply Action */}
                   <button
                     onClick={() => msg.circuit && handleApplyCircuit(msg.id, msg.circuit)}
                     disabled={isApplied}
-                    className={`w-full py-2.5 px-3 rounded-xl text-[13px] font-semibold flex items-center justify-center gap-1.5 transition-colors active:translate-y-[1px] ${
+                    className={`w-full py-1.5 px-3 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-all active:translate-y-[1px] ${
                       isApplied
-                        ? "bg-emerald-500/10 text-emerald-300/80 border border-emerald-500/20 cursor-default"
-                        : "bg-cyan-500 hover:bg-cyan-400 text-cyan-950"
+                        ? "bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 cursor-default"
+                        : "bg-cyan-400 hover:bg-cyan-300 text-slate-950 shadow-sm"
                     }`}
                   >
                     {isApplied ? (
                       <>
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                        <span>Applied ✓</span>
+                        <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                        <span>Applied to Canvas ✓</span>
                       </>
                     ) : (
-                      <span>Apply to canvas</span>
+                      <span>Apply to Canvas</span>
                     )}
                   </button>
                 </div>
@@ -272,13 +273,13 @@ export const QuCopilot: React.FC<QuCopilotProps> = ({ onClose }) => {
           );
         })}
 
-        {/* Suggested Quantum Starters */}
+        {/* Starter Protocol Cards */}
         {messages.length <= 1 && (
-          <div className="flex flex-col gap-3 my-auto py-3">
-            <span className="text-[11px] font-medium text-slate-500 px-1">
-              Try a protocol
+          <div className="flex flex-col gap-2 my-auto py-2">
+            <span className="text-[10px] font-mono font-medium text-slate-500 px-1">
+              Quick Protocol Synthesizers
             </span>
-            <div className="grid grid-cols-1 gap-2.5">
+            <div className="grid grid-cols-1 gap-2">
               {[
                 {
                   title: "Bell State |Φ⁺⟩",
@@ -287,17 +288,17 @@ export const QuCopilot: React.FC<QuCopilotProps> = ({ onClose }) => {
                 },
                 {
                   title: "3-Qubit GHZ State",
-                  desc: "Multipartite entanglement",
+                  desc: "Multipartite entanglement (|000⟩+|111⟩)/√2",
                   prompt: "Construct a 3-qubit GHZ state",
                 },
                 {
                   title: "Quantum Teleportation",
-                  desc: "Transfer state via entangled pair",
+                  desc: "Transfer state via entangled Bell pair",
                   prompt: "Explain and build quantum teleportation",
                 },
                 {
-                  title: "Grover Search",
-                  desc: "Quadratic speedup search algorithm",
+                  title: "Grover 2-Qubit Search",
+                  desc: "Oracle + Diffuser search algorithm",
                   prompt: "How does Grover search algorithm work?",
                 },
               ].map((item) => (
@@ -305,13 +306,13 @@ export const QuCopilot: React.FC<QuCopilotProps> = ({ onClose }) => {
                   key={item.title}
                   onClick={() => handleSend(item.prompt)}
                   disabled={isThinking}
-                  className="text-left p-3.5 rounded-xl bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.04] hover:border-white/[0.08] transition-all group active:translate-y-[1px]"
+                  className="text-left p-2.5 rounded-lg bg-[#070b14] hover:bg-[#0e1424] border border-white/[0.04] hover:border-white/[0.08] transition-all group active:translate-y-[1px]"
                 >
-                  <div className="flex items-center justify-between text-[13px] font-medium text-slate-200 group-hover:text-white">
+                  <div className="flex items-center justify-between text-xs font-medium text-slate-200 group-hover:text-white">
                     <span>{item.title}</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-600 group-hover:text-slate-400 group-hover:translate-x-0.5 transition-transform" />
+                    <ArrowRight className="w-3 h-3 text-slate-600 group-hover:text-cyan-400 group-hover:translate-x-0.5 transition-transform" />
                   </div>
-                  <div className="text-[12px] text-slate-500 mt-1">
+                  <div className="text-[11px] text-slate-500 mt-0.5">
                     {item.desc}
                   </div>
                 </button>
@@ -321,17 +322,17 @@ export const QuCopilot: React.FC<QuCopilotProps> = ({ onClose }) => {
         )}
 
         {isThinking && (
-          <div className="self-start bg-[#0a0e18] border border-white/[0.04] rounded-2xl rounded-bl-lg p-3.5 flex items-center gap-2.5 text-[13px] text-slate-400">
+          <div className="self-start bg-[#070b14] border border-white/[0.05] rounded-xl rounded-bl-sm p-2.5 flex items-center gap-2 text-xs text-slate-400">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse flex-shrink-0" />
-            <span>
-              Verifying unitaries...
+            <span className="font-mono text-[11px]">
+              Synthesizing & verifying unitaries...
             </span>
           </div>
         )}
       </div>
 
-      {/* Quick Prompts */}
-      <div className="flex-shrink-0 pt-3 pb-2 border-t border-white/[0.04] flex flex-wrap gap-1.5">
+      {/* Quick Prompt Chips */}
+      <div className="flex-shrink-0 pt-2 pb-1.5 border-t border-white/[0.04] flex flex-wrap gap-1">
         {[
           "Bell State",
           "GHZ State",
@@ -342,15 +343,15 @@ export const QuCopilot: React.FC<QuCopilotProps> = ({ onClose }) => {
             key={prompt}
             onClick={() => handleSend(prompt)}
             disabled={isThinking}
-            className="h-7 px-3 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] text-slate-400 hover:text-slate-200 border border-white/[0.04] hover:border-white/[0.07] transition-colors disabled:opacity-30 active:translate-y-[1px] text-[12px]"
+            className="h-6 px-2 rounded bg-white/[0.03] hover:bg-white/[0.06] text-slate-400 hover:text-slate-200 border border-white/[0.05] text-[11px] transition-colors disabled:opacity-30 active:translate-y-[1px]"
           >
             {prompt}
           </button>
         ))}
       </div>
 
-      {/* Chat Input */}
-      <div className="flex-shrink-0 flex items-center gap-2 pt-2">
+      {/* Chat Input Field */}
+      <div className="flex-shrink-0 flex items-center gap-1.5 pt-1">
         <input
           ref={inputRef}
           type="text"
@@ -363,17 +364,17 @@ export const QuCopilot: React.FC<QuCopilotProps> = ({ onClose }) => {
             }
           }}
           disabled={isThinking}
-          placeholder="Ask about quantum circuits..."
-          className="flex-1 h-10 bg-[#070a12] border border-white/[0.05] hover:border-white/[0.08] rounded-xl px-4 text-[13px] text-slate-200 placeholder-slate-500 focus:outline-none focus:border-white/[0.12] transition-colors"
+          placeholder="Ask Qu-Copilot or request a circuit..."
+          className="flex-1 h-9 bg-[#070b14] border border-white/[0.06] hover:border-white/[0.1] rounded-lg px-3 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-400/50 transition-colors"
         />
         <button
           onClick={() => handleSend(input)}
           disabled={!input.trim() || isThinking}
           aria-label="Send message to Qu-Copilot"
-          className="h-10 w-10 rounded-xl bg-cyan-500 hover:bg-cyan-400 disabled:opacity-25 text-cyan-950 transition-colors active:translate-y-[1px] flex items-center justify-center flex-shrink-0"
+          className="h-9 w-9 rounded-lg bg-cyan-400 hover:bg-cyan-300 disabled:opacity-30 text-slate-950 transition-all active:translate-y-[1px] flex items-center justify-center flex-shrink-0 shadow-sm"
           title="Send"
         >
-          <Send className="w-4 h-4" />
+          <Send className="w-3.5 h-3.5" />
         </button>
       </div>
     </div>

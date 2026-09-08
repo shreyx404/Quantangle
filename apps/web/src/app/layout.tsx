@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { PwaManager } from "../components/pwa/PwaManager";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -11,6 +12,13 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
 });
+
+export const viewport: Viewport = {
+  themeColor: "#060912",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 export const metadata: Metadata = {
   title: "Quantangle — Interactive AI-Guided Quantum Computing Platform",
@@ -25,6 +33,22 @@ export const metadata: Metadata = {
     "webassembly",
     "quantum algorithms",
   ],
+  manifest: "/manifest.json",
+  icons: {
+    icon: [
+      { url: "/icons/icon.svg", type: "image/svg+xml" },
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "192x192", type: "image/png" },
+    ],
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Quantangle",
+  },
 };
 
 export default function RootLayout({
@@ -38,6 +62,7 @@ export default function RootLayout({
       className={`${inter.variable} ${jetbrainsMono.variable} dark h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[#060912] text-[#e2e8f0] selection:bg-cyan-500/25 selection:text-cyan-100">
+        <PwaManager />
         {children}
       </body>
     </html>

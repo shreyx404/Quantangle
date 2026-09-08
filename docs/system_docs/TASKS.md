@@ -142,7 +142,7 @@
   - *Input*: Completed track requirements.
   - *Output*: Ed25519 digitally signed certificate with unique QR code verification URL.
   - *Acceptance Criteria*: Certificate signature validates against public key; tampering invalidates verification.
-- [ ] **TASK-7.2: PWA Offline Mode & Service Worker Caching**
+- [x] **TASK-7.2: PWA Offline Mode & Service Worker Caching**
   - *Input*: Next.js PWA configuration.
   - *Output*: Service Worker caching static assets, quest labs, and WebAssembly binary.
   - *Acceptance Criteria*: User can disconnect WiFi and fully design circuits and simulate $\le 16$ qubits locally.

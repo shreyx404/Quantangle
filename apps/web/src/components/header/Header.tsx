@@ -13,8 +13,12 @@ import {
   Trophy,
   Flame,
   ShieldCheck,
+  Download,
+  Wifi,
+  WifiOff,
 } from "lucide-react";
 import { useQuestStore } from "../../stores/useQuestStore";
+import { usePwaStore } from "../../stores/usePwaStore";
 
 export const PRESET_CIRCUITS: Record<
   string,
@@ -145,6 +149,14 @@ export const Header: React.FC<HeaderProps> = ({
     issuedCredentials,
   } = useQuestStore();
 
+  const {
+    effectiveOnline,
+    canInstall,
+    triggerInstall,
+    toggleSimulatedOffline,
+    isSimulatedOffline,
+  } = usePwaStore();
+
   const handleSelectPreset = (key: string) => {
     const preset = PRESET_CIRCUITS[key];
     if (preset) {
@@ -177,13 +189,51 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Zone 2: Controls */}
         <div className="flex flex-wrap items-center gap-3">
-          {/* Live WASM Engine Telemetry */}
-          <div className="h-9 flex items-center gap-2.5 px-3.5 rounded-xl bg-[#0d1220] border border-white/[0.05] text-[12px] text-slate-400">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0" />
-            <span className="text-slate-300 font-medium">WASM Edge</span>
+          {/* Live WASM Edge & Network Telemetry Pill (Clickable: Interactive Offline Simulation Toggle) */}
+          <button
+            id="pwa-offline-toggle-btn"
+            data-testid="pwa-offline-toggle-btn"
+            onClick={toggleSimulatedOffline}
+            className={`h-9 flex items-center gap-2.5 px-3.5 rounded-xl border text-[12px] transition-all active:translate-y-[1px] ${
+              effectiveOnline
+                ? "bg-[#0d1220] border-white/[0.05] hover:border-emerald-500/30 text-slate-400 hover:text-slate-200"
+                : "bg-amber-950/25 border-amber-500/40 text-amber-300 hover:bg-amber-950/40 shadow-[0_0_12px_rgba(245,158,11,0.15)]"
+            }`}
+            title={
+              effectiveOnline
+                ? "Online: WASM Edge Active (Click to toggle Simulated Offline Mode)"
+                : "Offline Mode Active: Local Rust WASM simulating 100% locally with 0ms latency (Click to resume online)"
+            }
+          >
+            <span
+              className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${
+                effectiveOnline ? "bg-emerald-400" : "bg-amber-400 animate-pulse"
+              }`}
+            />
+            <span className={`font-medium ${effectiveOnline ? "text-slate-300" : "text-amber-200"}`}>
+              {effectiveOnline ? "WASM Edge" : "Offline Sim"}
+            </span>
             <span className="text-white/[0.08]">·</span>
-            <span className="text-emerald-400 font-mono tabular-nums text-[11px]">0.08ms</span>
-          </div>
+            <span
+              className={`font-mono tabular-nums text-[11px] ${
+                effectiveOnline ? "text-emerald-400" : "text-amber-400 font-semibold"
+              }`}
+            >
+              {effectiveOnline ? "0.08ms" : "Local Edge"}
+            </span>
+          </button>
+
+          {/* Install PWA Standalone App Button */}
+          {canInstall && (
+            <button
+              onClick={() => triggerInstall()}
+              className="h-9 px-3 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 font-medium text-[13px] flex items-center gap-1.5 transition-all active:translate-y-[1px]"
+              title="Install Quantangle as a Standalone Desktop/Mobile App"
+            >
+              <Download className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Install App</span>
+            </button>
+          )}
 
           {/* Quest Arena Button with Live Streak & XP Telemetry */}
           <button

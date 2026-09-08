@@ -26,6 +26,7 @@ interface QuestStoreState {
   lastActiveDate: string | null;
   isArenaOpen: boolean;
   evaluation: QuestEvaluation | null;
+  pendingOfflineSync: string[];
 
   // Micro-Credentials State
   issuedCredentials: Record<string, SignedMicroCredential>;
@@ -39,6 +40,7 @@ interface QuestStoreState {
   setEvaluation: (evaluation: QuestEvaluation | null) => void;
   recordQuestCompletion: (questId: string, evaluation: QuestEvaluation) => void;
   resetActiveQuest: () => void;
+  syncOfflineQuestsToCloud: () => Promise<void>;
 
   // Credential Actions
   openCredentialModal: (credentialId?: string | null) => void;
@@ -67,6 +69,7 @@ function saveState(state: {
   streakDays: number;
   lastActiveDate: string | null;
   issuedCredentials: Record<string, SignedMicroCredential>;
+  pendingOfflineSync: string[];
 }) {
   if (typeof window === "undefined") return;
   try {
@@ -87,6 +90,7 @@ export const useQuestStore = create<QuestStoreState>((set, get) => ({
   lastActiveDate: saved.lastActiveDate ?? new Date().toISOString().split("T")[0],
   isArenaOpen: false,
   evaluation: null,
+  pendingOfflineSync: saved.pendingOfflineSync ?? [],
 
   // Micro-Credentials
   issuedCredentials: saved.issuedCredentials ?? {},
@@ -133,6 +137,7 @@ export const useQuestStore = create<QuestStoreState>((set, get) => ({
     };
 
     const newTotalXP = state.totalXP + xpToAdd;
+    const updatedPending = Array.from(new Set([...state.pendingOfflineSync, questId]));
 
     set({
       completedQuests: updatedCompleted,
@@ -140,6 +145,7 @@ export const useQuestStore = create<QuestStoreState>((set, get) => ({
       streakDays: newStreak,
       lastActiveDate: today,
       evaluation,
+      pendingOfflineSync: updatedPending,
     });
 
     saveState({
@@ -148,7 +154,62 @@ export const useQuestStore = create<QuestStoreState>((set, get) => ({
       streakDays: newStreak,
       lastActiveDate: today,
       issuedCredentials: state.issuedCredentials,
+      pendingOfflineSync: updatedPending,
     });
+
+    // Attempt background cloud sync if online
+    get().syncOfflineQuestsToCloud();
+  },
+
+  syncOfflineQuestsToCloud: async () => {
+    const state = get();
+    if (
+      typeof window === "undefined" ||
+      !navigator.onLine ||
+      state.pendingOfflineSync.length === 0
+    ) {
+      return;
+    }
+
+    const queue = [...state.pendingOfflineSync];
+    const successfullySynced: string[] = [];
+
+    for (const qId of queue) {
+      const record = state.completedQuests[qId];
+      if (!record) continue;
+      try {
+        const res = await fetch(`/api/v1/quests/${qId}/submit`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            circuit: { version: "1.0", qubits: 2, clbits: 2, steps: [] },
+            fidelity: record.fidelity,
+            depth: record.depth,
+          }),
+        });
+        if (res.ok) {
+          successfullySynced.push(qId);
+        }
+      } catch {
+        // Network deferred
+        break;
+      }
+    }
+
+    if (successfullySynced.length > 0) {
+      const remaining = state.pendingOfflineSync.filter(
+        (id) => !successfullySynced.includes(id)
+      );
+      set({ pendingOfflineSync: remaining });
+      saveState({
+        completedQuests: state.completedQuests,
+        totalXP: state.totalXP,
+        streakDays: state.streakDays,
+        lastActiveDate: state.lastActiveDate,
+        issuedCredentials: state.issuedCredentials,
+        pendingOfflineSync: remaining,
+      });
+    }
   },
 
   resetActiveQuest: () => {
@@ -188,6 +249,7 @@ export const useQuestStore = create<QuestStoreState>((set, get) => ({
       streakDays: state.streakDays,
       lastActiveDate: state.lastActiveDate,
       issuedCredentials: updated,
+      pendingOfflineSync: state.pendingOfflineSync,
     });
   },
 

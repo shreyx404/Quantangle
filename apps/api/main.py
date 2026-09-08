@@ -48,6 +48,7 @@ async def health_check():
 # ---------------------------------------------------------------------------
 # Router Registration
 # ---------------------------------------------------------------------------
-from routers import arena
+from routers import arena, credentials
 
 app.include_router(arena.router, prefix="/api/v1")
+app.include_router(credentials.router, prefix="/api/v1")

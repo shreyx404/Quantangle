@@ -13,6 +13,7 @@ import { QuantumCodeEditor } from "../components/editor/QuantumCodeEditor";
 import { QuCopilot } from "../components/copilot/QuCopilot";
 import { QuestMissionHUD } from "../components/quest/QuestMissionHUD";
 import { QuestArenaModal } from "../components/quest/QuestArenaModal";
+import { MicroCredentialModal } from "../components/quest/MicroCredentialModal";
 
 import { useCircuitStore } from "../stores/useCircuitStore";
 import { useSimulationStore } from "../stores/useSimulationStore";
@@ -233,6 +234,9 @@ export default function Home() {
 
       {/* Quest Arena & Leaderboard Modal */}
       <QuestArenaModal />
+
+      {/* National Quantum Mission Micro-Credential Modal */}
+      <MicroCredentialModal />
     </div>
   );
 }

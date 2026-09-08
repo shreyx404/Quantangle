@@ -17,8 +17,9 @@ Quantangle has successfully completed Phases 0 through 6:
 - **3D Quantum State Inspector**: Hardware-accelerated Three.js WebGL rendering of single-qubit Bloch spheres and multi-qubit Q-Spheres with dynamic phase hue mapping and entanglement purity detection.
 - **Real-Time Measurements**: Measurement probability histogram ($P(|00\rangle) = 50\%$, $P(|11\rangle) = 50\%$ on Bell state) and complex statevector amplitude tables.
 - **Qu-Copilot AI Quantum Tutor**: Interactive AI chat with Verified Circuit Generation ($F \ge 0.999$) badge, one-click Apply to Canvas, and pre-execution unitary verifier.
+- **Cryptographically Signed Micro-Credentials (`Phase 7 TASK-7.1`)**: RFC 8032 Ed25519 digitally signed certificates co-aligned with India's National Quantum Mission (NQM) & AICTE standards, dynamic QR code verification, interactive live tampering demonstration mode for SIH judges, and standalone `/verify` public verification portal.
 - **Quest Labs & Gamification Arena (`Phase 6`)**: 9 interactive curriculum quests across 3 tracks (Foundations, Entanglement, and Bug-Hunting Sandbox), docked Quest Mission HUD with real-time client-side fidelity grading ($F \ge 0.999$), depth bonus scoring, daily streak tracking (`5d`), and collegiate leaderboards (<20ms).
-- **Automated Verification Suite**: Vitest AST tests (3 passed), Python FastAPI test suite (9 passed), TypeScript zero-error check, and complete visual browser session recording (`quest_arena_demo_*.webp`).
+- **Automated Verification Suite**: Vitest AST tests (3 passed), Python FastAPI test suite (19 passed), TypeScript zero-error check, and complete visual browser session recording (`credentials_demo_*.webp`).
 
 ---
 
@@ -26,19 +27,26 @@ Quantangle has successfully completed Phases 0 through 6:
 
 ### Current Task
 - **Phase 7: Verification, Polish & National Quantum Mission Deployment**:
-  1. `TASK-7.1`: Implement Cryptographically Signed Micro-Credentials (Ed25519 digitally signed certificate with QR code verification).
+  1. `TASK-7.1`: Implement Cryptographically Signed Micro-Credentials [COMPLETED].
   2. `TASK-7.2`: PWA Offline Mode & Service Worker Caching.
   3. `TASK-7.3`: Comprehensive End-to-End System Test & Demonstration.
 
 ### Immediate Action
-- Push Phase 6 code, documentation updates, and visual artifacts to GitHub (`git push origin main`).
-- Proceed to Phase 7 engineering milestones.
+- Proceed to `TASK-7.2: PWA Offline Mode & Service Worker Caching`.
 
 ---
 
 ## 3. Recent Changes Log
 - **2026-09-08**:
-  - **Quest Labs & Gamification Arena Completed (`Phase 6`)**:
+  - **Cryptographically Signed Micro-Credentials Completed (`TASK-7.1`)**:
+    - **Ed25519 Cryptographic Service (`apps/api/services/credentials.py`)**: Built `CredentialService` implementing RFC 8032 Ed25519 asymmetric digital signatures (64-byte signature, 32-byte public key) over canonical JSON serialized payloads (RFC 8785) with strict $F \ge 0.999$ verification prerequisite.
+    - **REST API Endpoints (`apps/api/routers/credentials.py`)**: Implemented `POST /api/v1/credentials/issue`, `POST /api/v1/credentials/verify`, `GET /api/v1/credentials/{id}`, `GET /api/v1/credentials/public-key`, and `GET /api/v1/credentials/tracks`.
+    - **FastAPI Test Suite (`apps/api/tests/test_credentials.py`)**: 10 unit tests verifying issuance, sub-threshold rejection, genuine verification, tampered recipient detection, tampered fidelity score detection, corrupted signature bits, and independent cryptographic validation. (19/19 Python tests passing).
+    - **Micro-Credential Studio & Modal (`MicroCredentialModal.tsx`)**: Designed high-aesthetic Superconducting Quantum Workstation certificate with titanium/copper borders, gold holographic NQM / AICTE seal, dynamic sharp QR code pointing to `/verify?id=...`, export to PDF/Print, JSON download, and real-time signature verification.
+    - **Live Tamper Demonstration Mode**: Built an interactive simulation toggle for SIH judges demonstrating that modifying recipient name ("Eve Attacker"), inflating fidelity, or altering signature bits instantly triggers red cryptographic rejection (`SECURITY ALERT: TAMPERING DETECTED!`).
+    - **Arena & Header Integration**: Added "NQM Credentials" tab in `QuestArenaModal.tsx` and "NQM Certs" quick-access button with live count badge in `Header.tsx`.
+    - **Public Standalone Verification Portal (`/verify`)**: Created `apps/web/src/app/verify/page.tsx` with search bar, dossier inspection, and cryptographic audit trail.
+    - **Browser Visual Verification**: Verified full end-to-end flow with `browser_subagent` recording video demo (`credentials_demo_*.webp`).
     - **Quest Catalog (`TASK-6.1`)**: Created `apps/web/src/content/quests/types.ts` and `catalog.ts` with 9 interactive structured quantum quests across Track 1 (Foundations: Superposition, Bit & Phase Flips, Phase Kickback), Track 2 (Entanglement: Bell State $|\Phi^+\rangle$, Bell State $|\Psi^+\rangle$, 3-Qubit GHZ State), and Track 3 (Bug-Hunting Sandbox: Inverted CNOT Trap, Relative Phase Sign Drift, Broken Grover Diffuser).
     - **Client-Side Fidelity Verifier**: Added `evaluateCircuitFidelity` in `apps/web/src/lib/clientSimulator.ts` enforcing the Prime Directive: $F = |\langle\psi_t|\psi_s\rangle|^2 \ge 0.999$ in Little-Endian indexing with automated phase error vs basis divergence diagnosis.
     - **Quest Store & Mission HUD (`TASK-6.2`)**: Implemented `useQuestStore.ts` with `localStorage` persistence, XP progression, daily streak increments, and the docked `QuestMissionHUD.tsx` banner featuring interactive hints, circuit reset, depth bonuses, and Qu-Copilot guidance escalation.

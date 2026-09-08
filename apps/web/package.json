@@ -11,15 +11,17 @@
     "clean": "rimraf .next"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.6.0",
     "@quantangle/quantum-ast": "*",
     "@quantangle/wasm-engine": "*",
-    "@monaco-editor/react": "^4.6.0",
     "@react-three/drei": "^9.105.0",
     "@react-three/fiber": "^8.16.0",
+    "@types/qrcode": "^1.5.6",
     "clsx": "^2.1.0",
     "framer-motion": "^11.0.28",
     "lucide-react": "^0.372.0",
     "next": "14.2.24",
+    "qrcode": "^1.5.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tailwind-merge": "^2.2.2",

@@ -12,6 +12,7 @@ import {
   Github,
   Trophy,
   Flame,
+  ShieldCheck,
 } from "lucide-react";
 import { useQuestStore } from "../../stores/useQuestStore";
 
@@ -136,7 +137,13 @@ export const Header: React.FC<HeaderProps> = ({
   isRunningSimulation,
 }) => {
   const { loadCircuitFromIR } = useCircuitStore();
-  const { openArena, streakDays, totalXP } = useQuestStore();
+  const {
+    openArena,
+    streakDays,
+    totalXP,
+    openCredentialModal,
+    issuedCredentials,
+  } = useQuestStore();
 
   const handleSelectPreset = (key: string) => {
     const preset = PRESET_CIRCUITS[key];
@@ -195,6 +202,27 @@ export const Header: React.FC<HeaderProps> = ({
             <span className="font-mono text-[11px] text-amber-300 font-semibold">
               {totalXP} XP
             </span>
+          </button>
+
+          {/* NQM Micro-Credentials Button */}
+          <button
+            onClick={() => {
+              if (Object.keys(issuedCredentials).length > 0) {
+                openCredentialModal();
+              } else {
+                openArena();
+              }
+            }}
+            className="h-9 px-3 rounded-xl bg-[#0d1220] hover:bg-[#131b2e] border border-amber-500/20 hover:border-amber-500/40 text-amber-300 font-medium text-[13px] flex items-center gap-1.5 transition-all active:translate-y-[1px]"
+            title="National Quantum Mission Micro-Credentials"
+          >
+            <ShieldCheck className="w-4 h-4 text-amber-400 flex-shrink-0" />
+            <span>NQM Certs</span>
+            {Object.keys(issuedCredentials).length > 0 && (
+              <span className="px-1.5 py-0.5 rounded-md bg-amber-500/20 text-amber-300 text-[10px] font-mono leading-none">
+                {Object.keys(issuedCredentials).length}
+              </span>
+            )}
           </button>
 
           {/* Preset Circuit Dropdown */}

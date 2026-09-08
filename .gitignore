@@ -60,3 +60,9 @@ logs/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Impeccable cache & local runtime state
+**/.impeccable/hook.cache.json
+**/.impeccable/hook.pending.json
+.impeccable/live/
+.impeccable/config.local.json

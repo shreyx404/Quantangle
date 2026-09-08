@@ -38,6 +38,11 @@ Quantangle has successfully completed Phases 0 through 6:
 
 ## 3. Recent Changes Log
 - **2026-09-08**:
+  - **Impeccable Design Suite Installation (`pbakaus/impeccable`)**:
+    - Installed official Impeccable design skill suite into `.agents/skills/impeccable` with compiled native engine `impeccable.exe` (`v0.1.3`, `windows-x64`) and command runner.
+    - Pinned all 21 specialized design commands as standalone agent skills in `.agents/skills/` (`init`, `shape`, `document`, `extract`, `critique`, `audit`, `bolder`, `quieter`, `distill`, `harden`, `onboard`, `live`, `animate`, `colorize`, `typeset`, `layout`, `delight`, `overdrive`, `clarify`, `adapt`, `optimize`, and `polish`).
+    - Configured automatic post-edit design quality hook in `.codex/hooks.json`.
+    - Verified engine binary execution and context resolution across monorepo targets.
   - **PWA Offline Mode & Service Worker Caching Completed (`TASK-7.2`)**:
     - **W3C Web App Manifest & Scientific Icon Suite (`apps/web/public/manifest.json`)**: Built standalone PWA manifest (`standalone` mode, background `#060912`, categories `education`, `productivity`, `utilities`) with vector `icon.svg` and rasterized `icon-192.png`, `icon-512.png`, and `icon-maskable.png` icons generated via pure Node.js PNG encoder.
     - **Multi-Tier Service Worker (`apps/web/public/sw.js`)**: Implemented pre-caching for App Shell (`/`, `/verify`), static assets, manifest, and icons; Cache-First strategy for WebAssembly binary and Web Worker chunks (`quantangle-wasm-v1`); Cache-First for static bundles (`quantangle-static-v1`); Network-First with cached root shell fallback for page navigations; and structured offline fallback response for cloud API routes.
